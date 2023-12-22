@@ -1,0 +1,57 @@
+package LockerManagement;
+
+import javax.swing.JFrame;
+import java.awt.Color;
+import javax.swing.JTable;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Point;
+
+public class grid extends JFrame {
+	private JTable table;
+
+	public grid() {
+		setLocation(new Point(500, 200));
+		getContentPane().setBackground(new Color(0, 153, 102));
+		getContentPane().setLayout(null);
+		
+		table = new JTable();
+		table.setBounds(10, 37, 414, 156);
+		getContentPane().add(table);
+		
+		JButton exitButton = new JButton("Exit");
+		exitButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(404);
+			}
+		});
+		exitButton.setBounds(321, 227, 89, 23);
+		getContentPane().add(exitButton);
+		
+		JButton deleteButton = new JButton("Delete");
+		deleteButton.setBounds(10, 227, 89, 23);
+		getContentPane().add(deleteButton);
+		
+		JButton modifyButton = new JButton("Modify");
+		modifyButton.setBounds(222, 227, 89, 23);
+		getContentPane().add(modifyButton);
+		
+		JButton updateButton = new JButton("Update");
+		updateButton.setBounds(109, 227, 89, 23);
+		getContentPane().add(updateButton);
+		setTitle("Grid");
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+    	grid frame = new grid();
+    	frame.setSize(500, 400);
+    	frame.setVisible(true);
+
+	}
+}
