@@ -216,7 +216,7 @@ public class lockerIssuance extends JFrame {
 					    Integer id = result.getInt("accountstatusid");
 					    if (id==1){
 					    	
-					    	 JOptionPane.showMessageDialog(null,"Authorized For Locker");
+//					    	 JOptionPane.showMessageDialog(null,"Authorized For Locker");
 					    	 
 					    	 getCustDetails("1234567891245689");
 					    	 
@@ -254,14 +254,14 @@ public class lockerIssuance extends JFrame {
 			java.sql.Statement  lcl_stmt =null;
 			connection = java.sql.DriverManager.getConnection("jdbc:db2:WA27389", "db2admin", "admin123/?");
 						
-			String query="select c.customername,c.email, c.contactno  from Accountnew a, customerAccountRelationship r, customer c where a.accountNum=r.accountNum and r.customerId=c.customerid and a.accountNum=?;";
+			String query="select c.customerid,c.customername,c.email, c.contactno  from Accountnew a, customerAccountRelationship r, customer c where a.accountNum=r.accountNum and r.customerId=c.customerid and a.accountNum=?;";
 			PreparedStatement statement = connection.prepareStatement(query);
 			
 			statement.setString(1, accNum);
 			
 			ResultSet result = statement.executeQuery();
 			
-			String queryAccount="select  a.accounttitle, a.branchCode, o.operatinginstruction from accountnew a,operatinginstruction o where a.operatinginstructionid=o.operatinginstructionid  and accountnum=?;";
+			String queryAccount="select  a.accountNum,a.accounttitle, a.branchCode, o.operatinginstruction from accountnew a,operatinginstruction o where a.operatinginstructionid=o.operatinginstructionid  and accountnum=?;";
 			PreparedStatement statementAccount = connection.prepareStatement(queryAccount);
 			
 			statementAccount.setString(1, accNum);
@@ -271,6 +271,7 @@ public class lockerIssuance extends JFrame {
 			HashMap<String, String> customerAccountRelationship = new HashMap<>();
 			if(resultAccount.next()){
 				customerAccountRelationship.put("accounttitle",resultAccount.getString("ACCOUNTTITLE")) ;
+				Global.accountNum(resultAccount.getString("ACCOUNTNUM"));
 				int branchCode=resultAccount.getInt("BRANCHCODE");
 				if(branchCode==1001){
 					customerAccountRelationship.put("branchcode","No - Digital Account") ;
@@ -278,8 +279,10 @@ public class lockerIssuance extends JFrame {
 				else{
 					customerAccountRelationship.put("branchcode","Yes - "+ Integer.toString(resultAccount.getInt("BRANCHCODE"))) ;
 				}
+				customerAccountRelationship.put("branchcodeid",Integer.toString(resultAccount.getInt("BRANCHCODE"))) ;
 				customerAccountRelationship.put("operatinginstruction", resultAccount.getString("OPERATINGINSTRUCTION")) ;
-				
+				customerAccountRelationship.put("accountnum", resultAccount.getString("ACCOUNTNUM")) ;
+
 			}
 			
 			
@@ -288,7 +291,7 @@ public class lockerIssuance extends JFrame {
 				customerAccountRelationship.put("customername",result.getString("CUSTOMERNAME")) ;
 				customerAccountRelationship.put("contactno",result.getString("CONTACTNO")) ;
 				customerAccountRelationship.put("email", result.getString("EMAIL")) ;
-				
+				Global.customerId= result.getInt("customerid");
 			    customerDetails obj= new customerDetails(0);
 			    	obj.insertData(customerAccountRelationship);
 			    	obj.insertArray(availableLockers);

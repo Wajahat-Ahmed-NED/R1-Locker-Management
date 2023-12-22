@@ -97,7 +97,7 @@ public class logIn extends JFrame {
 						
 //						PreparedStatement statement = connection.prepareStatement("SELECT * FROM UserTable WHERE BRN_CD=? AND USER_NAME=? AND PASSWORD=?");
 						
-						PreparedStatement statement = connection.prepareStatement("select  userlockercode_tl.auth from userTable, userlockercode_tl where userTable.userId = userlockercode_tl.userid and userTable.branchcode=? and userTable.emailId=? and userTable.password=?");
+						PreparedStatement statement = connection.prepareStatement("select userTable.userId, userlockercode_tl.auth from userTable, userlockercode_tl where userTable.userId = userlockercode_tl.userid and userTable.branchcode=? and userTable.emailId=? and userTable.password=?");
 						
 						statement.setString(1, branchCode);
 						statement.setString(2, userName);
@@ -108,6 +108,7 @@ public class logIn extends JFrame {
 						if (result.next()) {
 							JOptionPane.showMessageDialog(null,"Signin Successful");
 							System.out.println(result.getString("AUTH"));
+							Global.userId=result.getInt("USERID");
 							if(Integer.parseInt(result.getString("AUTH"))==1){
 								
 								mainMenuAuthorization obj = new mainMenuAuthorization(1);
@@ -163,6 +164,7 @@ public class logIn extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(404);
 			}
+			
 		});
 		
 		JLabel lblUserVerification = new JLabel("User Verification");

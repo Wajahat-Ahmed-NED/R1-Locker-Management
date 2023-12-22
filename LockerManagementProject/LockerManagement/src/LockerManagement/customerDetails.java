@@ -37,11 +37,10 @@ public class customerDetails extends JFrame {
 	private JTextField contactInformationText;
 	private JTextField titleOfAccountText;
 	private JTextField operatingInstructionText;
-	private JTextField openInBranchText;
+//	private JTextField openInBranchText;
 	private JTextField securityDepositText;
 	private JTextField yearlyRentText;
 	private JTextField expiryDateText;
-	private JButton saveButton;
 	public int chk;
 	ArrayList<Integer> availableLockers;
 	JLabel securityDepositLabel = new JLabel("Security Deposit :");
@@ -49,7 +48,12 @@ public class customerDetails extends JFrame {
 	JLabel expiryDateLabel = new JLabel("Expiry Date");
 	private JTextField lockerNumberText;
 	private JTextField keyNumberText;
-	
+	public String accountNum;
+	public String branchcodeid;
+	public String lockerSize;
+	public String operationMode;
+	public String paymentMode;
+	public Integer lockerSizeId;
 	
 	
 	public customerDetails(final int chk)
@@ -93,9 +97,9 @@ public class customerDetails extends JFrame {
 		lblOperatingInstruction.setBounds(10, 157, 112, 20);
 		getContentPane().add(lblOperatingInstruction);
 		
-		JLabel lblOpenInBranch = new JLabel("Open In Branch");
-		lblOpenInBranch.setBounds(10, 188, 112, 20);
-		getContentPane().add(lblOpenInBranch);
+//		JLabel lblOpenInBranch = new JLabel("Open In Branch");
+//		lblOpenInBranch.setBounds(10, 188, 112, 20);
+//		getContentPane().add(lblOpenInBranch);
 		
 		contactInformationText = new JTextField();
 		contactInformationText.setColumns(10);
@@ -114,11 +118,11 @@ public class customerDetails extends JFrame {
 		operatingInstructionText.setBounds(144, 157, 183, 20);
 		getContentPane().add(operatingInstructionText);
 		
-		openInBranchText = new JTextField();
-		openInBranchText.setEditable(false);
-		openInBranchText.setColumns(10);
-		openInBranchText.setBounds(144, 188, 183, 20);
-		getContentPane().add(openInBranchText);
+//		openInBranchText = new JTextField();
+//		openInBranchText.setEditable(false);
+//		openInBranchText.setColumns(10);
+//		openInBranchText.setBounds(144, 188, 183, 20);
+//		getContentPane().add(openInBranchText);
 		
 		JLabel lblLockerSize = new JLabel("Locker Size");
 		lblLockerSize.setBounds(10, 230, 112, 20);
@@ -132,6 +136,7 @@ public class customerDetails extends JFrame {
 	                JComboBox<String> cb = (JComboBox<String>) e.getSource();
 	                String selectedItem = (String) cb.getSelectedItem();
 	                System.out.println("Selected item: " + selectedItem);
+	                lockerSize=selectedItem;
 	                int val=0;
 	                if(selectedItem=="Small"){
 	                	if(availableLockers.get(0)==3){
@@ -139,6 +144,7 @@ public class customerDetails extends JFrame {
 	                	}
 	                	else{
 	                		val=1;
+	                		
 	                		fetchLockerDetails(val);
 	                	}
 	                }
@@ -204,11 +210,27 @@ public class customerDetails extends JFrame {
 		getContentPane().add(lblModeOfOperation);
 		
 		JComboBox modeOfOperationComboBox = new JComboBox();
-		modeOfOperationComboBox.setModel(new DefaultComboBoxModel(new String[] {"Single", "Either or Surviver", "Jointly by all of Us", "Jointly by two of Us", "Others(Please Specify)"}));
+		modeOfOperationComboBox.setModel(new DefaultComboBoxModel(new String[] {"Single", "Either or Surviver", "Jointly by all of Us", "Jointly by two of Us"}));
 		modeOfOperationComboBox.setSelectedIndex(-1);
 		modeOfOperationComboBox.setMaximumRowCount(5);
 		modeOfOperationComboBox.setBounds(144, 299, 183, 20);
 		getContentPane().add(modeOfOperationComboBox);
+		
+		modeOfOperationComboBox.addActionListener(new ActionListener() {
+
+			 @Override
+	            public void actionPerformed(ActionEvent e) {
+	                JComboBox<String> cb = (JComboBox<String>) e.getSource();
+	                String selectedItem = (String) cb.getSelectedItem();
+	                System.out.println("Selected item: " + selectedItem);
+	          
+	                operationMode=selectedItem;
+	               
+	                
+	                
+			 }
+		});
+		
 		
 		JLabel lblModeOfPayment = new JLabel("Mode Of Payment");
 		lblModeOfPayment.setBounds(10, 336, 112, 20);
@@ -223,7 +245,7 @@ public class customerDetails extends JFrame {
 	                JComboBox<String> cb = (JComboBox<String>) e.getSource();
 	                String selectedItem = (String) cb.getSelectedItem();
 	                System.out.println("Selected item: " + selectedItem);
-	                
+	                paymentMode=selectedItem;
 	                
 	                int val=0;
 	                if(selectedItem=="Complementary"){
@@ -427,52 +449,30 @@ public class customerDetails extends JFrame {
 	getContentPane().add(backButton);
 	
 	
-	
-	JButton addToGridButton = new JButton("Add To Grid");
+	if(chk==0){
+		
+	JButton addToGridButton = new JButton("Save");
 	addToGridButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
 			
-			grid obj=new grid(0);
+			Object [][] data= {
+				   {accountNum,titleOfAccountText.getText(),branchcodeid,lockerSize,operationMode,paymentMode,expiryDateText.getText()}
+				};
+			
+			grid obj=new grid(0,true);
+			obj.setData(data,lockerSizeId);
 			obj.setSize(600,500);
 			obj.setVisible(true);
 			
 			
 		}
 	});
-	addToGridButton.setBounds(129, 394, 89, 23);
+	addToGridButton.setBounds(121, 394, 109, 23);
 	getContentPane().add(addToGridButton);
-	
-	saveButton = new JButton("Save");
-	if (chk==1) {
-		saveButton.setText("Authorize");
 	}
-	saveButton.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent arg0) {
-			
-			if (chk==1) {
-				try {
-					Class.forName("COM.ibm.db2.jdbc.app.DB2Driver");
-					java.sql.Connection connection = null;
-					java.sql.Statement  lcl_stmt =null;
-					connection = java.sql.DriverManager.getConnection("jdbc:db2:WA27389", "db2admin", "admin123/?");
-								
-					String query="select LOCKERNUM from lockerassigned_tr";
-					PreparedStatement statement = connection.prepareStatement(query);
-					
-					ResultSet result = statement.executeQuery();
-					System.out.println("ariz");
-					System.out.println(result.getString("LOCKERNUM"));
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
-				//validation for account check
-				
-				
-			}
-		}
-	});
-	saveButton.setBounds(238, 394, 89, 23);
-	getContentPane().add(saveButton);
+//	if (chk==1) {
+//		saveButton.setText("Authorize");
+//	}
 	
 	JButton cancelButton = new JButton("Cancel");
 	cancelButton.addActionListener(new ActionListener() {
@@ -481,7 +481,7 @@ public class customerDetails extends JFrame {
 		dispose();
 		}
 	});
-	cancelButton.setBounds(355, 360, 89, 23);
+	cancelButton.setBounds(248, 394, 89, 23);
 	getContentPane().add(cancelButton);
 		
 		
@@ -533,6 +533,8 @@ public class customerDetails extends JFrame {
 	
 	public void insertData(HashMap<String,String> custAccRelation ){
 		
+		this.accountNum=custAccRelation.get("accountnum");
+		this.branchcodeid=custAccRelation.get("branchcodeid");
 		customerNameText.setText(custAccRelation.get("customername"));
 		contactInformationText.setText(custAccRelation.get("contactno"));
 		emailText.setText(custAccRelation.get("email"));
@@ -541,10 +543,10 @@ public class customerDetails extends JFrame {
 		emailText.setEditable(false);
 		titleOfAccountText.setText(custAccRelation.get("accounttitle"));
 		operatingInstructionText.setText(custAccRelation.get("operatinginstruction"));
-		openInBranchText.setText(custAccRelation.get("branchcode"));
+//		openInBranchText.setText(custAccRelation.get("branchcode"));
 		titleOfAccountText.setEditable(false);
 		operatingInstructionText.setEditable(false);
-		openInBranchText.setEditable(false);
+//		openInBranchText.setEditable(false);
 	}
 	
 	
@@ -557,6 +559,7 @@ public class customerDetails extends JFrame {
 	
 	public void fetchLockerDetails(int val){
 		try{
+			lockerSizeId=val;
 			Class.forName("COM.ibm.db2.jdbc.app.DB2Driver");
 			java.sql.Connection connection = null;
 			java.sql.Statement  lcl_stmt =null;
