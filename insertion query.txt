@@ -1,0 +1,95 @@
+--select * from accountnew,accountstatus where accountnew.accountstatusid=accountstatus.accountstatusid and accountnew.accountnum='1234567891245689';
+--select * from customer;
+--insert into customer (customerName,customerTypeId,cnic,email,age,contactNo,Address) values('Ariz',1,'42101576689','ariz@gmail.com',22,'03242956778','Karachi');
+
+--select * from customerAccountRelationship;
+--INSERT INTO customerAccountRelationship (Accountnum, CustomerId) VALUES ('1234567891245689', 3000);
+
+--select c.customername,c.email, c.contactno  from Accountnew a, customerAccountRelationship r, customer c where a.accountNum=r.accountNum and r.customerId=c.customerid and a.accountNum='1234567891245689';
+
+--select  a.accountnum, a.branchCode, o.operatinginstruction from accountnew a,operatinginstruction o where a.operatinginstructionid=o.operatinginstructionid  and accountnum='1234567891245689';
+
+--select * from voucher_master_tl;
+
+--select * from modeOfOperation
+
+--insert into modeofoperation (modeofoperation) values('Single');
+--insert into modeofoperation (modeofoperation) values('Joint');
+--insert into modeofoperation (modeofoperation) values('Either OR Survival');
+--insert into modeofoperation (modeofoperation) values('Other');
+
+
+--select * from modeOfPayment
+
+--insert into modeOfPayment (modeofpayment) values('Complementary');
+--insert into modeOfPayment (modeofpayment) values('Security Deposit');
+--insert into modeOfPayment (modeofpayment) values('Yearly Rent');
+
+--select * from voucherstatus
+--insert into voucherstatus (voucherstatus) values('Processing');
+--insert into voucherstatus (voucherstatus) values('Approved');
+--insert into voucherstatus (voucherstatus) values('Rejected');
+
+--select * from vouchertype
+--insert into vouchertype (vouchertype) values('A');
+--insert into vouchertype (vouchertype) values('B');
+--insert into vouchertype (vouchertype) values('C');
+--select * from usertable;
+--select * from voucher_master_tl;
+--insert into voucher_master_tl (lockernum,customerId,userId,accountnum,modeofoperationid,modeofpaymentid,vouchertypeid,voucherstatusid) values('A120',3000,2001,'1234567891245689',1,1,1,1);
+select * from lockerassigned_tr
+
+--insert into lockerassigned_tr (voucherid,customerid,depositamount,overdue,lastrecoverdate,rentstatus) values (5000,3000,35000,CURRENT DATE,CURRENT DATE, 0);
+--select count(*) as Available, lockersizeid from locker where lockernum not in(select lockernum from lockerassigned_tr union select lockernum from lockerassigned_tl order by lockernum) group by lockersizeid;
+
+
+
+select * from voucher_master_tl 
+
+select * from lockerassigned_tr l inner join  voucher_master_tl v on l.voucherid=v.voucherid;
+
+SELECT column_name, column_default, is_nullable, data_type
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE table_name = voucher_master_tl AND column_name = voucherid;
+
+SELECT COLNAME, TYPENAME
+FROM SYSIBM.SYSCOLUMNS
+WHERE TBNAME = 'voucher_master_tl'
+AND COLNAME = 'voucherid'
+
+select * from voucher_master_tl
+
+drop table voucher_master_tl;
+
+
+
+insert into voucher_master_tl (lockernum,customerId,userId,accountnum,modeofoperationid,modeofpaymentid,vouchertypeid,voucherstatusid) values('A120',3000,2001,'1234567891245689',1,1,1,1);
+
+select l.lockersizeid,l.lockersize,c.charges, s.secdeposit from lockersize l,lockercharges c,lockersecuritydeposit s where l.lockerchargesid=c.lockerchargesid and l.secdepositid=s.secdepositid and l.lockersizeid=2;
+
+
+
+
+select * from lockercharges
+select * from voucherdetail_tl
+
+
+
+select * from Accountnew;
+
+
+select count(*) as Available, lockersizeid from locker where lockernum not in(select lockernum from lockerassigned_tr union select lockernum from lockerassigned_tl order by lockernum) group by lockersizeid having lockersizeid=1;
+
+select * from Branch;
+Insert 	into Branch (BRANCHNAME,ADDRESS,CITY) values('Karachi main','II chundigarh','Karachi');
+
+INSERT INTO USERTABLE (branchCode, name, age, contactNo, emailid,address,password)
+VALUES (1000, 'Muhammad Ariz', 22, '032421165465', 'ariz','Surjani Town','123');
+
+select * from USERTABLE;
+
+insert into LOCKER (branchcode,lockersizeid,keynum,lockernum) values(1000,3,505,'A122');
+insert into LOCKER (branchcode,lockersizeid,keynum,lockernum) values(1000,3,759,'A135');
+
+INSERT INTO accountnew (accountNum, accountTitle, accounttypeid, accountcategoryid, accountstatusid, operatinginstructionid, branchcode, balance,currencynum,onHoldBalance)
+VALUES ('1234567891245689', 'Wajahat', 1, 1, 1, 1, 1000, 2000,1,2);
