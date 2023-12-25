@@ -14,8 +14,11 @@ public class lockerMaintenance extends JFrame{
 	public int chk;
 	
 	public lockerMaintenance(final int chk) {
+		
 		this.chk=chk;
 		setLocation(new Point(500, 200));
+		
+		
 		
 		if(chk==1){
 			setTitle("Locker Maintenance");
@@ -27,6 +30,8 @@ public class lockerMaintenance extends JFrame{
 		getContentPane().setLayout(null);
 		
 		
+		
+		
 		JLabel lblLockerNumber = new JLabel("Locker Number");
 		lblLockerNumber.setBounds(183, 185, 93, 31);
 		getContentPane().add(lblLockerNumber);
@@ -35,6 +40,8 @@ public class lockerMaintenance extends JFrame{
 		lockerNumberText.setBounds(183, 216, 196, 31);
 		getContentPane().add(lockerNumberText);
 		lockerNumberText.setColumns(10);
+		
+		
 		
 		JButton searchButton = new JButton("Search");
 		searchButton.addActionListener(new ActionListener() {
@@ -58,6 +65,8 @@ public class lockerMaintenance extends JFrame{
 		searchButton.setBounds(183, 265, 123, 24);
 		getContentPane().add(searchButton);
 		
+		
+		
 		JButton backButton = new JButton("Back");
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -79,6 +88,8 @@ public class lockerMaintenance extends JFrame{
 		backButton.setBounds(452, 416, 89, 23);
 		getContentPane().add(backButton);
 		
+		
+		
 		JButton signOffButton = new JButton("Sign Off");
 		signOffButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -90,6 +101,8 @@ public class lockerMaintenance extends JFrame{
 		});
 		signOffButton.setBounds(10, 416, 89, 23);
 		getContentPane().add(signOffButton);
+		
+		
 		// TODO Auto-generated constructor stub
 		
 	}

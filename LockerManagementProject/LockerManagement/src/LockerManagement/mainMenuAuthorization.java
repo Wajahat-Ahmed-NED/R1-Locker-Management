@@ -10,8 +10,6 @@ public class mainMenuAuthorization extends JFrame {
 	
 	public int auth=0;
 	
-
-	
 	public mainMenuAuthorization(final int a) {
 		setLocation(new Point(500, 200));
 		setTitle("Main Menu");
@@ -82,7 +80,7 @@ public class mainMenuAuthorization extends JFrame {
 	////////////////
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		mainMenuAuthorization frame = new mainMenuAuthorization(1);
+		mainMenuAuthorization frame = new mainMenuAuthorization(0);
     	frame.setSize(600, 500);
     	frame.setVisible(true);
 	}

@@ -22,7 +22,7 @@ public class LogoFadeIn extends JFrame {
     	setResizable(false);
     	setLocation(new Point(500, 200));
     	
-        final ImageIcon logo = createImageIcon("C:\\Users\\ariza\\OneDrive\\Documents\\GitHub\\R1-Locker-Management\\bahl4.png"); // Load image
+        final ImageIcon logo = createImageIcon("E:\\R1-Locker-Management\\bahl4.png"); // Load image
         if (logo != null) {
             logoLabel = new JLabel(logo);
             logoLabel.setOpaque(true);

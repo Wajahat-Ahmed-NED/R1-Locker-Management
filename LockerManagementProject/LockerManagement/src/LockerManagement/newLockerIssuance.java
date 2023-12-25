@@ -55,7 +55,7 @@ public class newLockerIssuance extends JFrame {
 		scroll.setBounds(0, 0, 513, 70);
 		panel.add(scroll);
 		try {
-			if(chk==0)
+			if(chk==1)
 			{
 			Class.forName("COM.ibm.db2.jdbc.app.DB2Driver");
 			java.sql.Connection connection = null;
@@ -125,7 +125,7 @@ public class newLockerIssuance extends JFrame {
 				dispose();
 			}
 		});
-		signOffButton.setBounds(10, 421, 89, 23);
+		signOffButton.setBounds(470, 410, 90, 30);
 		getContentPane().add(signOffButton);
 		
 		JButton backButton = new JButton("Back");
@@ -137,6 +137,7 @@ public class newLockerIssuance extends JFrame {
 					obj.setSize(600, 500);
 					dispose();
 				} else if(chk==1){
+
 					newLockerModule obj = new newLockerModule(1);
 					obj.setVisible(true);
 					obj.setSize(600, 500);
@@ -144,7 +145,7 @@ public class newLockerIssuance extends JFrame {
 				}
 			}
 		});
-		backButton.setBounds(466, 421, 89, 23);
+		backButton.setBounds(370, 410, 90, 30);
 		getContentPane().add(backButton);
 		
 		JComboBox identificationComboBox = new JComboBox();
@@ -197,7 +198,7 @@ public class newLockerIssuance extends JFrame {
 		JButton proceedButton = new JButton("Proceed");
 		proceedButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(chk==1 )
+				if(chk==0 )
 				{
 						try{
 							
@@ -238,9 +239,9 @@ public class newLockerIssuance extends JFrame {
 						catch(Exception e){
 							System.out.println(e.getMessage());
 						}
-				}else if(chk==0)
+				}else if(chk==1)
 				{
-					newDetails obj = new newDetails(0);
+					newDetails obj = new newDetails(1);
 					obj.setSize(600, 500);
 					obj.setVisible(true);
 					dispose();
@@ -248,14 +249,14 @@ public class newLockerIssuance extends JFrame {
 				
 			}
 		});
-		proceedButton.setBounds(122, 421, 89, 23);
+		proceedButton.setBounds(270, 410, 90, 30);
 		getContentPane().add(proceedButton);
 		
-		newMainMenu date = new newMainMenu(1);
+		newMainMenu date = new newMainMenu(0);
         JLabel dateLabel = new JLabel(date.getCurrentDate());
-        dateLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        dateLabel.setHorizontalAlignment(SwingConstants.LEFT);
         dateLabel.setVerticalAlignment(SwingConstants.BOTTOM);
-        dateLabel.setBounds(0, 440, 580, 20);
+        dateLabel.setBounds(10, 440, 570, 20);
         getContentPane().add(dateLabel);
 	}
 	

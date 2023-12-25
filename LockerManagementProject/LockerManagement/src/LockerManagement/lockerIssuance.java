@@ -31,6 +31,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
 public class lockerIssuance extends JFrame {
+	
 	private JTable smallLockerTable;
 	private JTextField accountNumberText;
 	String [] columnNames={"Locker Available", "Lockers Size"};
@@ -39,22 +40,30 @@ public class lockerIssuance extends JFrame {
 	ArrayList<Integer> availableLockers= new ArrayList<Integer>();
 	public int chk;
 	
+	
+	
 	public lockerIssuance(final int chk)
 	{
+		
 		JPanel panel= new JPanel();
 		panel.setBounds(30,147,513,70);
 		getContentPane().add(panel);
 		panel.setLayout(null);
+		
 		smallLockerTable=new JTable(data,columnNames);
 		smallLockerTable.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		smallLockerTable.setBounds(65,83,674,174);
 		getContentPane().add(smallLockerTable);
+		
 		JScrollPane scroll=new JScrollPane(smallLockerTable);
 		scroll.setBounds(0, 0, 513, 70);
 		panel.add(scroll);
+		
+		
 		try {
 			if(chk==0)
 			{
+				
 			Class.forName("COM.ibm.db2.jdbc.app.DB2Driver");
 			java.sql.Connection connection = null;
 			java.sql.Statement  lcl_stmt =null;
@@ -64,7 +73,6 @@ public class lockerIssuance extends JFrame {
 			PreparedStatement statement = connection.prepareStatement(query);
 			
 			ResultSet result = statement.executeQuery();
-			
 			
 			
 			ArrayList<Object[]> rows= new ArrayList<Object[]>();
@@ -91,17 +99,22 @@ public class lockerIssuance extends JFrame {
 			for (int i=0; i<rows.size();i++){
 				data[i]=rows.get(i);
 			}
-			}else if(chk==1)
+						}
+			
+			else if(chk==1)
 			{
 				customerDetails obj=new customerDetails(1);
 				obj.setVisible(true);
 				obj.setSize(600, 400);
 				dispose();
 			}
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("DB Connection fail");
 		}
+		
+		
 		
 		
 		setLocation(new Point(500, 200));
@@ -113,6 +126,8 @@ public class lockerIssuance extends JFrame {
 		lblLockersInformation.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblLockersInformation.setBounds(142, 29, 139, 30);
 		getContentPane().add(lblLockersInformation);
+		
+		
 		
 		JButton signOffButton = new JButton("Sign Off");
 		signOffButton.addActionListener(new ActionListener() {
@@ -126,24 +141,23 @@ public class lockerIssuance extends JFrame {
 		signOffButton.setBounds(10, 421, 89, 23);
 		getContentPane().add(signOffButton);
 		
+		
+		
+		
 		JButton backButton = new JButton("Back");
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (chk==0) {
-					lockerModule obj = new lockerModule(0);
+				lockerModule obj = new lockerModule(chk);
 					obj.setVisible(true);
 					obj.setSize(600, 500);
 					dispose();
-				} else if(chk==1){
-					lockerModule obj = new lockerModule(1);
-					obj.setVisible(true);
-					obj.setSize(600, 500);
-					dispose();
-				}
+				
 			}
 		});
 		backButton.setBounds(466, 421, 89, 23);
 		getContentPane().add(backButton);
+		
+		
 		
 		JComboBox identificationComboBox = new JComboBox();
 		identificationComboBox.setModel(new DefaultComboBoxModel(new String[] {"Account Number"}));
@@ -153,39 +167,19 @@ public class lockerIssuance extends JFrame {
 		identificationComboBox.setBounds(91, 320, 153, 30);
 		getContentPane().add(identificationComboBox);
 		
+		
+		
 		JLabel lblLockerSize = new JLabel("Identification Type");
 		lblLockerSize.setBounds(93, 289, 94, 20);
 		getContentPane().add(lblLockerSize);
+		
+		
 		
 		JLabel lblAccountNumber = new JLabel("Account Number");
 		lblAccountNumber.setBounds(313, 289, 139, 21);
 		getContentPane().add(lblAccountNumber);
 		
 		accountNumberText = new JTextField();
-		accountNumberText.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent arg0) {
-				try{
-					Class.forName("COM.ibm.db2.jdbc.app.DB2Driver");
-					java.sql.Connection connection = null;
-					java.sql.Statement  lcl_stmt =null;
-					connection = java.sql.DriverManager.getConnection("jdbc:db2:WA27389", "db2admin", "admin123/?");
-								
-					String query="select * from account as Available, lockersizeid from locker where lockernum not in(select lockernum from lockerassigned_tr union select lockernum from lockerassigned_tl order by lockernum) group by lockersizeid;";
-					PreparedStatement statement = connection.prepareStatement(query);
-					
-//					statement.setString(1, branchCode);
-//					statement.setString(2, userName);
-//					statement.setString(3, password);
-					
-					ResultSet result = statement.executeQuery();
-					System.out.println(result);
-				}
-				catch(Exception e){
-					
-				}
-			}
-		});
 		accountNumberText.setBounds(313, 321, 153, 30);
 		getContentPane().add(accountNumberText);
 		accountNumberText.setColumns(10);
@@ -216,7 +210,6 @@ public class lockerIssuance extends JFrame {
 					    Integer id = result.getInt("accountstatusid");
 					    if (id==1){
 					    	
-//					    	 JOptionPane.showMessageDialog(null,"Authorized For Locker");
 					    	 
 					    	 getCustDetails("1234567891245689");
 					    	 
@@ -224,7 +217,7 @@ public class lockerIssuance extends JFrame {
 					    }
 					    else{
 					    		
-					     	 JOptionPane.showMessageDialog(null,"Not Authorized For Locker");
+					     	 JOptionPane.showMessageDialog(null,"Cannot Assign Locker TO This Account No");
 					    }
 					   
 					}
@@ -235,8 +228,7 @@ public class lockerIssuance extends JFrame {
 				catch(Exception e){
 					System.out.println(e.getMessage());
 				}
-				
-				
+
 			}
 		});
 		proceedButton.setBounds(122, 421, 89, 23);
@@ -248,6 +240,7 @@ public class lockerIssuance extends JFrame {
 	public void getCustDetails(String accNumText){
 		
 		try{
+			
 			String accNum="1234567891245689";
 			Class.forName("COM.ibm.db2.jdbc.app.DB2Driver");
 			java.sql.Connection connection = null;
@@ -313,6 +306,11 @@ public class lockerIssuance extends JFrame {
 		
 		
 	}
+	
+	
+	
+	
+	
 	 public static void main(String[] args) {
 		 lockerIssuance frame = new lockerIssuance(0);
 	    	frame.setSize(600, 500);

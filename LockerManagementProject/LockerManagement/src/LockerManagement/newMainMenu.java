@@ -26,20 +26,21 @@ public class newMainMenu extends JFrame {
 		getContentPane().setBackground(new Color(0, 102, 102));
 		getContentPane().setLayout(null);
 		
-		JButton btnNewButton = new JButton(a == 0 ? "Main Menu" : "Pending Task");
+		JButton btnNewButton = new JButton(a == 1 ? "Main Menu" : "Pending Task");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				System.out.print(a);
-				if(a==1){
-					grid obj=new grid(1);
+				if(a==0){
+					newLockerModule obj= new newLockerModule(0);
 					obj.setVisible(true);
 					obj.setSize(600, 500);
 					dispose();
 //					System.out.println("Auth Success");
 				}
-				else if (a==0){
-					newLockerModule obj= new newLockerModule(0);
+				else if (a==1){
+
+					newGrid obj=new newGrid(1);
 					obj.setVisible(true);
 					obj.setSize(600, 500);
 					dispose();
@@ -61,7 +62,7 @@ public class newMainMenu extends JFrame {
 		});
 		btnSignOff.setBounds(470, 410, 90, 30);
 		getContentPane().add(btnSignOff);
-		if(a==1){
+		if(a==0){
 			
 			setTitle("Authorizor Menu");
 		}
@@ -70,10 +71,11 @@ public class newMainMenu extends JFrame {
 		}
 		// Date Label
         JLabel dateLabel = new JLabel(getCurrentDate());
-        dateLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        dateLabel.setHorizontalAlignment(SwingConstants.LEFT);
         dateLabel.setVerticalAlignment(SwingConstants.BOTTOM);
-        dateLabel.setBounds(0, 440, 580, 20);
+        dateLabel.setBounds(10, 440, 570, 20);
         getContentPane().add(dateLabel);
+        
         }
 	
 	////////////////

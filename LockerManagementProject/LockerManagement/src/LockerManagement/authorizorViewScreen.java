@@ -35,6 +35,7 @@ public class authorizorViewScreen extends JFrame{
 				System.exit(404);
 			}
 		});
+		
 		exitButton.setBounds(481, 408, 89, 23);
 		getContentPane().add(exitButton);
 		

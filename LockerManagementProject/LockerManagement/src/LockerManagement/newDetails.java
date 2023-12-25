@@ -18,6 +18,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -50,7 +51,7 @@ public class newDetails extends JFrame {
 	private JTextField customerNameText;
 	private JTextField correspondedAddressText;
 	private JTextField mobileNumberText;
-	private JTextField textField;
+	private JTextField accountNumberText;
 	private JTextField lockerNumberText;
 	private JTextField lockerKeyText;
 	private JTextField lockerSizeText;
@@ -66,14 +67,19 @@ public class newDetails extends JFrame {
 	public String lockerSize;
 	public String paymentMode;
 	private JTextField expiryDateText;
+	private JTextField modeOfPaymentText;
 	//Constructor
 	public newDetails(final int chk)
 	{
 		this.chk=chk;
 		
-//		if(chk==1) 
+//		if(chk==0) 
 //		{
 		customerPanel();
+//		}
+//		else if(chk==1)
+//		{
+//			
 //		}
 	}
 	
@@ -128,10 +134,10 @@ public void customerPanel()
 	lblAccountNumber.setBounds(10, 95, 120, 20);
 	customerDetailsPanel.add(lblAccountNumber);
 	
-	textField = new JTextField();
-	textField.setBounds(200, 95, 300, 20);
-	customerDetailsPanel.add(textField);
-	textField.setColumns(10);
+	accountNumberText = new JTextField();
+	accountNumberText.setBounds(200, 95, 300, 20);
+	customerDetailsPanel.add(accountNumberText);
+	accountNumberText.setColumns(10);
 	
 	JPanel lockerDetailsPanel = new JPanel();
 	lockerDetailsPanel.setForeground(new Color(0, 0, 0));
@@ -217,6 +223,8 @@ public void customerPanel()
 	
 	operatingInstructionText = new JTextField();
 	JComboBox OperatingInstructionComboBox = new JComboBox();
+	OperatingInstructionComboBox.setModel(new DefaultComboBoxModel(new String[] {"Singly", "Either or Surviver", "Jointly by all of Us","Jointly by two of Us", "Others"}));
+	OperatingInstructionComboBox.setSelectedIndex(-1);
 	modeOfOperationComboBox = new JComboBox();
 	modeOfOperationComboBox.setModel(new DefaultComboBoxModel(new String[] {"Singly", "Either or Surviver", "Jointly by all of Us", "Jointly by two of Us", "Others"}));
 	modeOfOperationComboBox.setSelectedIndex(-1);
@@ -238,14 +246,15 @@ public void customerPanel()
 		lockerDetailsPanel.add(modeOfOperationText);
 		modeOfOperationText.setColumns(10);
 	}
-//	else if(chk==0){
+	else if(chk==0){
 		OperatingInstructionComboBox.setBounds(200, 67, 300, 22);
 		lockerDetailsPanel.add(OperatingInstructionComboBox);
 		lockerSizeComboBox.setBounds(200, 20, 90, 20);
 		lockerDetailsPanel.add(lockerSizeComboBox);
 		modeOfOperationComboBox.setBounds(200, 95, 300, 20);
 		lockerDetailsPanel.add(modeOfOperationComboBox);
-//	}
+
+	}
 	
 	
 	JLabel lblLockerStatus = new JLabel("Locker Status");
@@ -271,72 +280,12 @@ public void customerPanel()
 	// DepositDetailsPanel.setBounds(20, 290, 540, 125);
 	getContentPane().add(DepositDetailsPanel);
 	DepositDetailsPanel.setLayout(null);
-	
+	final JLabel lbldateFormat = new JLabel("Date format: dd/mm/yyyy");
 	JLabel lblNewLabel_4 = new JLabel("Mode Of Payment");
 	lblNewLabel_4.setForeground(new Color(0, 0, 0));
 	lblNewLabel_4.setBounds(10, 20, 120, 20);
 	DepositDetailsPanel.add(lblNewLabel_4);
 	final JLabel lblExpiryDate = new JLabel("Expiry Date");
-	//Mode of Payment
-	JComboBox modeOfPaymentComboBox = new JComboBox();
-	modeOfPaymentComboBox.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					
-		            JComboBox<String> cb = (JComboBox<String>) e.getSource();
-		            String selectedItem = (String) cb.getSelectedItem();
-		            System.out.println("Selected item: " + selectedItem);
-		            paymentMode=selectedItem;
-		            
-		            int val=0;
-		            if(selectedItem=="Complementary"){
-		            	// Set the new bounds here
-		            		DepositDetailsPanel.setBounds(20, 290, 540, 125);
-		            		lblExpiryDate.setBounds(10, 95, 150, 20);
-		            		lblExpiryDate.setForeground(new Color(0, 0, 0));
-		            		DepositDetailsPanel.add(lblExpiryDate);
-		                   	lblExpiryDate.setVisible(true);
-		            		expiryDateText = new JTextField();
-		            		expiryDateText.setBounds(200, 95, 90, 20);
-		                    expiryDateText.setVisible(true);
-		            		DepositDetailsPanel.add(expiryDateText);
-		            		expiryDateText.setColumns(10);
-		                 // Repaint the panel to reflect changes
-			                 DepositDetailsPanel.revalidate();
-			                 DepositDetailsPanel.repaint();
-//		            	expiryDateText.setEnabled(true);
-//		            	expiryDateText.setEditable(true);
-//		            	
-//		            	expiryDate.setEnabled(true);
-		            	
-		            }
-		            else if (selectedItem=="Security Deposit" || selectedItem=="Yearly Rent"){
-		            	DepositDetailsPanel.setBounds(20, 290, 540, 100);
-		            	DepositDetailsPanel.revalidate();
-		                DepositDetailsPanel.repaint();
-//		            	expiryDateText.setEnabled(false);
-//		            	expiryDateText.setEditable(false);
-		                expiryDateText.setVisible(false);
-		            	lblExpiryDate.setVisible(false);
-		            	
-		            }
-		          
-		           
-		            
-		            
-			 
-				}
-	});
-	modeOfPaymentComboBox.setMaximumRowCount(3);
-	modeOfPaymentComboBox.setModel(new DefaultComboBoxModel(new String[] {"Complementary", "Security Deposit", "Yearly Rent"}));
-	modeOfPaymentComboBox.setSelectedIndex(-1);
-	modeOfPaymentComboBox.setBounds(200, 20, 300, 20);
-	DepositDetailsPanel.add(modeOfPaymentComboBox);
-	
-	JLabel lblNewLabel_5 = new JLabel("Rent/Security Deposit");
-	lblNewLabel_5.setForeground(new Color(0, 0, 0));
-	lblNewLabel_5.setBounds(10, 45, 150, 20);
-	DepositDetailsPanel.add(lblNewLabel_5);
-	
 	depositText = new JTextField();
 	depositText.setBounds(200, 45, 90, 20);
 	DepositDetailsPanel.add(depositText);
@@ -372,6 +321,108 @@ public void customerPanel()
 	DepositDetailsPanel.add(rentStatusText);
 	rentStatusText.setColumns(10);	
 	
+	////
+
+	//Mode of Payment
+	if(chk==0)
+	{
+				JComboBox modeOfPaymentComboBox = new JComboBox();
+				modeOfPaymentComboBox.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								
+					            JComboBox<String> cb = (JComboBox<String>) e.getSource();
+					            String selectedItem = (String) cb.getSelectedItem();
+					            System.out.println("Selected item: " + selectedItem);
+					            paymentMode=selectedItem;
+					            
+					            int val=0;
+					            if(selectedItem=="Complementary"){
+					            	// Set the new bounds here
+					            		DepositDetailsPanel.setBounds(20, 290, 540, 125);
+					            		lblExpiryDate.setBounds(10, 95, 150, 20);
+					            		lblExpiryDate.setForeground(new Color(0, 0, 0));
+					            		DepositDetailsPanel.add(lblExpiryDate);
+					                   	lblExpiryDate.setVisible(true);
+					            		expiryDateText = new JTextField();
+					            		expiryDateText.setBounds(200, 95, 90, 20);
+					                    expiryDateText.setVisible(true);
+					            		DepositDetailsPanel.add(expiryDateText);
+					            		expiryDateText.setColumns(10);
+					            		
+//					            		lbldateFormat = new JLabel()
+					            		lbldateFormat.setBounds(300, 95, 150, 20);
+					            		lbldateFormat.setForeground(new Color(0, 0, 0));					            		
+					            		DepositDetailsPanel.add(lbldateFormat);
+					            		lbldateFormat.setVisible(true);
+					            		lbldateFormat.setEnabled(false);
+					            		
+					            		expiryDateText.addFocusListener(new FocusAdapter() {
+					            			@Override
+					            			public void focusLost(FocusEvent e) {
+					            				
+					            				
+					            				///
+					            				String text=expiryDateText.getText();
+					            				System.out.print(text);
+					            				boolean ans=formatDate(text);
+					            				if(!ans){
+					            					JOptionPane.showMessageDialog(null,"Invalid Date");
+					            				}
+					            				
+					            			}
+					            		});
+					                 // Repaint the panel to reflect changes
+						                 DepositDetailsPanel.revalidate();
+						                 DepositDetailsPanel.repaint();
+					            	
+					            }
+					            else if (selectedItem=="Security Deposit" || selectedItem=="Yearly Rent"){
+					            	DepositDetailsPanel.setBounds(20, 290, 540, 100);
+					            	DepositDetailsPanel.revalidate();
+					                DepositDetailsPanel.repaint();
+					                expiryDateText.setVisible(false);
+					            	lblExpiryDate.setVisible(false);
+					            	lbldateFormat.setVisible(false);
+					            	
+					            }
+						 
+							}
+							});
+
+					modeOfPaymentComboBox.setMaximumRowCount(3);
+					modeOfPaymentComboBox.setModel(new DefaultComboBoxModel(new String[] {"Complementary", "Security Deposit", "Yearly Rent"}));
+					modeOfPaymentComboBox.setSelectedIndex(-1);
+					modeOfPaymentComboBox.setBounds(200, 20, 300, 20);
+					DepositDetailsPanel.add(modeOfPaymentComboBox);
+				}
+				else if(chk==1)
+				{
+					modeOfPaymentText = new JTextField();
+					modeOfPaymentText.setBounds(200, 20, 300, 20);
+					DepositDetailsPanel.add(modeOfPaymentText);
+					modeOfPaymentText.setColumns(10);	
+					customerNameText.setEditable(false);
+					correspondedAddressText.setEditable(false);
+					mobileNumberText.setEditable(false);
+					accountNumberText.setEditable(false);
+					lockerSizeText.setEditable(false);
+					lockerKeyText.setEditable(false);
+					lockerNumberText.setEditable(false);
+					lockerStatusText.setEditable(false);
+					operatingInstructionText.setEditable(false);
+					modeOfOperationText.setEditable(false);
+					modeOfPaymentText.setEditable(false);
+					depositText.setEditable(false);
+					overdueDateText.setEditable(false);
+					recoverDateText.setEditable(false);
+					rentStatusText.setEditable(false);
+				}
+	JLabel lblNewLabel_5 = new JLabel("Rent/Security Deposit");
+	lblNewLabel_5.setForeground(new Color(0, 0, 0));
+	lblNewLabel_5.setBounds(10, 45, 150, 20);
+	DepositDetailsPanel.add(lblNewLabel_5);
+	
+	
 	JButton backButton = new JButton("Back");
 	backButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -381,24 +432,25 @@ public void customerPanel()
 				obj.setSize(600, 500);
 				dispose();
 			}else if(chk==1){
-				lockerMaintenance obj=new lockerMaintenance(1);
+				newLockerMaintenance obj=new newLockerMaintenance(1);
 				obj.setVisible(true);
 				obj.setSize(600, 500);
 				dispose();
 			}
 		}
 	});
-	backButton.setBounds(471, 427, 89, 23);
+	backButton.setBounds(370, 410, 90, 30);
 	getContentPane().add(backButton);
 	
 	JButton signOffButton = new JButton("Sign Off");
-	signOffButton.setBounds(372, 427, 89, 23);
+	signOffButton.setBounds(470, 410, 90, 30);
 	getContentPane().add(signOffButton);
+
 	newMainMenu date = new newMainMenu(1);
     JLabel dateLabel = new JLabel(date.getCurrentDate());
-    dateLabel.setHorizontalAlignment(SwingConstants.CENTER);
+    dateLabel.setHorizontalAlignment(SwingConstants.LEFT);
     dateLabel.setVerticalAlignment(SwingConstants.BOTTOM);
-    dateLabel.setBounds(0, 440, 580, 20);
+    dateLabel.setBounds(10, 440, 570, 20);
     getContentPane().add(dateLabel);
 }
 	
@@ -406,12 +458,17 @@ public void customerPanel()
 	public boolean formatDate(String inp){
 		Scanner scanner = new Scanner(System.in);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String userDateInput = inp;
 
         try {
-            java.util.Date date = sdf.parse(userDateInput);
-            System.out.println("The date you entered is: " + date.getDate()+"  "+ date.getMonth()+ " "+date.getYear());
-            System.out.println("The date you entered is: " +  new Date());
+            java.util.Date date = sdf.parse(inp);
+            int month = date.getMonth() + 1; // Extract month value
+            if (month > 12) {
+            	JOptionPane.showMessageDialog(null,"Invalid Month");
+                System.out.println("Invalid month. Please enter a month between 1 and 12.");
+                return false;
+            }
+            System.out.println("The date you entered is: "+ sdf.format(date));
+  //          System.out.println("The date you entered is: " +  new Date());
             Date currentDate = new Date();
             return !date.before(currentDate);
         } catch (ParseException e) {
@@ -419,6 +476,32 @@ public void customerPanel()
             return false;
         }
 	}
+//public static boolean formatDate(String inp) {
+//    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//
+//    try {
+//        java.util.Date date = sdf.parse(inp);
+//
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.setTime(date);
+//
+//        int year = calendar.get(Calendar.YEAR);
+//        System.out.println("Month:" );
+//        int month = calendar.get(Calendar.MONTH) + 1; // Month index starts from 0, so adding 1
+//
+//        if (month > 12) {
+//        	JOptionPane.showMessageDialog(null,"Invalid Month");
+//            return false;
+//        }
+//
+//        System.out.println("The date you entered is: " + sdf.format(date)); // Display parsed date using SimpleDateFormat
+//        Date currentDate = new Date();
+//        return !date.before(currentDate);
+//    } catch (ParseException e) {
+//        System.out.println("Invalid date format. Please try again.");
+//        return false;
+//    }
+//}
 	
 	
 	
@@ -431,6 +514,7 @@ public void customerPanel()
             Date currentDate = new Date(); // Get the current date
 //            System.out.println(date);
 //            System.out.println(currentDate);
+            System.out.println("The date you entered is: " + date.getDate()+"  "+ date.getMonth()+ "  "+date.getYear());
             return !date.before(currentDate); // Check if the date is not before the current date
         } catch (ParseException e) {
         	System.out.println(e.getMessage());
@@ -512,11 +596,6 @@ public void customerPanel()
 	    	frame.setVisible(true);
 	    	
 	    }
-	public int getModeOfOperationComboBoxSelectedIndex() {
-		return modeOfOperationComboBox.getSelectedIndex();
-	}
-	public void setModeOfOperationComboBoxSelectedIndex(int selectedIndex) {
-		modeOfOperationComboBox.setSelectedIndex(selectedIndex);
-	}
+
 }
 

@@ -4,78 +4,113 @@ import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Point;
+import java.awt.Dimension;
 
-public class lockerMaintenance extends JFrame{
+public class newLockerMaintenance extends JFrame{
 	private JTextField lockerNumberText;
 	public int chk;
 	
-	public lockerMaintenance(final int chk) {
+	public newLockerMaintenance(final int chk) {
+		setSize(new Dimension(600, 500));
+		this.chk=chk;
 		setLocation(new Point(500, 200));
+		
 		if(chk==1){
 			setTitle("Locker Maintenance");
 		}
 		else if (chk==2){
 			setTitle("Locker Surrender");
 		}
-		getContentPane().setBackground(new Color(0, 153, 102));
+		getContentPane().setBackground(new Color(0, 102, 102));
 		getContentPane().setLayout(null);
-		this.chk=chk;
+		
 		
 		JLabel lblLockerNumber = new JLabel("Locker Number");
-		lblLockerNumber.setBounds(183, 185, 93, 31);
+		lblLockerNumber.setBounds(200, 180, 90, 30);
 		getContentPane().add(lblLockerNumber);
 		
 		lockerNumberText = new JTextField();
-		lockerNumberText.setBounds(183, 216, 196, 31);
+		lockerNumberText.setBounds(200, 210, 150, 30);
 		getContentPane().add(lockerNumberText);
 		lockerNumberText.setColumns(10);
 		
 		JButton searchButton = new JButton("Search");
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				customerDetails obj=new customerDetails(1);
+				if(chk==1){
+					
+				newDetails obj=new newDetails(1);
 				obj.setVisible(true);
 				obj.setSize(600, 500);
 				dispose();
+				}
+				else if (chk==2){
+					
+					newDetails obj=new newDetails(1);
+					obj.setVisible(true);
+					obj.setSize(600, 500);
+					dispose();
+				}
 			}
 		});
-		searchButton.setBounds(183, 265, 123, 24);
+		searchButton.setBounds(200, 250, 100, 30);
 		getContentPane().add(searchButton);
 		
 		JButton backButton = new JButton("Back");
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				lockerModule obj=new lockerModule();
+				if (chk==0){	
+				newLockerModule obj=new newLockerModule(0);
 				obj.setVisible(true);
 				obj.setSize(600, 500);
 				dispose();
+				}
+				else if (chk==1) {
+					newGrid obj=new newGrid(1);
+					obj.setVisible(true);
+					obj.setSize(600, 500);
+					dispose();
+				}
 			}
 		});
-		backButton.setBounds(452, 416, 89, 23);
+		backButton.setBounds(370, 410, 90, 30);
 		getContentPane().add(backButton);
 		
 		JButton signOffButton = new JButton("Sign Off");
 		signOffButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				logIn obj=new logIn();
+				newLogIn obj=new newLogIn();
 				obj.setVisible(true);
 				obj.setSize(600, 500);
 				dispose();
 			}
 		});
-		signOffButton.setBounds(10, 416, 89, 23);
+		signOffButton.setBounds(470, 410, 90, 30);
 		getContentPane().add(signOffButton);
-		// TODO Auto-generated constructor stub
+
+		//date
+				newMainMenu date = new newMainMenu(1);
+		        JLabel dateLabel = new JLabel(date.getCurrentDate());
+		        dateLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		        dateLabel.setVerticalAlignment(SwingConstants.BOTTOM);
+		        dateLabel.setBounds(10, 440, 570, 20);
+		        getContentPane().add(dateLabel);
 		
 	}
 
 	/**
 	 * @param args
 	 */
+    public static void main(String[] args) {
+    	newLockerMaintenance frame = new newLockerMaintenance(1);
+    	frame.setSize(600, 500);
+    	frame.setVisible(true);
+    }
 
 }

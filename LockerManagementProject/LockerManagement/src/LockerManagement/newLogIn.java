@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -56,6 +57,13 @@ public class newLogIn extends JFrame {
 		logInPanel.setBorder(new TitledBorder(null, "Log In", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		logInPanel.setLayout(null);
 		
+		newMainMenu date = new newMainMenu(1);
+        JLabel dateLabel = new JLabel(date.getCurrentDate());
+        dateLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        dateLabel.setVerticalAlignment(SwingConstants.BOTTOM);
+        dateLabel.setBounds(10, 440, 570, 20);
+        getContentPane().add(dateLabel);
+        
 		branchCodeText = new JTextField();
 		branchCodeText.setBounds(43, 45, 74, 20);
 		logInPanel.add(branchCodeText);
@@ -198,7 +206,7 @@ public class newLogIn extends JFrame {
 		getContentPane().add(signInButton);
 		getContentPane().add(exitButton);
 		getContentPane().add(lblUserVerification);
-		ImageIcon originalIcon = new ImageIcon("C:\\Users\\ariza\\OneDrive\\Documents\\GitHub\\R1-Locker-Management\\bahl4.png");
+		ImageIcon originalIcon = new ImageIcon("E:\\R1-Locker-Management\\bahl4.png");
 		Image originalImage = originalIcon.getImage();
         Image scaledImage = getScaledImage(originalImage, 250, 250);
 		JLabel lblLogo = new JLabel();

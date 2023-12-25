@@ -25,13 +25,14 @@ public class newLockerModule extends JFrame {
 		lockerIssuanceButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (chk==0) {
-					newLockerIssuance obj=new newLockerIssuance(0);
+					newDetails obj = new newDetails(0); 
 					obj.setVisible(true);
 					obj.setSize(600,500);
 					dispose();
 				} else if(chk==1){
 //					lockerIssuance obj=new lockerIssuance(1);
-					newDetails obj = new newDetails(1); 
+
+					newLockerIssuance obj=new newLockerIssuance(1);
 					obj.setVisible(true);
 					obj.setSize(600,500);
 					dispose();
@@ -44,9 +45,9 @@ public class newLockerModule extends JFrame {
 		JButton lockerSurrenderButton = new JButton("Locker Surrender");
 		lockerSurrenderButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				lockerMaintenance obj=new lockerMaintenance(2);
+				newLockerMaintenance obj =new newLockerMaintenance(1);
 				obj.setVisible(true);
-				obj.setSize(600, 400);
+				obj.setSize(600,500);
 				dispose();
 			}
 		});
@@ -56,7 +57,7 @@ public class newLockerModule extends JFrame {
 		JButton btnNewButton_2 = new JButton("Locker Maintenance");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				lockerMaintenance obj =new lockerMaintenance(1);
+				newLockerMaintenance obj =new newLockerMaintenance(1);
 				obj.setVisible(true);
 				obj.setSize(600,500);
 				dispose();
@@ -74,7 +75,7 @@ public class newLockerModule extends JFrame {
 				dispose();
 			}
 		});
-		signOffButton.setBounds(470, 420, 90, 30);
+		signOffButton.setBounds(470, 410, 90, 30);
 		getContentPane().add(signOffButton);
 		
 		JButton backButton = new JButton("Back");
@@ -86,18 +87,18 @@ public class newLockerModule extends JFrame {
 				dispose();
 			}
 		});
-		backButton.setBounds(370, 420, 90, 30);
+		backButton.setBounds(370, 410, 90, 30);
 		getContentPane().add(backButton);
 		//date
-		newMainMenu date = new newMainMenu(1);
+		newMainMenu date = new newMainMenu(0);
         JLabel dateLabel = new JLabel(date.getCurrentDate());
-        dateLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        dateLabel.setHorizontalAlignment(SwingConstants.LEFT);
         dateLabel.setVerticalAlignment(SwingConstants.BOTTOM);
-        dateLabel.setBounds(0, 440, 580, 20);
+        dateLabel.setBounds(10, 440, 570, 20);
         getContentPane().add(dateLabel);
 	}
 	 public static void main(String[] args) {
-		 newLockerModule frame = new newLockerModule(1);
+		 newLockerModule frame = new newLockerModule(0);
 	    	frame.setSize(600, 500);
 	    	frame.setVisible(true);
 	    }

@@ -32,6 +32,8 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
 public class customerDetails extends JFrame {
+	
+	
 	private JTextField customerNameText;
 	private JTextField emailText;
 	private JTextField contactInformationText;
@@ -58,13 +60,16 @@ public class customerDetails extends JFrame {
 	
 	public customerDetails(final int chk)
 	{
+		
+		
 		setLocation(new Point(500, 200));
 		getContentPane().setBackground(new Color(0, 153, 102));
 		setTitle("Customer Details");
 		getContentPane().setLayout(null);
 		this.chk=chk;
-//		customerAccountRelationship=custAccRelation;
+		
 		if (chk==0) {
+			
 		JLabel lblCustomerName = new JLabel("Customer Name");
 		lblCustomerName.setBounds(10, 33, 112, 20);
 		getContentPane().add(lblCustomerName);
@@ -75,6 +80,7 @@ public class customerDetails extends JFrame {
 		customerNameText.setBounds(144, 33, 183, 20);
 		getContentPane().add(customerNameText);
 		customerNameText.setColumns(10);
+		
 		
 		JLabel lblEmailAddress = new JLabel("Email Address");
 		lblEmailAddress.setBounds(10, 64, 112, 20);
@@ -137,7 +143,10 @@ public class customerDetails extends JFrame {
 	                String selectedItem = (String) cb.getSelectedItem();
 	                System.out.println("Selected item: " + selectedItem);
 	                lockerSize=selectedItem;
+	                
 	                int val=0;
+	                
+	                
 	                if(selectedItem=="Small"){
 	                	if(availableLockers.get(0)==3){
 	                		 JOptionPane.showMessageDialog(null,"Small Locker Not Available");
@@ -148,6 +157,7 @@ public class customerDetails extends JFrame {
 	                		fetchLockerDetails(val);
 	                	}
 	                }
+	                
 	                else if (selectedItem=="Medium"){
 	                
 	                	if(availableLockers.get(1)==0){
@@ -158,6 +168,8 @@ public class customerDetails extends JFrame {
 	                		fetchLockerDetails(val);
 	                	}
 	                }
+	                
+	                
 	                else if(selectedItem=="Large"){
 	                	
 	                	if(availableLockers.get(2)==0){
@@ -168,9 +180,11 @@ public class customerDetails extends JFrame {
 	                		fetchLockerDetails(val);
 	                	}
 	                }
+	                
 	               
 	            }
 		});
+		
 		
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Small", "Medium", "Large"}));
 		comboBox.setMaximumRowCount(3);
@@ -179,10 +193,10 @@ public class customerDetails extends JFrame {
 		getContentPane().add(comboBox);
 		
 		
-		
 		securityDepositLabel.setEnabled(false);
 		securityDepositLabel.setBounds(10, 260, 89, 14);
 		getContentPane().add(securityDepositLabel);
+		
 		
 		securityDepositText = new JTextField();
 		securityDepositText.setEnabled(false);
@@ -196,6 +210,7 @@ public class customerDetails extends JFrame {
 		yearlyRentLabel.setEnabled(false);
 		yearlyRentLabel.setBounds(205, 260, 89, 17);
 		getContentPane().add(yearlyRentLabel);
+		
 		
 		yearlyRentText = new JTextField();
 		yearlyRentText.setBackground(new Color(0, 153, 102));
@@ -226,10 +241,9 @@ public class customerDetails extends JFrame {
 	          
 	                operationMode=selectedItem;
 	               
-	                
-	                
 			 }
 		});
+		
 		
 		
 		JLabel lblModeOfPayment = new JLabel("Mode Of Payment");
@@ -248,6 +262,7 @@ public class customerDetails extends JFrame {
 	                paymentMode=selectedItem;
 	                
 	                int val=0;
+	                
 	                if(selectedItem=="Complementary"){
 	                	expiryDateText.setEnabled(true);
 	                	expiryDateText.setEditable(true);
@@ -263,9 +278,6 @@ public class customerDetails extends JFrame {
 	                	
 	                }
 	              
-	               
-	                
-	                
 			 }
 		}
 		);
@@ -306,7 +318,7 @@ public class customerDetails extends JFrame {
 		
 		}
 		
-//		else if(chk==1){
+		else if(chk==1){
 			JLabel lblOperatingInstruction = new JLabel("Operating Instruction");
 			lblOperatingInstruction.setBounds(10, 153, 112, 20);
 			getContentPane().add(lblOperatingInstruction);
@@ -408,7 +420,7 @@ public class customerDetails extends JFrame {
 			keyNumberText.setBounds(144, 122, 183, 20);
 			getContentPane().add(keyNumberText);
 			keyNumberText.setColumns(10);
-//		}
+		}
 
 		JButton signOffButton = new JButton("Sign Off");
 		signOffButton.addActionListener(new ActionListener() {
@@ -421,6 +433,8 @@ public class customerDetails extends JFrame {
 		});
 		signOffButton.setBounds(10, 394, 89, 23);
 		getContentPane().add(signOffButton);
+		
+		
 		
 	JButton backButton = new JButton("Back");
 	backButton.addActionListener(new ActionListener() {
@@ -449,9 +463,13 @@ public class customerDetails extends JFrame {
 	getContentPane().add(backButton);
 	
 	
+	
+	
 	if(chk==0){
 		
 	JButton addToGridButton = new JButton("Save");
+	
+	
 	addToGridButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
 			

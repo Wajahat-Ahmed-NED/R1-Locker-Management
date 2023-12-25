@@ -12,7 +12,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="miglayout-src.zip"/>
-	<classpathentry kind="lib" path="C:/Users/ariza/OneDrive/Documents/GitHub/R1-Locker-Management/LockerManagementProject/LockerManagement/miglayout15-swing.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ariza/Downloads/Compressed/Db2JdbcDriver.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

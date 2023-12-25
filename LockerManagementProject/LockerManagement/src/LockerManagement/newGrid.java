@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import javax.swing.border.BevelBorder;
 import java.awt.Font;
 
-public class grid extends JFrame {
+public class newGrid extends JFrame {
 	private JTable table;
 	String [] columnNames={"Locker Number", "Locker"};
 	Object[][] data= new Object[5][7];
@@ -29,8 +29,7 @@ public class grid extends JFrame {
 	/**
 	 * @wbp.parser.constructor
 	 */
-	public grid(final int chk) {
-		
+	public newGrid(final int chk) {
 		getContentPane().setFont(new Font("Tahoma", Font.BOLD, 12));
 		setLocation(new Point(500, 200));
 		getContentPane().setBackground(new Color(0, 153, 102));
@@ -40,7 +39,9 @@ public class grid extends JFrame {
 		panel.setBounds(10,71,563,119);
 		getContentPane().add(panel);
 		panel.setLayout(null);
-				
+		
+		
+		
 		table = new JTable(data,columnNames);
 //		table.setVisible(false);
 		table.setBounds(77, 166, 414, 156);
@@ -50,7 +51,6 @@ public class grid extends JFrame {
 		scroll.setBounds(0,0,563,119);
 		panel.add(scroll);
 
-		
 		try {
 			Class.forName("COM.ibm.db2.jdbc.app.DB2Driver");
 			java.sql.Connection connection = null;
@@ -116,9 +116,7 @@ public class grid extends JFrame {
 		exitButton.setBounds(472, 419, 89, 23);
 		getContentPane().add(exitButton);
 		
-		
-		
-		if(chk==0)
+		if(chk==1)
 		{
 		JButton deleteButton = new JButton("Delete");
 		deleteButton.setBounds(120, 419, 89, 23);
@@ -134,19 +132,19 @@ public class grid extends JFrame {
 		setTitle("Locker Issuance Details");
 		}
 		
-		JButton proceedButton = new JButton("Proceed");
+		JButton proceedButton = new JButton("Save");
 		proceedButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(chk==1)
 				{
-					customerDetails obj=new customerDetails(1);
+						lockerModule obj = new lockerModule(0);
 						obj.setVisible(true);
 						obj.setSize(600, 500);
 //						dispose();
 				} else if(chk==0)
 				{
-	
-					lockerModule obj = new lockerModule(0);
+					lockerMaintenance obj = new lockerMaintenance(1);
+
 					obj.setVisible(true);
 					obj.setSize(600, 500);
 					dispose();
@@ -170,10 +168,11 @@ public class grid extends JFrame {
 	}
 	public Integer lockerNum;
 	
-	public grid(final int chk,final Boolean issuance){
+	public newGrid(final int chk,final Boolean issuance){
 
 		if(issuance==true){
 			
+		
 		getContentPane().setFont(new Font("Tahoma", Font.BOLD, 12));
 		setLocation(new Point(500, 200));
 		getContentPane().setBackground(new Color(0, 153, 102));
@@ -202,10 +201,6 @@ public class grid extends JFrame {
 			java.sql.Statement  lcl_stmt =null;
 			connection = java.sql.DriverManager.getConnection("jdbc:db2:WA27389", "db2admin", "admin123/?");
 						
-			
-			//make changes here
-			//insert into voucher_master_tl
-			//insert into LockerAssigned_tr
 			String query="select  lockernum,rentstatus from lockerAssigned_tr;";
 			PreparedStatement statement = connection.prepareStatement(query);
 			
@@ -265,35 +260,35 @@ public class grid extends JFrame {
 		exitButton.setBounds(472, 419, 89, 23);
 		getContentPane().add(exitButton);
 		
-//		if(chk==0)
-//		{
-//		JButton deleteButton = new JButton("Delete");
-//		deleteButton.setBounds(120, 419, 89, 23);
-//		getContentPane().add(deleteButton);
-//		
-//		deleteButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//				if(chk==0)
-//				{
-//	
-//					JOptionPane.showMessageDialog(null,"Are you sure you want to delete? ");
-//					dispose();
-//				}
-//			}
-//		});
-//		
-////		10, 419, 99, 23
-////		JButton modifyButton = new JButton("Modify");
-////		modifyButton.setBounds(373, 419, 89, 23);
-////		getContentPane().add(modifyButton);
-////		
-////		JButton updateButton = new JButton("Update");
-////		updateButton.setBounds(120, 419, 89, 23);
-////		getContentPane().add(updateButton);
-//		setTitle("Locker Issuance Details");
-//		}
+		if(chk==1)
+		{
+		JButton deleteButton = new JButton("Delete");
+		deleteButton.setBounds(120, 419, 89, 23);
+		getContentPane().add(deleteButton);
 		
-		JButton proceedButton = new JButton("OK");
+		deleteButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(chk==1)
+				{
+	
+					JOptionPane.showMessageDialog(null,"Are you sure you want to delete? ");
+					dispose();
+				}
+			}
+		});
+		
+//		10, 419, 99, 23
+//		JButton modifyButton = new JButton("Modify");
+//		modifyButton.setBounds(373, 419, 89, 23);
+//		getContentPane().add(modifyButton);
+//		
+//		JButton updateButton = new JButton("Update");
+//		updateButton.setBounds(120, 419, 89, 23);
+//		getContentPane().add(updateButton);
+		setTitle("Locker Issuance Details");
+		}
+		
+		JButton proceedButton = new JButton("Issue");
 		proceedButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				createVoucher();
@@ -321,7 +316,7 @@ public class grid extends JFrame {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-    	grid frame = new grid(0,true);
+    	newGrid frame = new newGrid(0,true);
     	frame.setSize(600, 500);
     	frame.setVisible(true);
 
@@ -339,8 +334,6 @@ public class grid extends JFrame {
 	    }
 		
 	}
-	
-	
 	
 	
 	public void createVoucher(){
@@ -386,11 +379,9 @@ public class grid extends JFrame {
 			System.out.println(e.getMessage());
 			// TODO: handle exception
 			System.out.println("DB Connection fail");
+//			JOptionPane.showMessageDialog(null,"DB Connection Failed");
 		}
 	}
-	
-	
-	
 	
 	public Integer getLockerNum(Integer num){
 		try{
@@ -428,5 +419,4 @@ public class grid extends JFrame {
 		return -1;
 	}
 	}
-
 }
