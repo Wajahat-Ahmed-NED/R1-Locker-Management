@@ -84,7 +84,7 @@ public class newMainMenu extends JFrame {
 	    }
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		newMainMenu frame = new newMainMenu(1);
+		newMainMenu frame = new newMainMenu(0);
     	frame.setSize(600, 500);
     	frame.setVisible(true);
 	}

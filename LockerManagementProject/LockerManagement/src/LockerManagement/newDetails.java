@@ -62,7 +62,10 @@ public class newDetails extends JFrame {
 	private JTextField rentStatusText;
 	private JTextField modeOfOperationText;
 	private JComboBox modeOfOperationComboBox;
-	
+	ArrayList<Integer> availableLockers;
+	public String lockerSize;
+	public String paymentMode;
+	private JTextField expiryDateText;
 	//Constructor
 	public newDetails(final int chk)
 	{
@@ -162,6 +165,50 @@ public void customerPanel()
 	lblNewLabel_2.setForeground(new Color(0, 0, 0));
 	lblNewLabel_2.setBounds(10, 20, 80, 20);
 	JComboBox lockerSizeComboBox = new JComboBox();
+	lockerSizeComboBox.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+
+            JComboBox<String> cb = (JComboBox<String>) e.getSource();
+            String selectedItem = (String) cb.getSelectedItem();
+            System.out.println("Selected item: " + selectedItem);
+            lockerSize=selectedItem;
+            int val=0;
+            if(selectedItem=="Small"){
+            	if(availableLockers.get(0)==3){
+            		 JOptionPane.showMessageDialog(null,"Small Locker Not Available");
+            	}
+            	else{
+            		val=1;
+            		
+            		fetchLockerDetails(val);
+            	}
+            }
+            else if (selectedItem=="Medium"){
+            
+            	if(availableLockers.get(1)==0){
+            		 JOptionPane.showMessageDialog(null,"Medium Locker Not Available");
+            	}
+            	else{
+            		val=2;
+            		fetchLockerDetails(val);
+            	}
+            }
+            else if(selectedItem=="Large"){
+            	
+            	if(availableLockers.get(2)==0){
+            		 JOptionPane.showMessageDialog(null,"Large Locker Not Available");
+            	}
+            	else{
+            		val=3;
+            		fetchLockerDetails(val);
+            	}
+            }
+           
+        
+		}
+	});
+	lockerSizeComboBox.setModel(new DefaultComboBoxModel(new String[] {"Small", "Medium", "Large"}));
+	lockerSizeComboBox.setSelectedIndex(-1);
 	lockerDetailsPanel.add(lblNewLabel_2);
 	JLabel lblNewLabel_3 = new JLabel("Operating Instruction");
 	lblNewLabel_3.setForeground(new Color(0, 0, 0));
@@ -216,11 +263,12 @@ public void customerPanel()
 	lblNewLabel_9.setBounds(10, 95, 120, 20);
 	lockerDetailsPanel.add(lblNewLabel_9);
 	
-	JPanel DepositDetailsPanel = new JPanel();
+	final JPanel DepositDetailsPanel = new JPanel();
 	DepositDetailsPanel.setForeground(new Color(0, 0, 0));
 	DepositDetailsPanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Rent & Security Deposit Details", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 	DepositDetailsPanel.setBackground(new Color(0, 102, 102));
 	DepositDetailsPanel.setBounds(20, 290, 540, 100);
+	// DepositDetailsPanel.setBounds(20, 290, 540, 125);
 	getContentPane().add(DepositDetailsPanel);
 	DepositDetailsPanel.setLayout(null);
 	
@@ -228,8 +276,59 @@ public void customerPanel()
 	lblNewLabel_4.setForeground(new Color(0, 0, 0));
 	lblNewLabel_4.setBounds(10, 20, 120, 20);
 	DepositDetailsPanel.add(lblNewLabel_4);
-	
+	final JLabel lblExpiryDate = new JLabel("Expiry Date");
+	//Mode of Payment
 	JComboBox modeOfPaymentComboBox = new JComboBox();
+	modeOfPaymentComboBox.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+		            JComboBox<String> cb = (JComboBox<String>) e.getSource();
+		            String selectedItem = (String) cb.getSelectedItem();
+		            System.out.println("Selected item: " + selectedItem);
+		            paymentMode=selectedItem;
+		            
+		            int val=0;
+		            if(selectedItem=="Complementary"){
+		            	// Set the new bounds here
+		            		DepositDetailsPanel.setBounds(20, 290, 540, 125);
+		            		lblExpiryDate.setBounds(10, 95, 150, 20);
+		            		lblExpiryDate.setForeground(new Color(0, 0, 0));
+		            		DepositDetailsPanel.add(lblExpiryDate);
+		                   	lblExpiryDate.setVisible(true);
+		            		expiryDateText = new JTextField();
+		            		expiryDateText.setBounds(200, 95, 90, 20);
+		                    expiryDateText.setVisible(true);
+		            		DepositDetailsPanel.add(expiryDateText);
+		            		expiryDateText.setColumns(10);
+		                 // Repaint the panel to reflect changes
+			                 DepositDetailsPanel.revalidate();
+			                 DepositDetailsPanel.repaint();
+//		            	expiryDateText.setEnabled(true);
+//		            	expiryDateText.setEditable(true);
+//		            	
+//		            	expiryDate.setEnabled(true);
+		            	
+		            }
+		            else if (selectedItem=="Security Deposit" || selectedItem=="Yearly Rent"){
+		            	DepositDetailsPanel.setBounds(20, 290, 540, 100);
+		            	DepositDetailsPanel.revalidate();
+		                DepositDetailsPanel.repaint();
+//		            	expiryDateText.setEnabled(false);
+//		            	expiryDateText.setEditable(false);
+		                expiryDateText.setVisible(false);
+		            	lblExpiryDate.setVisible(false);
+		            	
+		            }
+		          
+		           
+		            
+		            
+			 
+				}
+	});
+	modeOfPaymentComboBox.setMaximumRowCount(3);
+	modeOfPaymentComboBox.setModel(new DefaultComboBoxModel(new String[] {"Complementary", "Security Deposit", "Yearly Rent"}));
+	modeOfPaymentComboBox.setSelectedIndex(-1);
 	modeOfPaymentComboBox.setBounds(200, 20, 300, 20);
 	DepositDetailsPanel.add(modeOfPaymentComboBox);
 	
@@ -277,7 +376,7 @@ public void customerPanel()
 	backButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			if (chk==0) {
-				lockerIssuance obj=new lockerIssuance(0);
+				newLockerIssuance obj=new newLockerIssuance(0);
 				obj.setVisible(true);
 				obj.setSize(600, 500);
 				dispose();
@@ -341,8 +440,8 @@ public void customerPanel()
 	
 	
 	
-//	public void insertData(HashMap<String,String> custAccRelation ){
-//		
+	public void insertData(HashMap<String,String> custAccRelation ){
+		
 //		this.accountNum=custAccRelation.get("accountnum");
 //		this.branchcodeid=custAccRelation.get("branchcodeid");
 //		customerNameText.setText(custAccRelation.get("customername"));
@@ -357,7 +456,7 @@ public void customerPanel()
 //		titleOfAccountText.setEditable(false);
 //		operatingInstructionText.setEditable(false);
 ////		openInBranchText.setEditable(false);
-//	}
+	}
 //	
 //	
 //	

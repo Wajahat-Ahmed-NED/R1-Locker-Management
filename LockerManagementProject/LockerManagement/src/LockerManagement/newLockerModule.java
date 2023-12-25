@@ -68,7 +68,7 @@ public class newLockerModule extends JFrame {
 		JButton signOffButton = new JButton("Sign Off");
 		signOffButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				logIn obj=new logIn();
+				newLogIn obj=new newLogIn();
 				obj.setVisible(true);
 				obj.setSize(600, 500);
 				dispose();
@@ -80,7 +80,7 @@ public class newLockerModule extends JFrame {
 		JButton backButton = new JButton("Back");
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				mainMenuAuthorization obj = new mainMenuAuthorization(0);
+				newMainMenu obj = new newMainMenu(0);
 				obj.setVisible(true);
 				obj.setSize(600, 500);
 				dispose();

@@ -131,7 +131,7 @@ public class customerDetails extends JFrame {
 		JComboBox comboBox = new JComboBox();
 		comboBox.addActionListener(new ActionListener() {
 
-			 @Override
+//			 @Override
 	            public void actionPerformed(ActionEvent e) {
 	                JComboBox<String> cb = (JComboBox<String>) e.getSource();
 	                String selectedItem = (String) cb.getSelectedItem();
@@ -218,7 +218,7 @@ public class customerDetails extends JFrame {
 		
 		modeOfOperationComboBox.addActionListener(new ActionListener() {
 
-			 @Override
+	//		 @Override
 	            public void actionPerformed(ActionEvent e) {
 	                JComboBox<String> cb = (JComboBox<String>) e.getSource();
 	                String selectedItem = (String) cb.getSelectedItem();
@@ -240,7 +240,7 @@ public class customerDetails extends JFrame {
 		modeOfPaymentComboBox.setModel(new DefaultComboBoxModel(new String[] {"Complementary", "Security Deposit", "Yearly Rent"}));
 		modeOfPaymentComboBox.addActionListener(new ActionListener() {
 
-			 @Override
+//			 @Override
 	            public void actionPerformed(ActionEvent e) {
 	                JComboBox<String> cb = (JComboBox<String>) e.getSource();
 	                String selectedItem = (String) cb.getSelectedItem();

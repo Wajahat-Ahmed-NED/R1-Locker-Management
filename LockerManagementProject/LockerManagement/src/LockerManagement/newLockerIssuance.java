@@ -95,7 +95,7 @@ public class newLockerIssuance extends JFrame {
 			}
 			}else if(chk==1)
 			{
-				customerDetails obj=new customerDetails(1);
+				newDetails obj=new newDetails(1);
 				obj.setVisible(true);
 				obj.setSize(600, 400);
 				dispose();
@@ -119,7 +119,7 @@ public class newLockerIssuance extends JFrame {
 		JButton signOffButton = new JButton("Sign Off");
 		signOffButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				logIn obj=new logIn();
+				newLogIn obj=new newLogIn();
 				obj.setVisible(true);
 				obj.setSize(600, 400);
 				dispose();
@@ -132,12 +132,12 @@ public class newLockerIssuance extends JFrame {
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (chk==0) {
-					lockerModule obj = new lockerModule(0);
+					newLockerModule obj = new newLockerModule(0);
 					obj.setVisible(true);
 					obj.setSize(600, 500);
 					dispose();
 				} else if(chk==1){
-					lockerModule obj = new lockerModule(1);
+					newLockerModule obj = new newLockerModule(1);
 					obj.setVisible(true);
 					obj.setSize(600, 500);
 					dispose();
@@ -240,7 +240,10 @@ public class newLockerIssuance extends JFrame {
 						}
 				}else if(chk==0)
 				{
-					
+					newDetails obj = new newDetails(0);
+					obj.setSize(600, 500);
+					obj.setVisible(true);
+					dispose();
 				}
 				
 			}
@@ -303,9 +306,9 @@ public class newLockerIssuance extends JFrame {
 				customerAccountRelationship.put("contactno",result.getString("CONTACTNO")) ;
 				customerAccountRelationship.put("email", result.getString("EMAIL")) ;
 				Global.customerId= result.getInt("customerid");
-			    customerDetails obj= new customerDetails(0);
-			    	obj.insertData(customerAccountRelationship);
-			    	obj.insertArray(availableLockers);
+			    newDetails obj= new newDetails(0);
+//			    	obj.insertData(customerAccountRelationship);
+//			    	obj.insertArray(availableLockers);
 					obj.setVisible(true);
 					obj.setSize(600,500);
 					dispose();
