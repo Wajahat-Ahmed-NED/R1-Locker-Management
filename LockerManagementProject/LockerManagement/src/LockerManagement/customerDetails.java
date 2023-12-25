@@ -210,7 +210,7 @@ public class customerDetails extends JFrame {
 		getContentPane().add(lblModeOfOperation);
 		
 		JComboBox modeOfOperationComboBox = new JComboBox();
-		modeOfOperationComboBox.setModel(new DefaultComboBoxModel(new String[] {"Single", "Either or Surviver", "Jointly by all of Us", "Jointly by two of Us"}));
+		modeOfOperationComboBox.setModel(new DefaultComboBoxModel(new String[] {"Singly", "Either or Surviver", "Jointly by all of Us", "Jointly by two of Us"}));
 		modeOfOperationComboBox.setSelectedIndex(-1);
 		modeOfOperationComboBox.setMaximumRowCount(5);
 		modeOfOperationComboBox.setBounds(144, 299, 183, 20);
@@ -306,7 +306,7 @@ public class customerDetails extends JFrame {
 		
 		}
 		
-		else if(chk==1){
+//		else if(chk==1){
 			JLabel lblOperatingInstruction = new JLabel("Operating Instruction");
 			lblOperatingInstruction.setBounds(10, 153, 112, 20);
 			getContentPane().add(lblOperatingInstruction);
@@ -408,7 +408,7 @@ public class customerDetails extends JFrame {
 			keyNumberText.setBounds(144, 122, 183, 20);
 			getContentPane().add(keyNumberText);
 			keyNumberText.setColumns(10);
-		}
+//		}
 
 		JButton signOffButton = new JButton("Sign Off");
 		signOffButton.addActionListener(new ActionListener() {
@@ -597,7 +597,7 @@ public class customerDetails extends JFrame {
 	}
 	
 	 public static void main(String[] args) {
-	    	grid frame = new grid(0);
+		 customerDetails frame = new customerDetails(0);
 	    	frame.setSize(600, 500);
 	    	frame.setVisible(true);
 	    	

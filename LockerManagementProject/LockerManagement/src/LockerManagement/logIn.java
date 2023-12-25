@@ -36,14 +36,16 @@ public class logIn extends JFrame {
 	private JPasswordField passwordText;
 	private JPasswordField userNameText;
 	public static String currentDate;
+	
 	public logIn() {
+		setResizable(false);
 		setLocation(new Point(500, 200));
-		getContentPane().setBackground(new Color(0, 153, 102));
+		getContentPane().setBackground(new Color(0, 102, 102));
 		setTitle("Login");
 		
 		JPanel logInPanel = new JPanel();
 		logInPanel.setBounds(157, 151, 241, 123);
-		logInPanel.setBackground(new Color(0, 153, 102));
+		logInPanel.setBackground(new Color(0, 102, 102));
 		logInPanel.setBorder(new TitledBorder(null, "Log In", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		logInPanel.setLayout(null);
 		

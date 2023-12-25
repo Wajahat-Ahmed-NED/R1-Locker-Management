@@ -36,7 +36,7 @@ public class lockerIssuance extends JFrame {
 	String [] columnNames={"Locker Available", "Lockers Size"};
 	Object[][] data= new Object[3][2];
 	boolean auth=true;
-	ArrayList<Integer> availableLockers= new ArrayList<>();
+	ArrayList<Integer> availableLockers= new ArrayList<Integer>();
 	public int chk;
 	
 	public lockerIssuance(final int chk)
@@ -67,7 +67,7 @@ public class lockerIssuance extends JFrame {
 			
 			
 			
-			ArrayList<Object[]> rows= new ArrayList<>();
+			ArrayList<Object[]> rows= new ArrayList<Object[]>();
 			while(result.next()) {
 				Object[] row= new Object[2];
 				for ( int i=0;i<2;i++){
@@ -268,7 +268,7 @@ public class lockerIssuance extends JFrame {
 			
 			ResultSet resultAccount = statementAccount.executeQuery();
 			
-			HashMap<String, String> customerAccountRelationship = new HashMap<>();
+			HashMap<String, String> customerAccountRelationship = new HashMap<String, String>();
 			if(resultAccount.next()){
 				customerAccountRelationship.put("accounttitle",resultAccount.getString("ACCOUNTTITLE")) ;
 				Global.accountNum(resultAccount.getString("ACCOUNTNUM"));

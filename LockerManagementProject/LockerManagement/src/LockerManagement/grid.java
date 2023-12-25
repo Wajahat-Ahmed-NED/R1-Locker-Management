@@ -26,6 +26,9 @@ public class grid extends JFrame {
 	Object[][] newdata3 = new Object [4][6] ;
 	public int chk;
 	public boolean issuance;
+	/**
+	 * @wbp.parser.constructor
+	 */
 	public grid(final int chk) {
 		getContentPane().setFont(new Font("Tahoma", Font.BOLD, 12));
 		setLocation(new Point(500, 200));

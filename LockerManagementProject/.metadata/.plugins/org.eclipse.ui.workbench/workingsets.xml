@@ -16,6 +16,8 @@
 <workingSet editPageId="com.ibm.etools.project.OthersWorkingSet" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1702443622355_13" label="Uncategorized Projects" name="OthersWorkingSet.name">
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/LockerManagement" type="4"/>
 </workingSet>
+<workingSet editPageId="org.eclipse.jdt.internal.ui.DynamicSourcesWorkingSet" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1703272499026_19" label="Java Main Sources" name="Java Main Sources"/>
+<workingSet editPageId="org.eclipse.jdt.internal.ui.DynamicSourcesWorkingSet" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1703272499086_20" label="Java Test Sources" name="Java Test Sources"/>
 <workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1702443622386_14" label="Multiple Working Sets" name="Aggregate:OSGi Bundle Projects:OSGi Fragment Bundle Projects:OSGi Application Projects:OSGi Composite Bundle Projects:Liberty Feature Projects:EARWorkingSetPage.name:AppClientWorkingSetPage.name:EjbWorkingSetPage.name:ConnectorWorkingSetPage.name:NewWebWorkingSetPage.name:JPAWorkingSet.name:WS_UTIL:WebFragmentWorkingSetPage.name:OthersWorkingSet.name:">
 <workingSet IMemento.internal.id="OSGi Bundle Projects"/>
 <workingSet IMemento.internal.id="OSGi Fragment Bundle Projects"/>
@@ -36,4 +38,5 @@
 <workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1702469596803_16" label="Window Working Set" name="Aggregate for window 1702469596803"/>
 <workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1702526764953_17" label="Window Working Set" name="Aggregate for window 1702526764953"/>
 <workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1702969941647_18" label="Window Working Set" name="Aggregate for window 1702969941647"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1703272500992_21" label="Window Working Set" name="Aggregate for window 1703272500992"/>
 </workingSetManager>
