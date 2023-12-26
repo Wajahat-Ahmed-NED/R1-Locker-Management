@@ -13,7 +13,9 @@
 <workingSet editPageId="com.ibm.etools.j2ee.ui.JPAWorkingSet" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1702469576159_10" label="JPA Projects" name="JPAWorkingSet.name"/>
 <workingSet editPageId="com.ibm.etools.j2ee.ui.UtilWorkingSet" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1702469576159_11" label="Utility Projects" name="WS_UTIL"/>
 <workingSet editPageId="com.ibm.etools.j2ee.ui.WebFragmentWorkingSet" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1702469576159_12" label="Web Fragment Projects" name="WebFragmentWorkingSetPage.name"/>
-<workingSet editPageId="com.ibm.etools.project.OthersWorkingSet" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1702469576159_13" label="Uncategorized Projects" name="OthersWorkingSet.name"/>
+<workingSet editPageId="com.ibm.etools.project.OthersWorkingSet" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1702469576159_13" label="Uncategorized Projects" name="OthersWorkingSet.name">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/LockerManagement" type="4"/>
+</workingSet>
 <workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1702469576190_14" label="Multiple Working Sets" name="Aggregate:OSGi Bundle Projects:OSGi Fragment Bundle Projects:OSGi Application Projects:OSGi Composite Bundle Projects:Liberty Feature Projects:EARWorkingSetPage.name:AppClientWorkingSetPage.name:EjbWorkingSetPage.name:ConnectorWorkingSetPage.name:NewWebWorkingSetPage.name:JPAWorkingSet.name:WS_UTIL:WebFragmentWorkingSetPage.name:OthersWorkingSet.name:">
 <workingSet IMemento.internal.id="OSGi Bundle Projects"/>
 <workingSet IMemento.internal.id="OSGi Fragment Bundle Projects"/>
@@ -30,4 +32,9 @@
 <workingSet IMemento.internal.id="WebFragmentWorkingSetPage.name"/>
 <workingSet IMemento.internal.id="OthersWorkingSet.name"/>
 </workingSet>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1703564785323_15" label="Window Working Set" name="Aggregate for window 1703564785323"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1703564819093_16" label="Window Working Set" name="Aggregate for window 1703564819093"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1703564866273_17" label="Window Working Set" name="Aggregate for window 1703564866273"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1703565071900_18" label="Window Working Set" name="Aggregate for window 1703565071900"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1703565266233_19" label="Window Working Set" name="Aggregate for window 1703565266217"/>
 </workingSetManager>
