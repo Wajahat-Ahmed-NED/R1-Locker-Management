@@ -11,31 +11,29 @@ public class mainMenuAuthorization extends JFrame {
 	
 	public int auth=0;
 	
-
-	
 	public mainMenuAuthorization(final int a) {
 		setLocation(new Point(500, 200));
 		setTitle("Main Menu");
 		getContentPane().setBackground(new Color(0, 153, 102));
 		getContentPane().setLayout(null);
 		
-		JButton btnNewButton = new JButton("Main Menu");
+		JButton mainMenuButton = new JButton("Main Menu");
 		if(a==0)
 		{
-			btnNewButton.setText("Main Menu");
+			mainMenuButton.setText("Main Menu");
 		} else if(a==1)
 		{
-			btnNewButton.setText("Pending Task");
+			mainMenuButton.setText("Pending Task");
 		}
-		btnNewButton.addActionListener(new ActionListener() {
+		mainMenuButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				System.out.print(a);
 				if(a==1){
 //					lockerMaintenance obj= new lockerMaintenance(1);
 					grid obj=new grid(1);
 					obj.setVisible(true);
 					obj.setSize(600, 500);
+//					setLocation(new Point(500, 200));
 					dispose();
 //					System.out.println("Auth Success");
 				}
@@ -48,8 +46,8 @@ public class mainMenuAuthorization extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setBounds(198, 160, 140, 54);
-		getContentPane().add(btnNewButton);
+		mainMenuButton.setBounds(198, 160, 140, 54);
+		getContentPane().add(mainMenuButton);
 		
 		JButton btnSignOff = new JButton("Sign Off");
 		btnSignOff.addActionListener(new ActionListener() {
@@ -80,5 +78,10 @@ public class mainMenuAuthorization extends JFrame {
 		}
 		// TODO Auto-generated constructor stub
 	}
+    public static void main(String[] args) {
+    	mainMenuAuthorization frame = new mainMenuAuthorization(1);
+    	frame.setSize(600, 500);
+    	frame.setVisible(true);
+    }
 
 }

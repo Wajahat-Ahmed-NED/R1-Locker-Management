@@ -22,17 +22,15 @@ public class grid extends JFrame {
 	public int chk;
 	public grid(final int chk) {
 		setLocation(new Point(500, 200));
+		setResizable(false);
+
 		getContentPane().setBackground(new Color(0, 153, 102));
 		getContentPane().setLayout(null);
 		this.chk=chk;
 		JPanel panel= new JPanel();
-		panel.setBounds(24,23,403,262);
+		panel.setBounds(96,83,403,262);
 		getContentPane().add(panel);
 		panel.setLayout(null);
-		
-		table = new JTable();
-		table.setBounds(77, 166, 414, 156);
-		getContentPane().add(table);
 		
 		
 		table = new JTable(data,columnNames);

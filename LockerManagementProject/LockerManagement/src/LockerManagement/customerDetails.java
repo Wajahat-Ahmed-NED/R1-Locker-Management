@@ -30,30 +30,42 @@ import java.util.Date;
 
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import javax.swing.JTextPane;
+import javax.swing.border.TitledBorder;
+import javax.swing.UIManager;
 
 public class customerDetails extends JFrame {
 	private JTextField customerNameText;
 	private JTextField emailText;
 	private JTextField contactInformationText;
 	private JTextField titleOfAccountText;
-	private JTextField operatingInstructionText;
+	private JTextField mobileText;
 	private JTextField openInBranchText;
-	private JTextField securityDepositText;
-	private JTextField yearlyRentText;
-	private JTextField expiryDateText;
-	private JButton saveButton;
+	private JButton authorizeButton;
 	public int chk;
 	ArrayList<Integer> availableLockers;
 	JLabel securityDepositLabel = new JLabel("Security Deposit :");
 	JLabel yearlyRentLabel = new JLabel("Yearly Rent :");
 	JLabel expiryDateLabel = new JLabel("Expiry Date");
-	private JTextField lockerNumberText;
-	private JTextField keyNumberText;
-	
+	private JTextField nameText;
+	private JTextField corresspondedAddressText;
+	private JTextField accountNumberText;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField operatingInstrucionText;
+	private JTextField modeOfPaymentText;
+	private JTextField textField_3;
+	private JTextField textField_2;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
+	private JTextField textField_7;
+	final JTextPane textPane = new JTextPane();
 	
 	
 	public customerDetails(final int chk)
 	{
+		setResizable(false);
 		setLocation(new Point(500, 200));
 		getContentPane().setBackground(new Color(0, 153, 102));
 		setTitle("Customer Details");
@@ -108,11 +120,11 @@ public class customerDetails extends JFrame {
 		titleOfAccountText.setBounds(144, 126, 183, 20);
 		getContentPane().add(titleOfAccountText);
 		
-		operatingInstructionText = new JTextField();
-		operatingInstructionText.setEditable(false);
-		operatingInstructionText.setColumns(10);
-		operatingInstructionText.setBounds(144, 157, 183, 20);
-		getContentPane().add(operatingInstructionText);
+		mobileText = new JTextField();
+		mobileText.setEditable(false);
+		mobileText.setColumns(10);
+		mobileText.setBounds(144, 157, 183, 20);
+		getContentPane().add(mobileText);
 		
 		openInBranchText = new JTextField();
 		openInBranchText.setEditable(false);
@@ -124,269 +136,11 @@ public class customerDetails extends JFrame {
 		lblLockerSize.setBounds(10, 230, 112, 20);
 		getContentPane().add(lblLockerSize);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.addActionListener(new ActionListener() {
-
-			 @Override
-	            public void actionPerformed(ActionEvent e) {
-	                JComboBox<String> cb = (JComboBox<String>) e.getSource();
-	                String selectedItem = (String) cb.getSelectedItem();
-	                System.out.println("Selected item: " + selectedItem);
-	                int val=0;
-	                if(selectedItem=="Small"){
-	                	if(availableLockers.get(0)==3){
-	                		 JOptionPane.showMessageDialog(null,"Small Locker Not Available");
-	                	}
-	                	else{
-	                		val=1;
-	                		fetchLockerDetails(val);
-	                	}
-	                }
-	                else if (selectedItem=="Medium"){
-	                
-	                	if(availableLockers.get(1)==0){
-	                		 JOptionPane.showMessageDialog(null,"Medium Locker Not Available");
-	                	}
-	                	else{
-	                		val=2;
-	                		fetchLockerDetails(val);
-	                	}
-	                }
-	                else if(selectedItem=="Large"){
-	                	
-	                	if(availableLockers.get(2)==0){
-	                		 JOptionPane.showMessageDialog(null,"Large Locker Not Available");
-	                	}
-	                	else{
-	                		val=3;
-	                		fetchLockerDetails(val);
-	                	}
-	                }
-	               
-	            }
-		});
-		
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Small", "Medium", "Large"}));
-		comboBox.setMaximumRowCount(3);
-		comboBox.setSelectedIndex(-1);
-		comboBox.setBounds(144, 219, 183, 20);
-		getContentPane().add(comboBox);
-		
-		
-		
-		securityDepositLabel.setEnabled(false);
-		securityDepositLabel.setBounds(10, 260, 89, 14);
-		getContentPane().add(securityDepositLabel);
-		
-		securityDepositText = new JTextField();
-		securityDepositText.setEnabled(false);
-		securityDepositText.setBackground(new Color(0, 153, 102));
-		securityDepositText.setEditable(false);
-		securityDepositText.setBounds(109, 257, 86, 20);
-		getContentPane().add(securityDepositText);
-		securityDepositText.setColumns(10);
-		
-		
-		yearlyRentLabel.setEnabled(false);
-		yearlyRentLabel.setBounds(205, 260, 89, 17);
-		getContentPane().add(yearlyRentLabel);
-		
-		yearlyRentText = new JTextField();
-		yearlyRentText.setBackground(new Color(0, 153, 102));
-		yearlyRentText.setEnabled(false);
-		yearlyRentText.setEditable(false);
-		yearlyRentText.setColumns(10);
-		yearlyRentText.setBounds(273, 257, 86, 20);
-		getContentPane().add(yearlyRentText);
-		
-		JLabel lblModeOfOperation = new JLabel("Mode Of Operation");
-		lblModeOfOperation.setBounds(10, 299, 112, 20);
-		getContentPane().add(lblModeOfOperation);
-		
-		JComboBox modeOfOperationComboBox = new JComboBox();
-		modeOfOperationComboBox.setModel(new DefaultComboBoxModel(new String[] {"Single", "Either or Surviver", "Jointly by all of Us", "Jointly by two of Us", "Others(Please Specify)"}));
-		modeOfOperationComboBox.setSelectedIndex(-1);
-		modeOfOperationComboBox.setMaximumRowCount(5);
-		modeOfOperationComboBox.setBounds(144, 299, 183, 20);
-		getContentPane().add(modeOfOperationComboBox);
-		
-		JLabel lblModeOfPayment = new JLabel("Mode Of Payment");
-		lblModeOfPayment.setBounds(10, 336, 112, 20);
-		getContentPane().add(lblModeOfPayment);
-		
-		JComboBox modeOfPaymentComboBox = new JComboBox();
-		modeOfPaymentComboBox.setModel(new DefaultComboBoxModel(new String[] {"Complementary", "Security Deposit", "Yearly Rent"}));
-		modeOfPaymentComboBox.addActionListener(new ActionListener() {
-
-			 @Override
-	            public void actionPerformed(ActionEvent e) {
-	                JComboBox<String> cb = (JComboBox<String>) e.getSource();
-	                String selectedItem = (String) cb.getSelectedItem();
-	                System.out.println("Selected item: " + selectedItem);
-	                
-	                
-	                int val=0;
-	                if(selectedItem=="Complementary"){
-	                	expiryDateText.setEnabled(true);
-	                	expiryDateText.setEditable(true);
-	                	
-	                	expiryDateLabel.setEnabled(true);
-	                	
-	                }
-	                else if (selectedItem=="Security Deposit" || selectedItem=="Yearly Rent"){
-	                	expiryDateText.setEnabled(false);
-	                	expiryDateText.setEditable(false);
-	                	
-	                	expiryDateLabel.setEnabled(false);
-	                	
-	                }
-	              
-	               
-	                
-	                
-			 }
-		}
-		);
-		modeOfPaymentComboBox.setSelectedIndex(-1);
-		modeOfPaymentComboBox.setMaximumRowCount(5);
-		modeOfPaymentComboBox.setBounds(144, 336, 183, 20);
-		getContentPane().add(modeOfPaymentComboBox);
-		
-		
-		expiryDateLabel.setEnabled(false);
-		expiryDateLabel.setBounds(10, 363, 112, 20);
-		getContentPane().add(expiryDateLabel);
-		
-		expiryDateText = new JTextField();
-		expiryDateText.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent arg0) {
-				String text=expiryDateText.getText();
-				boolean ans=formatDate(text);
-				if(!ans){
-					JOptionPane.showMessageDialog(null,"Invalid Date");
-				}
-				
-			}
-		});
-		
-		expiryDateText.setBackground(new Color(0, 153, 102));
-		expiryDateText.setEditable(false);
-		expiryDateText.setEnabled(false);
-		expiryDateText.setBounds(132, 363, 86, 20);
-		getContentPane().add(expiryDateText);
-		expiryDateText.setColumns(10);
-	
-		
-		JLabel lblDateFormatDdmmyyyy = new JLabel("Date Format dd/MM/yyyy");
-		lblDateFormatDdmmyyyy.setBounds(228, 367, 141, 14);
-		getContentPane().add(lblDateFormatDdmmyyyy);
-		
 		}
 		
-		else if(chk==1){
-			JLabel lblOperatingInstruction = new JLabel("Operating Instruction");
-			lblOperatingInstruction.setBounds(10, 153, 112, 20);
-			getContentPane().add(lblOperatingInstruction);
-			
-			operatingInstructionText = new JTextField();
-			operatingInstructionText.setEditable(false);
-			operatingInstructionText.setColumns(10);
-			operatingInstructionText.setBounds(144, 153, 183, 20);
-			getContentPane().add(operatingInstructionText);
-			
-			JLabel lblLockerSize = new JLabel("Locker Size");
-			lblLockerSize.setBounds(10, 184, 112, 20);
-			getContentPane().add(lblLockerSize);
-			
-			JComboBox comboBox = new JComboBox();
-			comboBox.setModel(new DefaultComboBoxModel(new String[] {"Small", "Medium", "Large"}));
-			comboBox.setMaximumRowCount(3);
-			comboBox.setSelectedIndex(-1);
-			comboBox.setBounds(144, 184, 183, 20);
-			getContentPane().add(comboBox);
-			
-			JLabel lblSecurityDeposit = new JLabel("Security Deposit :");
-			lblSecurityDeposit.setEnabled(false);
-			lblSecurityDeposit.setBounds(10, 301, 89, 14);
-			getContentPane().add(lblSecurityDeposit);
-			
-			securityDepositText = new JTextField();
-			securityDepositText.setEnabled(false);
-			securityDepositText.setBackground(new Color(0, 153, 102));
-			securityDepositText.setEditable(false);
-			securityDepositText.setBounds(110, 298, 86, 20);
-			getContentPane().add(securityDepositText);
-			securityDepositText.setColumns(10);
-			
-			JLabel lblYearlyRent = new JLabel("Yearly Rent :");
-			lblYearlyRent.setEnabled(false);
-			lblYearlyRent.setBounds(206, 300, 89, 17);
-			getContentPane().add(lblYearlyRent);
-			
-			yearlyRentText = new JTextField();
-			yearlyRentText.setBackground(new Color(0, 153, 102));
-			yearlyRentText.setEnabled(false);
-			yearlyRentText.setEditable(false);
-			yearlyRentText.setColumns(10);
-			yearlyRentText.setBounds(278, 298, 86, 20);
-			getContentPane().add(yearlyRentText);
-			
-			JLabel lblModeOfOperation = new JLabel("Mode Of Operation");
-			lblModeOfOperation.setBounds(10, 215, 112, 20);
-			getContentPane().add(lblModeOfOperation);
-			
-			JComboBox modeOfOperationComboBox = new JComboBox();
-			modeOfOperationComboBox.setModel(new DefaultComboBoxModel(new String[] {"Single", "Either or Surviver", "Jointly by all of Us", "Jointly by two of Us", "Others(Please Specify)"}));
-			modeOfOperationComboBox.setSelectedIndex(-1);
-			modeOfOperationComboBox.setMaximumRowCount(5);
-			modeOfOperationComboBox.setBounds(144, 215, 183, 20);
-			getContentPane().add(modeOfOperationComboBox);
-			
-			JLabel lblModeOfPayment = new JLabel("Mode Of Payment");
-			lblModeOfPayment.setBounds(10, 246, 112, 20);
-			getContentPane().add(lblModeOfPayment);
-			
-			JComboBox modeOfPaymentComboBox = new JComboBox();
-			modeOfPaymentComboBox.setModel(new DefaultComboBoxModel(new String[] {"Complementary", "Security Deposit", "Yearly Rent"}));
-			modeOfPaymentComboBox.setSelectedIndex(-1);
-			modeOfPaymentComboBox.setMaximumRowCount(5);
-			modeOfPaymentComboBox.setBounds(144, 246, 183, 20);
-			getContentPane().add(modeOfPaymentComboBox);
-			
-			JLabel lblExpiryDate = new JLabel("Expiry Date");
-			lblExpiryDate.setEnabled(false);
-			lblExpiryDate.setBounds(10, 329, 112, 20);
-			getContentPane().add(lblExpiryDate);
-			
-			expiryDateText = new JTextField();
-			expiryDateText.setBackground(new Color(0, 153, 102));
-			expiryDateText.setEditable(false);
-			expiryDateText.setEnabled(false);
-			expiryDateText.setBounds(110, 329, 86, 20);
-			getContentPane().add(expiryDateText);
-			expiryDateText.setColumns(10);
-			
-			lockerNumberText = new JTextField();
-			lockerNumberText.setEditable(false);
-			lockerNumberText.setBounds(144, 91, 183, 20);
-			getContentPane().add(lockerNumberText);
-			lockerNumberText.setColumns(10);
-			
-			JLabel lblLockerNumber = new JLabel("Locker Number");
-			lblLockerNumber.setBounds(10, 91, 112, 20);
-			getContentPane().add(lblLockerNumber);
-			
-			JLabel lblKeyNumber = new JLabel("Key Number");
-			lblKeyNumber.setBounds(10, 122, 112, 20);
-			getContentPane().add(lblKeyNumber);
-			
-			keyNumberText = new JTextField();
-			keyNumberText.setEditable(false);
-			keyNumberText.setBounds(144, 122, 183, 20);
-			getContentPane().add(keyNumberText);
-			keyNumberText.setColumns(10);
-		}
+//		else if(chk==1){
+			surrenderPanel();
+//		}
 
 		JButton signOffButton = new JButton("Sign Off");
 		signOffButton.addActionListener(new ActionListener() {
@@ -397,56 +151,35 @@ public class customerDetails extends JFrame {
 				dispose();
 			}
 		});
-		signOffButton.setBounds(10, 394, 89, 23);
+		signOffButton.setBounds(10, 431, 89, 23);
 		getContentPane().add(signOffButton);
+	
+	
 		
-	JButton backButton = new JButton("Back");
-	backButton.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent arg0) {
-			if (chk==0) {
-				lockerIssuance obj=new lockerIssuance(0);
-				obj.setVisible(true);
-				obj.setSize(600, 500);
-				dispose();
-			}else if(chk==1){
-				lockerMaintenance obj=new lockerMaintenance(1);
-				obj.setVisible(true);
-				obj.setSize(600, 500);
-				dispose();
+		JButton referBackButton = new JButton("Refer Back");
+		referBackButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {;
+//				textPane.setEnabled(true);
 			}
-//			else if(chk==2){
-//				lockerMaintenance obj=new lockerMaintenance(2);
-//				obj.setVisible(true);
-//				obj.setSize(600, 500);
-//				dispose();
-//			}
-
-		}
-	});
-	backButton.setBounds(355, 394, 89, 23);
-	getContentPane().add(backButton);
-	
-	
-	
-	JButton addToGridButton = new JButton("Add To Grid");
-	addToGridButton.addActionListener(new ActionListener() {
+		});
+		referBackButton.setBounds(109, 431, 133, 23);
+		getContentPane().add(referBackButton);
+			
+	JButton rejectButton = new JButton("Reject");
+	rejectButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
-			
-			grid obj=new grid(0);
-			obj.setSize(600,500);
-			obj.setVisible(true);
-			
+//			textPane.setEnabled(true);
 			
 		}
 	});
-	addToGridButton.setBounds(129, 394, 89, 23);
-	getContentPane().add(addToGridButton);
+	rejectButton.setBounds(250, 431, 89, 23);
+	getContentPane().add(rejectButton);
 	
-	saveButton = new JButton("Save");
+	authorizeButton = new JButton("Authorize");
 	if (chk==1) {
-		saveButton.setText("Authorize");
+		authorizeButton.setText("Authorize");
 	}
-	saveButton.addActionListener(new ActionListener() {
+	authorizeButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
 			
 			if (chk==1) {
@@ -471,8 +204,8 @@ public class customerDetails extends JFrame {
 			}
 		}
 	});
-	saveButton.setBounds(238, 394, 89, 23);
-	getContentPane().add(saveButton);
+	authorizeButton.setBounds(349, 431, 89, 23);
+	getContentPane().add(authorizeButton);
 	
 	JButton cancelButton = new JButton("Cancel");
 	cancelButton.addActionListener(new ActionListener() {
@@ -481,18 +214,174 @@ public class customerDetails extends JFrame {
 		dispose();
 		}
 	});
-	cancelButton.setBounds(355, 360, 89, 23);
+	cancelButton.setBounds(449, 431, 89, 23);
 	getContentPane().add(cancelButton);
-		
-		
-		
-		
-		
+	
+				
 	}
 	
 	
 	
-	
+	public void surrenderPanel()
+	{
+		JPanel customerDetailsPanel = new JPanel();
+		customerDetailsPanel.setBorder(new TitledBorder(null, "Customer Details", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		customerDetailsPanel.setBackground(new Color(0, 153, 102));
+		customerDetailsPanel.setBounds(61, 11, 434, 121);
+		getContentPane().add(customerDetailsPanel);
+		customerDetailsPanel.setLayout(null);
+		
+		JLabel lblLockerNumber = new JLabel("Customer Name");
+		lblLockerNumber.setBounds(23, 34, 76, 14);
+		customerDetailsPanel.add(lblLockerNumber);
+		
+		JLabel lblKeyNumber = new JLabel("Corresponded Address");
+		lblKeyNumber.setBounds(23, 52, 112, 20);
+		customerDetailsPanel.add(lblKeyNumber);
+		
+		nameText = new JTextField();
+		nameText.setBounds(166, 11, 258, 20);
+		customerDetailsPanel.add(nameText);
+		nameText.setVisible(false);
+		nameText.setEditable(false);
+		nameText.setColumns(10);
+		
+		corresspondedAddressText = new JTextField();
+		corresspondedAddressText.setBounds(166, 34, 258, 20);
+		customerDetailsPanel.add(corresspondedAddressText);
+		corresspondedAddressText.setEditable(false);
+		corresspondedAddressText.setColumns(10);
+		
+				JLabel lblOperatingInstruction = new JLabel("Mobile");
+				lblOperatingInstruction.setBounds(23, 71, 112, 20);
+				customerDetailsPanel.add(lblOperatingInstruction);
+				
+				mobileText = new JTextField();
+				mobileText.setBounds(166, 62, 258, 20);
+				customerDetailsPanel.add(mobileText);
+				mobileText.setEditable(false);
+				mobileText.setColumns(10);
+				
+				accountNumberText = new JTextField();
+				accountNumberText.setBounds(166, 91, 258, 20);
+				customerDetailsPanel.add(accountNumberText);
+				accountNumberText.setColumns(10);
+				
+				JLabel lblAccountNumber = new JLabel("Account Number");
+				lblAccountNumber.setBounds(23, 91, 112, 20);
+				customerDetailsPanel.add(lblAccountNumber);
+				
+				JPanel panel = new JPanel();
+				panel.setBorder(new TitledBorder(null, "Locker Deatils", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				panel.setBackground(new Color(0, 153, 102));
+				panel.setBounds(61, 132, 434, 102);
+				getContentPane().add(panel);
+				panel.setLayout(null);
+				
+				JLabel lblLocker = new JLabel("Locker Number");
+				lblLocker.setBounds(33, 24, 112, 20);
+				panel.add(lblLocker);
+				
+				textField = new JTextField();
+				textField.setBounds(155, 24, 89, 20);
+				panel.add(textField);
+				textField.setColumns(10);
+				
+				JLabel lblSize = new JLabel("Size");
+				lblSize.setBounds(268, 27, 35, 14);
+				panel.add(lblSize);
+				
+				JLabel lblLockerKey = new JLabel("Locker Key");
+				lblLockerKey.setBounds(33, 55, 89, 14);
+				panel.add(lblLockerKey);
+				
+				textField_1 = new JTextField();
+				textField_1.setBounds(157, 52, 89, 20);
+				panel.add(textField_1);
+				textField_1.setColumns(10);
+				
+				JLabel lblStatus = new JLabel("Status");
+				lblStatus.setBounds(268, 58, 46, 14);
+				panel.add(lblStatus);
+				
+				JLabel lblOperatingInstruction_1 = new JLabel("Operating Instruction");
+				lblOperatingInstruction_1.setBounds(35, 80, 112, 14);
+				panel.add(lblOperatingInstruction_1);
+				
+				operatingInstrucionText = new JTextField();
+				operatingInstrucionText.setBounds(157, 77, 258, 20);
+				panel.add(operatingInstrucionText);
+				operatingInstrucionText.setColumns(10);
+				
+				textField_2 = new JTextField();
+				textField_2.setBounds(324, 24, 79, 20);
+				panel.add(textField_2);
+				textField_2.setColumns(10);
+				
+				textField_4 = new JTextField();
+				textField_4.setColumns(10);
+				textField_4.setBounds(324, 52, 79, 20);
+				panel.add(textField_4);
+				
+				JPanel panel_1 = new JPanel();
+				panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Rent & Security Deposit Details", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				panel_1.setBackground(new Color(0, 153, 102));
+				panel_1.setBounds(61, 245, 434, 121);
+				getContentPane().add(panel_1);
+				panel_1.setLayout(null);
+				
+				JLabel lblModeOfPaymeent = new JLabel("Mode Of Payment");
+				lblModeOfPaymeent.setBounds(10, 22, 99, 14);
+				panel_1.add(lblModeOfPaymeent);
+				
+				modeOfPaymentText = new JTextField();
+				modeOfPaymentText.setBounds(165, 19, 248, 20);
+				panel_1.add(modeOfPaymentText);
+				modeOfPaymentText.setColumns(10);
+				
+				JLabel lblRentsecurityDepositAmount = new JLabel("Rent/Security Deposit Amount");
+				lblRentsecurityDepositAmount.setBounds(10, 47, 145, 14);
+				panel_1.add(lblRentsecurityDepositAmount);
+				
+				textField_3 = new JTextField();
+				textField_3.setColumns(10);
+				textField_3.setBounds(165, 44, 248, 20);
+				panel_1.add(textField_3);
+				
+				JLabel lblOverdues = new JLabel("Overdue Date");
+				lblOverdues.setBounds(256, 94, 79, 14);
+				panel_1.add(lblOverdues);
+				
+				textField_5 = new JTextField();
+				textField_5.setBounds(334, 91, 79, 20);
+				panel_1.add(textField_5);
+				textField_5.setColumns(10);
+				
+				JLabel lblLastRentRecover = new JLabel("Last Rent Recover Date");
+				lblLastRentRecover.setBounds(10, 97, 129, 14);
+				panel_1.add(lblLastRentRecover);
+				
+				textField_6 = new JTextField();
+				textField_6.setColumns(10);
+				textField_6.setBounds(165, 91, 79, 20);
+				panel_1.add(textField_6);
+				
+				JLabel lblRentStatus = new JLabel("Rent Status");
+				lblRentStatus.setBounds(10, 72, 79, 14);
+				panel_1.add(lblRentStatus);
+				
+				textField_7 = new JTextField();
+				textField_7.setBounds(165, 69, 248, 20);
+				panel_1.add(textField_7);
+				textField_7.setColumns(10);
+
+
+		textPane.setBorder(new TitledBorder(null, "Comments", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		textPane.setEnabled(false);
+		textPane.setBounds(61, 377, 434, 43);
+		getContentPane().add(textPane);
+
+	}
 	
 	public boolean formatDate(String inp){
 		Scanner scanner = new Scanner(System.in);
@@ -540,10 +429,10 @@ public class customerDetails extends JFrame {
 		contactInformationText.setEditable(false);
 		emailText.setEditable(false);
 		titleOfAccountText.setText(custAccRelation.get("accounttitle"));
-		operatingInstructionText.setText(custAccRelation.get("operatinginstruction"));
+		mobileText.setText(custAccRelation.get("operatinginstruction"));
 		openInBranchText.setText(custAccRelation.get("branchcode"));
 		titleOfAccountText.setEditable(false);
-		operatingInstructionText.setEditable(false);
+		mobileText.setEditable(false);
 		openInBranchText.setEditable(false);
 	}
 	
@@ -573,16 +462,6 @@ public class customerDetails extends JFrame {
 			    String secDeposit = result.getString("SECDEPOSIT");
 			    Integer charges= result.getInt("CHARGES");
 			    
-			   securityDepositText.setEnabled(true);
-			   yearlyRentText.setEnabled(true);
-			   
-			   securityDepositText.setText(secDeposit);
-			   yearlyRentText.setText(Integer.toString(charges));
-			    		
-			     	 
-			   securityDepositLabel.setEnabled(true);
-			   yearlyRentLabel.setEnabled(true);
-			    
 			   
 			}
 			
@@ -594,7 +473,7 @@ public class customerDetails extends JFrame {
 	}
 	
 	 public static void main(String[] args) {
-	    	grid frame = new grid(0);
+		 customerDetails frame = new customerDetails(1);
 	    	frame.setSize(600, 500);
 	    	frame.setVisible(true);
 	    	

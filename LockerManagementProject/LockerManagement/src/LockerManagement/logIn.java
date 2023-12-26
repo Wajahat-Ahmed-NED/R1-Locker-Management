@@ -30,7 +30,7 @@ import java.awt.Frame;
 import java.awt.Window.Type;
 import java.awt.Point;
 import java.awt.Cursor;
-
+//Merged Code
 public class logIn extends JFrame {
 	private JTextField branchCodeText;
 	private JPasswordField passwordText;
@@ -80,7 +80,7 @@ public class logIn extends JFrame {
 //				String password = passwordText.getText();
 				
 				String branchCode = "1000";
-				String userName = "wajahat";
+				String userName = "ariz";
 				String password = "123";
 				
 				

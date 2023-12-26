@@ -14,10 +14,12 @@ public class lockerMaintenance extends JFrame{
 	public int chk;
 	
 	public lockerMaintenance(final int chk) {
+		setResizable(false);
 		this.chk=chk;
-		setLocation(new Point(500, 200));
+
 		
 		if(chk==1){
+			setLocation(new Point(1000, 200));
 			setTitle("Locker Maintenance");
 		}
 		else if (chk==2){
@@ -94,8 +96,11 @@ public class lockerMaintenance extends JFrame{
 		
 	}
 
-	/**
-	 * @param args
-	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		lockerMaintenance frame = new lockerMaintenance(1);
+    	frame.setSize(600, 500);
+    	frame.setVisible(true);
+	}
 
 }

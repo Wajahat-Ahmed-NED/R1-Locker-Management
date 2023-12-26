@@ -42,3 +42,47 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product com.ibm.ratio
 
 !ENTRY org.eclipse.core.net 1 0 2023-12-18 09:15:11.573
 !MESSAGE System property http.proxyPort is set to 8080 but should not be set.
+!SESSION 2023-12-22 11:30:15.868 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=JRE 1.7.0 IBM J9 2.6 Windows 8 amd64-64 Compressed References 20130306_140761 (JIT enabled, AOT enabled)
+J9VM - R26_Java726_SR4_FP1_20130306_1011_B140761
+JIT  - r11.b03_20130131_32403ifx1
+GC   - R26_Java726_SR4_FP1_20130306_1011_B140761_CMPRSS
+J9CL - 20130306_140761
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product com.ibm.rational.rad.product.v9.ide
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product com.ibm.rational.rad.product.v9.ide
+
+!ENTRY org.eclipse.core.net 1 0 2023-12-22 11:30:22.600
+!MESSAGE System property http.proxyHost is set to 10.200.1.18 but should not be set.
+
+!ENTRY org.eclipse.core.net 1 0 2023-12-22 11:30:22.600
+!MESSAGE System property http.proxyPort is set to 8080 but should not be set.
+
+!ENTRY org.eclipse.core.net 1 0 2023-12-22 11:30:22.600
+!MESSAGE System property http.proxyHost is set to 10.200.1.18 but should not be set.
+
+!ENTRY org.eclipse.core.net 1 0 2023-12-22 11:30:22.600
+!MESSAGE System property http.proxyPort is set to 8080 but should not be set.
+!SESSION 2023-12-22 11:30:45.541 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=JRE 1.7.0 IBM J9 2.6 Windows 8 amd64-64 Compressed References 20130306_140761 (JIT enabled, AOT enabled)
+J9VM - R26_Java726_SR4_FP1_20130306_1011_B140761
+JIT  - r11.b03_20130131_32403ifx1
+GC   - R26_Java726_SR4_FP1_20130306_1011_B140761_CMPRSS
+J9CL - 20130306_140761
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product com.ibm.rational.rad.product.v9.ide
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product com.ibm.rational.rad.product.v9.ide
+
+!ENTRY org.eclipse.core.net 1 0 2023-12-22 11:31:01.889
+!MESSAGE System property http.proxyHost is set to 10.200.1.18 but should not be set.
+
+!ENTRY org.eclipse.core.net 1 0 2023-12-22 11:31:01.889
+!MESSAGE System property http.proxyPort is set to 8080 but should not be set.
+
+!ENTRY org.eclipse.core.net 1 0 2023-12-22 11:31:01.889
+!MESSAGE System property http.proxyHost is set to 10.200.1.18 but should not be set.
+
+!ENTRY org.eclipse.core.net 1 0 2023-12-22 11:31:01.889
+!MESSAGE System property http.proxyPort is set to 8080 but should not be set.
