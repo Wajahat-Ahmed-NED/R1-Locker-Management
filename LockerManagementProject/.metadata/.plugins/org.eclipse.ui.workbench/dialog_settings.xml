@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<section name="WorkbenchPreferenceDialog">
+		<item value="696" key="DIALOG_WIDTH"/>
+		<item value="8" key="DIALOG_Y_ORIGIN"/>
+		<item value="728" key="DIALOG_HEIGHT"/>
+		<item value="124" key="DIALOG_X_ORIGIN"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+	</section>
 	<section name="org.eclipse.ui.internal.QuickAccess">
-		<item key="dialogWidth" value="1200"/>
-		<item key="dialogHeight" value="618"/>
+		<item value="1200" key="dialogWidth"/>
+		<item value="618" key="dialogHeight"/>
 		<list key="orderedProviders">
 		</list>
 		<list key="textArray">
@@ -13,20 +20,13 @@
 		</list>
 	</section>
 	<section name="WorkbenchPreferenceDialogSettings">
-		<item key="DIALOG_Y_ORIGIN" value="8"/>
-		<item key="DIALOG_X_ORIGIN" value="491"/>
+		<item value="8" key="DIALOG_Y_ORIGIN"/>
+		<item value="491" key="DIALOG_X_ORIGIN"/>
 	</section>
 	<section name="NewWizardAction">
 	</section>
-	<section name="ImportExportAction">
-	</section>
 	<section name="EditorSelectionDialog">
 	</section>
-	<section name="WorkbenchPreferenceDialog">
-		<item key="DIALOG_X_ORIGIN" value="124"/>
-		<item key="DIALOG_Y_ORIGIN" value="8"/>
-		<item key="DIALOG_WIDTH" value="696"/>
-		<item key="DIALOG_HEIGHT" value="728"/>
-		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+	<section name="ImportExportAction">
 	</section>
 </section>

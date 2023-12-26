@@ -39,4 +39,22 @@
 <workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1702526764953_17" label="Window Working Set" name="Aggregate for window 1702526764953"/>
 <workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1702969941647_18" label="Window Working Set" name="Aggregate for window 1702969941647"/>
 <workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1703272500992_21" label="Window Working Set" name="Aggregate for window 1703272500992"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1703565877690_22" label="Multiple Working Sets" name="Aggregate:OSGi Bundle Projects:OSGi Fragment Bundle Projects:OSGi Application Projects:OSGi Composite Bundle Projects:Liberty Feature Projects:EARWorkingSetPage.name:AppClientWorkingSetPage.name:EjbWorkingSetPage.name:ConnectorWorkingSetPage.name:NewWebWorkingSetPage.name:JPAWorkingSet.name:WS_UTIL:WebFragmentWorkingSetPage.name:OthersWorkingSet.name:Java Main Sources:Java Test Sources:">
+<workingSet IMemento.internal.id="OSGi Bundle Projects"/>
+<workingSet IMemento.internal.id="OSGi Fragment Bundle Projects"/>
+<workingSet IMemento.internal.id="OSGi Application Projects"/>
+<workingSet IMemento.internal.id="OSGi Composite Bundle Projects"/>
+<workingSet IMemento.internal.id="Liberty Feature Projects"/>
+<workingSet IMemento.internal.id="EARWorkingSetPage.name"/>
+<workingSet IMemento.internal.id="AppClientWorkingSetPage.name"/>
+<workingSet IMemento.internal.id="EjbWorkingSetPage.name"/>
+<workingSet IMemento.internal.id="ConnectorWorkingSetPage.name"/>
+<workingSet IMemento.internal.id="NewWebWorkingSetPage.name"/>
+<workingSet IMemento.internal.id="JPAWorkingSet.name"/>
+<workingSet IMemento.internal.id="WS_UTIL"/>
+<workingSet IMemento.internal.id="WebFragmentWorkingSetPage.name"/>
+<workingSet IMemento.internal.id="OthersWorkingSet.name"/>
+<workingSet IMemento.internal.id="Java Main Sources"/>
+<workingSet IMemento.internal.id="Java Test Sources"/>
+</workingSet>
 </workingSetManager>
