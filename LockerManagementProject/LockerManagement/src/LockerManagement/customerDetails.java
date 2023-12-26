@@ -35,18 +35,29 @@ import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 
 public class customerDetails extends JFrame {
+	
+	
 	private JTextField customerNameText;
 	private JTextField emailText;
 	private JTextField contactInformationText;
 	private JTextField titleOfAccountText;
+<<<<<<< HEAD
 	private JTextField mobileText;
 	private JTextField openInBranchText;
 	private JButton authorizeButton;
+=======
+	private JTextField operatingInstructionText;
+//	private JTextField openInBranchText;
+	private JTextField securityDepositText;
+	private JTextField yearlyRentText;
+	private JTextField expiryDateText;
+>>>>>>> 79ddf6e3e102d5c14b9e601923b157ae6acc5993
 	public int chk;
 	ArrayList<Integer> availableLockers;
 	JLabel securityDepositLabel = new JLabel("Security Deposit :");
 	JLabel yearlyRentLabel = new JLabel("Yearly Rent :");
 	JLabel expiryDateLabel = new JLabel("Expiry Date");
+<<<<<<< HEAD
 	private JTextField nameText;
 	private JTextField corresspondedAddressText;
 	private JTextField accountNumberText;
@@ -61,18 +72,34 @@ public class customerDetails extends JFrame {
 	private JTextField textField_6;
 	private JTextField textField_7;
 	final JTextPane textPane = new JTextPane();
+=======
+	private JTextField lockerNumberText;
+	private JTextField keyNumberText;
+	public String accountNum;
+	public String branchcodeid;
+	public String lockerSize;
+	public String operationMode;
+	public String paymentMode;
+	public Integer lockerSizeId;
+>>>>>>> 79ddf6e3e102d5c14b9e601923b157ae6acc5993
 	
 	
 	public customerDetails(final int chk)
 	{
+<<<<<<< HEAD
 		setResizable(false);
+=======
+		
+		
+>>>>>>> 79ddf6e3e102d5c14b9e601923b157ae6acc5993
 		setLocation(new Point(500, 200));
 		getContentPane().setBackground(new Color(0, 153, 102));
 		setTitle("Customer Details");
 		getContentPane().setLayout(null);
 		this.chk=chk;
-//		customerAccountRelationship=custAccRelation;
+		
 		if (chk==0) {
+			
 		JLabel lblCustomerName = new JLabel("Customer Name");
 		lblCustomerName.setBounds(10, 33, 112, 20);
 		getContentPane().add(lblCustomerName);
@@ -83,6 +110,7 @@ public class customerDetails extends JFrame {
 		customerNameText.setBounds(144, 33, 183, 20);
 		getContentPane().add(customerNameText);
 		customerNameText.setColumns(10);
+		
 		
 		JLabel lblEmailAddress = new JLabel("Email Address");
 		lblEmailAddress.setBounds(10, 64, 112, 20);
@@ -105,9 +133,9 @@ public class customerDetails extends JFrame {
 		lblOperatingInstruction.setBounds(10, 157, 112, 20);
 		getContentPane().add(lblOperatingInstruction);
 		
-		JLabel lblOpenInBranch = new JLabel("Open In Branch");
-		lblOpenInBranch.setBounds(10, 188, 112, 20);
-		getContentPane().add(lblOpenInBranch);
+//		JLabel lblOpenInBranch = new JLabel("Open In Branch");
+//		lblOpenInBranch.setBounds(10, 188, 112, 20);
+//		getContentPane().add(lblOpenInBranch);
 		
 		contactInformationText = new JTextField();
 		contactInformationText.setColumns(10);
@@ -126,16 +154,201 @@ public class customerDetails extends JFrame {
 		mobileText.setBounds(144, 157, 183, 20);
 		getContentPane().add(mobileText);
 		
-		openInBranchText = new JTextField();
-		openInBranchText.setEditable(false);
-		openInBranchText.setColumns(10);
-		openInBranchText.setBounds(144, 188, 183, 20);
-		getContentPane().add(openInBranchText);
+//		openInBranchText = new JTextField();
+//		openInBranchText.setEditable(false);
+//		openInBranchText.setColumns(10);
+//		openInBranchText.setBounds(144, 188, 183, 20);
+//		getContentPane().add(openInBranchText);
 		
 		JLabel lblLockerSize = new JLabel("Locker Size");
 		lblLockerSize.setBounds(10, 230, 112, 20);
 		getContentPane().add(lblLockerSize);
 		
+<<<<<<< HEAD
+=======
+		JComboBox comboBox = new JComboBox();
+		comboBox.addActionListener(new ActionListener() {
+
+//			 @Override
+	            public void actionPerformed(ActionEvent e) {
+	                JComboBox<String> cb = (JComboBox<String>) e.getSource();
+	                String selectedItem = (String) cb.getSelectedItem();
+	                System.out.println("Selected item: " + selectedItem);
+	                lockerSize=selectedItem;
+	                
+	                int val=0;
+	                
+	                
+	                if(selectedItem=="Small"){
+	                	if(availableLockers.get(0)==3){
+	                		 JOptionPane.showMessageDialog(null,"Small Locker Not Available");
+	                	}
+	                	else{
+	                		val=1;
+	                		
+	                		fetchLockerDetails(val);
+	                	}
+	                }
+	                
+	                else if (selectedItem=="Medium"){
+	                
+	                	if(availableLockers.get(1)==0){
+	                		 JOptionPane.showMessageDialog(null,"Medium Locker Not Available");
+	                	}
+	                	else{
+	                		val=2;
+	                		fetchLockerDetails(val);
+	                	}
+	                }
+	                
+	                
+	                else if(selectedItem=="Large"){
+	                	
+	                	if(availableLockers.get(2)==0){
+	                		 JOptionPane.showMessageDialog(null,"Large Locker Not Available");
+	                	}
+	                	else{
+	                		val=3;
+	                		fetchLockerDetails(val);
+	                	}
+	                }
+	                
+	               
+	            }
+		});
+		
+		
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Small", "Medium", "Large"}));
+		comboBox.setMaximumRowCount(3);
+		comboBox.setSelectedIndex(-1);
+		comboBox.setBounds(144, 219, 183, 20);
+		getContentPane().add(comboBox);
+		
+		
+		securityDepositLabel.setEnabled(false);
+		securityDepositLabel.setBounds(10, 260, 89, 14);
+		getContentPane().add(securityDepositLabel);
+		
+		
+		securityDepositText = new JTextField();
+		securityDepositText.setEnabled(false);
+		securityDepositText.setBackground(new Color(0, 153, 102));
+		securityDepositText.setEditable(false);
+		securityDepositText.setBounds(109, 257, 86, 20);
+		getContentPane().add(securityDepositText);
+		securityDepositText.setColumns(10);
+		
+		
+		yearlyRentLabel.setEnabled(false);
+		yearlyRentLabel.setBounds(205, 260, 89, 17);
+		getContentPane().add(yearlyRentLabel);
+		
+		
+		yearlyRentText = new JTextField();
+		yearlyRentText.setBackground(new Color(0, 153, 102));
+		yearlyRentText.setEnabled(false);
+		yearlyRentText.setEditable(false);
+		yearlyRentText.setColumns(10);
+		yearlyRentText.setBounds(273, 257, 86, 20);
+		getContentPane().add(yearlyRentText);
+		
+		JLabel lblModeOfOperation = new JLabel("Mode Of Operation");
+		lblModeOfOperation.setBounds(10, 299, 112, 20);
+		getContentPane().add(lblModeOfOperation);
+		
+		JComboBox modeOfOperationComboBox = new JComboBox();
+		modeOfOperationComboBox.setModel(new DefaultComboBoxModel(new String[] {"Singly", "Either or Surviver", "Jointly by all of Us", "Jointly by two of Us"}));
+		modeOfOperationComboBox.setSelectedIndex(-1);
+		modeOfOperationComboBox.setMaximumRowCount(5);
+		modeOfOperationComboBox.setBounds(144, 299, 183, 20);
+		getContentPane().add(modeOfOperationComboBox);
+		
+		modeOfOperationComboBox.addActionListener(new ActionListener() {
+
+	//		 @Override
+	            public void actionPerformed(ActionEvent e) {
+	                JComboBox<String> cb = (JComboBox<String>) e.getSource();
+	                String selectedItem = (String) cb.getSelectedItem();
+	                System.out.println("Selected item: " + selectedItem);
+	          
+	                operationMode=selectedItem;
+	               
+			 }
+		});
+		
+		
+		
+		JLabel lblModeOfPayment = new JLabel("Mode Of Payment");
+		lblModeOfPayment.setBounds(10, 336, 112, 20);
+		getContentPane().add(lblModeOfPayment);
+		
+		JComboBox modeOfPaymentComboBox = new JComboBox();
+		modeOfPaymentComboBox.setModel(new DefaultComboBoxModel(new String[] {"Complementary", "Security Deposit", "Yearly Rent"}));
+		modeOfPaymentComboBox.addActionListener(new ActionListener() {
+
+//			 @Override
+	            public void actionPerformed(ActionEvent e) {
+	                JComboBox<String> cb = (JComboBox<String>) e.getSource();
+	                String selectedItem = (String) cb.getSelectedItem();
+	                System.out.println("Selected item: " + selectedItem);
+	                paymentMode=selectedItem;
+	                
+	                int val=0;
+	                
+	                if(selectedItem=="Complementary"){
+	                	expiryDateText.setEnabled(true);
+	                	expiryDateText.setEditable(true);
+	                	
+	                	expiryDateLabel.setEnabled(true);
+	                	
+	                }
+	                else if (selectedItem=="Security Deposit" || selectedItem=="Yearly Rent"){
+	                	expiryDateText.setEnabled(false);
+	                	expiryDateText.setEditable(false);
+	                	
+	                	expiryDateLabel.setEnabled(false);
+	                	
+	                }
+	              
+			 }
+		}
+		);
+		modeOfPaymentComboBox.setSelectedIndex(-1);
+		modeOfPaymentComboBox.setMaximumRowCount(5);
+		modeOfPaymentComboBox.setBounds(144, 336, 183, 20);
+		getContentPane().add(modeOfPaymentComboBox);
+		
+		
+		expiryDateLabel.setEnabled(false);
+		expiryDateLabel.setBounds(10, 363, 112, 20);
+		getContentPane().add(expiryDateLabel);
+		
+		expiryDateText = new JTextField();
+		expiryDateText.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				String text=expiryDateText.getText();
+				boolean ans=formatDate(text);
+				if(!ans){
+					JOptionPane.showMessageDialog(null,"Invalid Date");
+				}
+				
+			}
+		});
+		
+		expiryDateText.setBackground(new Color(0, 153, 102));
+		expiryDateText.setEditable(false);
+		expiryDateText.setEnabled(false);
+		expiryDateText.setBounds(132, 363, 86, 20);
+		getContentPane().add(expiryDateText);
+		expiryDateText.setColumns(10);
+	
+		
+		JLabel lblDateFormatDdmmyyyy = new JLabel("Date Format dd/MM/yyyy");
+		lblDateFormatDdmmyyyy.setBounds(228, 367, 141, 14);
+		getContentPane().add(lblDateFormatDdmmyyyy);
+		
+>>>>>>> 79ddf6e3e102d5c14b9e601923b157ae6acc5993
 		}
 		
 //		else if(chk==1){
@@ -156,6 +369,7 @@ public class customerDetails extends JFrame {
 	
 	
 		
+<<<<<<< HEAD
 		JButton referBackButton = new JButton("Refer Back");
 		referBackButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {;
@@ -206,6 +420,65 @@ public class customerDetails extends JFrame {
 	});
 	authorizeButton.setBounds(349, 431, 89, 23);
 	getContentPane().add(authorizeButton);
+=======
+		
+		
+	JButton backButton = new JButton("Back");
+	backButton.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent arg0) {
+			if (chk==0) {
+				lockerIssuance obj=new lockerIssuance(0);
+				obj.setVisible(true);
+				obj.setSize(600, 500);
+				dispose();
+			}else if(chk==1){
+				lockerMaintenance obj=new lockerMaintenance(1);
+				obj.setVisible(true);
+				obj.setSize(600, 500);
+				dispose();
+			}
+//			else if(chk==2){
+//				lockerMaintenance obj=new lockerMaintenance(2);
+//				obj.setVisible(true);
+//				obj.setSize(600, 500);
+//				dispose();
+//			}
+
+		}
+	});
+	backButton.setBounds(355, 394, 89, 23);
+	getContentPane().add(backButton);
+	
+	
+	
+	
+	if(chk==0){
+		
+	JButton addToGridButton = new JButton("Save");
+	
+	
+	addToGridButton.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent arg0) {
+			
+			Object [][] data= {
+				   {accountNum,titleOfAccountText.getText(),branchcodeid,lockerSize,operationMode,paymentMode,expiryDateText.getText()}
+				};
+			
+			grid obj=new grid(0,true);
+			obj.setData(data,lockerSizeId);
+			obj.setSize(600,500);
+			obj.setVisible(true);
+			
+			
+		}
+	});
+	addToGridButton.setBounds(121, 394, 109, 23);
+	getContentPane().add(addToGridButton);
+	}
+//	if (chk==1) {
+//		saveButton.setText("Authorize");
+//	}
+>>>>>>> 79ddf6e3e102d5c14b9e601923b157ae6acc5993
 	
 	JButton cancelButton = new JButton("Cancel");
 	cancelButton.addActionListener(new ActionListener() {
@@ -214,7 +487,11 @@ public class customerDetails extends JFrame {
 		dispose();
 		}
 	});
+<<<<<<< HEAD
 	cancelButton.setBounds(449, 431, 89, 23);
+=======
+	cancelButton.setBounds(248, 394, 89, 23);
+>>>>>>> 79ddf6e3e102d5c14b9e601923b157ae6acc5993
 	getContentPane().add(cancelButton);
 	
 				
@@ -422,6 +699,8 @@ public class customerDetails extends JFrame {
 	
 	public void insertData(HashMap<String,String> custAccRelation ){
 		
+		this.accountNum=custAccRelation.get("accountnum");
+		this.branchcodeid=custAccRelation.get("branchcodeid");
 		customerNameText.setText(custAccRelation.get("customername"));
 		contactInformationText.setText(custAccRelation.get("contactno"));
 		emailText.setText(custAccRelation.get("email"));
@@ -429,11 +708,19 @@ public class customerDetails extends JFrame {
 		contactInformationText.setEditable(false);
 		emailText.setEditable(false);
 		titleOfAccountText.setText(custAccRelation.get("accounttitle"));
+<<<<<<< HEAD
 		mobileText.setText(custAccRelation.get("operatinginstruction"));
 		openInBranchText.setText(custAccRelation.get("branchcode"));
 		titleOfAccountText.setEditable(false);
 		mobileText.setEditable(false);
 		openInBranchText.setEditable(false);
+=======
+		operatingInstructionText.setText(custAccRelation.get("operatinginstruction"));
+//		openInBranchText.setText(custAccRelation.get("branchcode"));
+		titleOfAccountText.setEditable(false);
+		operatingInstructionText.setEditable(false);
+//		openInBranchText.setEditable(false);
+>>>>>>> 79ddf6e3e102d5c14b9e601923b157ae6acc5993
 	}
 	
 	
@@ -446,6 +733,7 @@ public class customerDetails extends JFrame {
 	
 	public void fetchLockerDetails(int val){
 		try{
+			lockerSizeId=val;
 			Class.forName("COM.ibm.db2.jdbc.app.DB2Driver");
 			java.sql.Connection connection = null;
 			java.sql.Statement  lcl_stmt =null;
@@ -473,7 +761,11 @@ public class customerDetails extends JFrame {
 	}
 	
 	 public static void main(String[] args) {
+<<<<<<< HEAD
 		 customerDetails frame = new customerDetails(1);
+=======
+		 customerDetails frame = new customerDetails(0);
+>>>>>>> 79ddf6e3e102d5c14b9e601923b157ae6acc5993
 	    	frame.setSize(600, 500);
 	    	frame.setVisible(true);
 	    	

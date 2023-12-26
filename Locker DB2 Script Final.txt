@@ -1,0 +1,211 @@
+CREATE TABLE Branch (
+    branchCode INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1000 INCREMENT BY 1) PRIMARY KEY NOT NULL,
+    branchName VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    city VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE UserTable (
+    userId INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 2000 INCREMENT BY 1) PRIMARY KEY NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    age INTEGER NOT NULL,
+    contactNo VARCHAR(13) NOT NULL,
+    emailId VARCHAR(50) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    password VARCHAR(20) NOT NULL,
+    branchCode INTEGER NOT NULL,
+    FOREIGN KEY (branchCode) REFERENCES Branch(branchCode)
+);
+
+CREATE TABLE UserLockerCode_TL (
+    id INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY NOT NULL,
+    userId INTEGER NOT NULL,
+    auth SMALLINT NOT NULL,
+    lastSignIn TIMESTAMP,
+    FOREIGN KEY (userId) REFERENCES UserTable(userId)
+);
+
+CREATE TABLE Locker (
+    lockerNum VARCHAR(4) PRIMARY KEY NOT NULL,
+    lockerSizeId INTEGER NOT NULL,
+    branchCode INTEGER NOT NULL,
+    keyNum INTEGER NOT NULL,
+    FOREIGN KEY (branchCode) REFERENCES Branch(branchCode)
+);
+
+CREATE TABLE LockerSize (
+    lockerSizeId INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY NOT NULL,
+    lockerSize VARCHAR(10) NOT NULL,
+    lockerChargesId INTEGER NOT NULL,
+    secDepositId INTEGER NOT NULL
+);
+
+CREATE TABLE LockerCharges (
+    lockerChargesId INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY NOT NULL,
+    charges INTEGER NOT NULL,
+    fed INTEGER NOT NULL
+);
+
+CREATE TABLE ModeOfOperation (
+    modeOfOperationId INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY NOT NULL,
+    modeOfOperation VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE ModeOfPayment (
+    modeOfPaymentId INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY NOT NULL,
+    modeOfPayment VARCHAR(50) NOT NULL,
+    expiry_date TIMESTAMP
+);
+
+CREATE TABLE LockerSecurityDeposit (
+    secDepositId INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY NOT NULL,
+    secDeposit VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE LockerAssigned_TL (
+    assignedId BIGINT PRIMARY KEY NOT NULL,
+    voucherId BIGINT NOT NULL,
+    customerId INTEGER NOT NULL,
+    depositAmount BIGINT NOT NULL,
+    overDue DATE NOT NULL,
+    lastRecoverDate DATE NOT NULL,
+    rentStatus INTEGER NOT NULL,
+    assignedDate TIMESTAMP,
+    comments VARCHAR(255),
+    notifyUser INTEGER,
+    FOREIGN KEY (voucherId) REFERENCES Voucher_Master_TL(voucherId),
+    FOREIGN KEY (customerId) REFERENCES Customer(customerId)
+);
+
+CREATE TABLE LockerAssigned_TR (
+    assignedId BIGINT GENERATED ALWAYS AS IDENTITY (START WITH 2000 INCREMENT BY 1) PRIMARY KEY NOT NULL,
+    voucherId BIGINT NOT NULL,
+    customerId INTEGER NOT NULL,
+    depositAmount BIGINT NOT NULL,
+    overDue DATE NOT NULL,
+    lastRecoverDate DATE NOT NULL,
+    rentStatus INTEGER NOT NULL,
+    assignedDate TIMESTAMP,
+    comments VARCHAR(255),
+    notifyUser INTEGER,
+    FOREIGN KEY (voucherId) REFERENCES Voucher_Master_TL(voucherId),
+    FOREIGN KEY (customerId) REFERENCES Customer(customerId)
+);
+
+CREATE TABLE LockerAssigned_HT (
+    assignedId BIGINT PRIMARY KEY NOT NULL,
+    voucherId BIGINT NOT NULL,
+    customerId INTEGER NOT NULL,
+    depositAmount BIGINT NOT NULL,
+    overDue DATE NOT NULL,
+    lastRecoverDate DATE NOT NULL,
+    rentStatus INTEGER NOT NULL,
+    assignedDate TIMESTAMP,
+    comments VARCHAR(255),
+    notifyUser INTEGER,
+    FOREIGN KEY (voucherId) REFERENCES Voucher_Master_TL(voucherId),
+    FOREIGN KEY (customerId) REFERENCES Customer(customerId)
+);
+
+CREATE TABLE Voucher_Master_TL (
+    voucherId INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 5000 INCREMENT BY 1) PRIMARY KEY NOT NULL,
+    lockerNum VARCHAR(4) UNIQUE NOT NULL,
+    customerId INTEGER NOT NULL,
+    userId INTEGER NOT NULL,
+    accountNum VARCHAR(17) NOT NULL,
+    modeOfOperationId INTEGER NOT NULL,
+    modeOfPaymentId INTEGER NOT NULL,
+    voucherTypeId INTEGER NOT NULL,
+    voucherStatusId INTEGER NOT NULL,
+    FOREIGN KEY (customerId) REFERENCES Customer(customerId),
+    FOREIGN KEY (userId) REFERENCES UserTable(userId)
+);
+
+CREATE TABLE VoucherDetail_TL (
+    voucherId INTEGER NOT NULL,
+    sNo INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY,
+    accountNum VARCHAR(17) NOT NULL,
+    amount BIGINT NOT NULL,
+    FOREIGN KEY (voucherId) REFERENCES Voucher_Master_TL(voucherId)
+);
+
+CREATE TABLE VoucherType (
+    voucherTypeId INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY NOT NULL,
+    voucherType VARCHAR(20)
+);
+
+CREATE TABLE VoucherStatus (
+    voucherStatusId INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY NOT NULL,
+    voucherStatus VARCHAR(20)
+);
+
+CREATE TABLE Customer (
+    customerId INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 3000 INCREMENT BY 1) PRIMARY KEY NOT NULL,
+    customerName VARCHAR(255) NOT NULL,
+    cnic VARCHAR(13) NOT NULL,
+    customerTypeId INTEGER NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    age INTEGER,
+    contactNo VARCHAR(255),
+    address VARCHAR(500),
+    FOREIGN KEY (customerTypeId) REFERENCES CustomerType(customerTypeId)
+);
+
+-- Continuing from the previous script...
+
+CREATE TABLE Account (
+    accountNum VARCHAR(17) PRIMARY KEY NOT NULL,
+    accountTitle VARCHAR(255) NOT NULL,
+    accountTypeId INTEGER NOT NULL,
+    accountCategoryId INTEGER NOT NULL,
+    accountStatusId INTEGER NOT NULL,
+    operatingInstructionId INTEGER NOT NULL,
+    branchCode INTEGER NOT NULL,
+    balance BIGINT NOT NULL,
+    currencyNum INTEGER NOT NULL,
+    onHoldBalance BIGINT DEFAULT 0,
+    FOREIGN KEY (accountTypeId) REFERENCES AccountType(accountTypeId),
+    FOREIGN KEY (accountCategoryId) REFERENCES AccountCategory(accountCategoryId),
+    FOREIGN KEY (accountStatusId) REFERENCES AccountStatus(accountStatusId),
+    FOREIGN KEY (operatingInstructionId) REFERENCES OperatingInstruction(operatingInstructionId)
+);
+
+CREATE TABLE OperatingInstruction (
+    operatingInstructionId INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY NOT NULL,
+    operatingInstruction VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE CustomerAccountRelationship (
+    id INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1),
+    accountNum VARCHAR(17) NOT NULL,
+    customerId BIGINT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (accountNum) REFERENCES Account(accountNum),
+    FOREIGN KEY (customerId) REFERENCES Customer(customerId)
+);
+
+CREATE TABLE AccountType (
+    accountTypeId INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY NOT NULL,
+    accountType VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE AccountCategory (
+    accountCategoryId INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY NOT NULL,
+    accountCategory VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE AccountStatus (
+    accountStatusId INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY NOT NULL,
+    accountStatus VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE CurrencyCode (
+    currencyNum INTEGER PRIMARY KEY NOT NULL,
+    currencyCode VARCHAR(3) NOT NULL
+);
+CREATE TABLE CustomerType (
+    customerTypeId INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY NOT NULL,
+    customerType VARCHAR(255) NOT NULL
+);
+-- All tables have been created with their respective columns and foreign key constraints.
+

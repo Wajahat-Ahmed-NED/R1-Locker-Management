@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+<<<<<<< HEAD
 		<item value="257" key="DIALOG_WIDTH"/>
 		<item value="404" key="DIALOG_Y_ORIGIN"/>
 		<item value="381" key="DIALOG_HEIGHT"/>
@@ -23,8 +24,42 @@
 			<item value="location"/>
 			<item value="expiryDateText"/>
 			<item value="expiryDateLabel"/>
+=======
+		<item key="DIALOG_WIDTH" value="299"/>
+		<item key="DIALOG_Y_ORIGIN" value="357"/>
+		<item key="DIALOG_HEIGHT" value="376"/>
+		<item key="DIALOG_X_ORIGIN" value="1066"/>
+		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="wrap" value="true"/>
+		<item key="isRegEx" value="true"/>
+		<item key="casesensitive" value="true"/>
+		<item key="incremental" value="false"/>
+		<item key="wholeword" value="false"/>
+		<item key="selection" value="back"/>
+		<list key="findhistory">
+			<item value="back"/>
+			<item value="Invalid Month"/>
+			<item value="formatDate"/>
+			<item value="validateDate"/>
+			<item value="date"/>
+			<item value="grid"/>
+			<item value="operatingInstruction"/>
+			<item value="dateformat"/>
+			<item value="expiryDateText"/>
+			<item value="print"/>
+			<item value="focuslost"/>
+			<item value="expiryDate"/>
+			<item value="expiry"/>
+			<item value="new JTextf"/>
+			<item value="accountNumber"/>
+>>>>>>> 79ddf6e3e102d5c14b9e601923b157ae6acc5993
 		</list>
 		<list key="replacehistory">
+			<item value="newGrid"/>
+			<item value="modeOfPaymentText"/>
+			<item value="newLockerIssuance"/>
 		</list>
 	</section>
 </section>

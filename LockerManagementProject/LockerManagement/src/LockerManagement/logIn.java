@@ -1,5 +1,7 @@
 package LockerManagement;
-
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.awt.Color;
 
 import javax.swing.JFrame;
@@ -36,14 +38,18 @@ public class logIn extends JFrame {
 	private JPasswordField passwordText;
 	private JPasswordField userNameText;
 	public static String currentDate;
+//	String password = "myPassword123";
+	String hashPassword = "";
+	
 	public logIn() {
+		setResizable(false);
 		setLocation(new Point(500, 200));
-		getContentPane().setBackground(new Color(0, 153, 102));
+		getContentPane().setBackground(new Color(0, 102, 102));
 		setTitle("Login");
 		
 		JPanel logInPanel = new JPanel();
 		logInPanel.setBounds(157, 151, 241, 123);
-		logInPanel.setBackground(new Color(0, 153, 102));
+		logInPanel.setBackground(new Color(0, 102, 102));
 		logInPanel.setBorder(new TitledBorder(null, "Log In", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		logInPanel.setLayout(null);
 		
@@ -86,28 +92,27 @@ public class logIn extends JFrame {
 				
 				if((!branchCode.isEmpty() || !userName.isEmpty() || !password.isEmpty()) && branchCode.length()==4){
 					
-					
-					
-					
 					try {
+						
+						hashString(password);
+						
 						Class.forName("COM.ibm.db2.jdbc.app.DB2Driver");
 						java.sql.Connection connection = null;
 						java.sql.Statement  lcl_stmt =null;
 						connection = java.sql.DriverManager.getConnection("jdbc:db2:WA27389", "db2admin", "admin123/?");
 						
-//						PreparedStatement statement = connection.prepareStatement("SELECT * FROM UserTable WHERE BRN_CD=? AND USER_NAME=? AND PASSWORD=?");
-						
-						PreparedStatement statement = connection.prepareStatement("select  userlockercode_tl.auth from userTable, userlockercode_tl where userTable.userId = userlockercode_tl.userid and userTable.branchcode=? and userTable.emailId=? and userTable.password=?");
+						PreparedStatement statement = connection.prepareStatement("select userTable.userId, userlockercode_tl.auth from userTable, userlockercode_tl where userTable.userId = userlockercode_tl.userid and userTable.branchcode=? and userTable.emailId=? and userTable.password=?");
 						
 						statement.setString(1, branchCode);
 						statement.setString(2, userName);
-						statement.setString(3, password);
+						statement.setString(3, hashPassword);
 						
 						ResultSet result = statement.executeQuery();
-//						System.out.println(result);
+
 						if (result.next()) {
 							JOptionPane.showMessageDialog(null,"Signin Successful");
 							System.out.println(result.getString("AUTH"));
+							Global.userId=result.getInt("USERID");
 							if(Integer.parseInt(result.getString("AUTH"))==1){
 								
 								mainMenuAuthorization obj = new mainMenuAuthorization(1);
@@ -163,6 +168,7 @@ public class logIn extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(404);
 			}
+			
 		});
 		
 		JLabel lblUserVerification = new JLabel("User Verification");
@@ -193,6 +199,28 @@ public class logIn extends JFrame {
 //
 //    }
 
+	public void hashString(String password) {
+		try {
+            // Create a MessageDigest instance for SHA-256
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+
+            // Add password bytes to digest
+            digest.update(password.getBytes());
+
+            // Get the hashed bytes
+            byte[] hashedBytes = digest.digest();
+
+            // Convert hashed bytes to base64 for storage
+            String hashedPassword = Base64.getEncoder().encodeToString(hashedBytes);
+            hashPassword=hashedPassword;
+           
+            // Print the hashed password
+            
+        } catch (NoSuchAlgorithmException e) {
+            
+            e.printStackTrace();
+        }
+	}
     public static void main(String[] args) {
     	logIn frame = new logIn();
     	frame.setSize(600, 500);

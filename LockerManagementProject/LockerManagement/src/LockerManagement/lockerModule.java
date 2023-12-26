@@ -8,14 +8,24 @@ import java.awt.Color;
 import java.awt.Point;
 
 public class lockerModule extends JFrame {
+	
+	
 	public int chk;
+	
+	
+	
 	public lockerModule(final int chk)
+	
 	{
+			
 		this.chk=chk;
 		setLocation(new Point(500, 200));
 		setTitle("Locker Module");
 		getContentPane().setBackground(new Color(0, 153, 102));
 		getContentPane().setLayout(null);
+		
+		
+		
 		
 		JButton lockerIssuanceButton = new JButton("Locker Issuance");
 		lockerIssuanceButton.addActionListener(new ActionListener() {
@@ -26,7 +36,6 @@ public class lockerModule extends JFrame {
 					obj.setSize(600,500);
 					dispose();
 				} else if(chk==1){
-//					lockerIssuance obj=new lockerIssuance(1);
 					customerDetails obj = new customerDetails(1); 
 					obj.setVisible(true);
 					obj.setSize(600,500);
@@ -36,6 +45,9 @@ public class lockerModule extends JFrame {
 		});
 		lockerIssuanceButton.setBounds(196, 134, 159, 35);
 		getContentPane().add(lockerIssuanceButton);
+		
+		
+		
 		
 		JButton lockerSurrenderButton = new JButton("Locker Surrender");
 		lockerSurrenderButton.addActionListener(new ActionListener() {
@@ -49,6 +61,8 @@ public class lockerModule extends JFrame {
 		lockerSurrenderButton.setBounds(196, 192, 159, 35);
 		getContentPane().add(lockerSurrenderButton);
 		
+		
+		
 		JButton btnNewButton_2 = new JButton("Locker Maintenance");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -61,6 +75,8 @@ public class lockerModule extends JFrame {
 		btnNewButton_2.setBounds(196, 251, 159, 35);
 		getContentPane().add(btnNewButton_2);
 		
+		
+		
 		JButton signOffButton = new JButton("Sign Off");
 		signOffButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -72,6 +88,8 @@ public class lockerModule extends JFrame {
 		});
 		signOffButton.setBounds(10, 424, 89, 23);
 		getContentPane().add(signOffButton);
+		
+		
 		
 		JButton backButton = new JButton("Back");
 		backButton.addActionListener(new ActionListener() {
@@ -86,6 +104,9 @@ public class lockerModule extends JFrame {
 		getContentPane().add(backButton);
 		
 	}
+	
+	
+	
 	 public static void main(String[] args) {
 		 lockerModule frame = new lockerModule(0);
 	    	frame.setSize(600, 500);

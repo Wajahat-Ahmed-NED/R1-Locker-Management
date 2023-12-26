@@ -6,7 +6,6 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Point;
-
 public class mainMenuAuthorization extends JFrame {
 	
 	public int auth=0;
@@ -78,10 +77,20 @@ public class mainMenuAuthorization extends JFrame {
 		}
 		// TODO Auto-generated constructor stub
 	}
+<<<<<<< HEAD
     public static void main(String[] args) {
     	mainMenuAuthorization frame = new mainMenuAuthorization(1);
     	frame.setSize(600, 500);
     	frame.setVisible(true);
     }
 
+=======
+	////////////////
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		mainMenuAuthorization frame = new mainMenuAuthorization(0);
+    	frame.setSize(600, 500);
+    	frame.setVisible(true);
+	}
+>>>>>>> 79ddf6e3e102d5c14b9e601923b157ae6acc5993
 }
