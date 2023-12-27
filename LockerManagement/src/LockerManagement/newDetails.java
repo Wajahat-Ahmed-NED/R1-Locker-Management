@@ -3,6 +3,8 @@ import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
@@ -29,7 +31,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.BorderLayout;
@@ -42,11 +43,10 @@ import javax.swing.border.TitledBorder;
 import java.awt.Component;
 import java.awt.Dimension;
 import javax.swing.border.EtchedBorder;
-
 public class newDetails extends JFrame {
 
 	public int chk;
-	
+	public String lockerNumber;
 	public Integer lockerSizeId;
 	private JTextField customerNameText;
 	private JTextField correspondedAddressText;
@@ -69,20 +69,22 @@ public class newDetails extends JFrame {
 	private JTextField expiryDateText;
 	private JTextField modeOfPaymentText;
 	//Constructor
+	/**
+	 * @wbp.parser.constructor
+	 */
 	public newDetails(final int chk)
 	{
 		this.chk=chk;
-		
-//		if(chk==0) 
-//		{
 		customerPanel();
-//		}
-//		else if(chk==1)
-//		{
-//			
-//		}
+
 	}
-	
+	public newDetails(final int chk, String lockerNumber)
+	{
+		this.lockerNumber=lockerNumber;
+		this.chk=chk;
+		System.out.println(lockerNumber);
+		customerPanel();
+	}
 public void customerPanel()
 {
 	getContentPane().setBackground(new Color(0, 102, 102));
@@ -231,14 +233,13 @@ public void customerPanel()
 	modeOfOperationComboBox.setMaximumRowCount(5);
 	
 	modeOfOperationText = new JTextField();
-
-	if (chk==1) {
+	lockerSizeText = new JTextField();
+	if (chk==1 | chk==3 | chk==2) {
 
 		operatingInstructionText.setBounds(200, 70, 300, 20);
 		lockerDetailsPanel.add(operatingInstructionText);
 		operatingInstructionText.setColumns(10);
 		
-		lockerSizeText = new JTextField();
 		lockerSizeText.setBounds(200, 20, 90, 20);
 		lockerDetailsPanel.add(lockerSizeText);
 		lockerSizeText.setColumns(10);
@@ -255,7 +256,68 @@ public void customerPanel()
 		lockerDetailsPanel.add(modeOfOperationComboBox);
 
 	}
-	
+	if(chk==1)
+	{
+		JButton rejectButton = new JButton("Reject");
+	    rejectButton.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent arg0) {
+	    		 JPanel panel = new JPanel();
+	    	        JTextArea textArea = new JTextArea(5, 20);
+	    	        JScrollPane scrollPane = new JScrollPane(textArea);
+	    	        panel.add(scrollPane);
+	    	        Object[] options = { "Reject", "Cancel" };
+
+	    	        // Show the confirm dialog with custom button labels
+	    	        int result = JOptionPane.showOptionDialog(null, panel, "Enter Comments", JOptionPane.OK_CANCEL_OPTION,
+	    	                JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+	    	        // Check if the user clicked the OK button
+	    	        if (result == JOptionPane.OK_OPTION) {
+	    	            String comment = textArea.getText();
+	    	            JOptionPane.showMessageDialog(null, "<html>You Comment:<br>" + comment + "<br>send to User</html>");
+	    	            newMainMenu obj = new newMainMenu(1);
+	    		    	obj.setSize(600, 500);
+	    		    	obj.setVisible(true);
+	    		    	dispose();
+	    	        } else if (result == JOptionPane.CANCEL_OPTION) {
+	    	            // Close the JOptionPane
+	    	            System.exit(0);
+	    	        }
+	    	}
+	    });
+	    rejectButton.setBounds(20, 410, 90, 30);
+	    getContentPane().add(rejectButton);
+	    
+	    JButton referBackButton = new JButton("Refer Back");
+	    referBackButton.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent arg0) {
+	   		 JPanel panel = new JPanel();
+		        JTextArea textArea = new JTextArea(5, 20);
+		        JScrollPane scrollPane = new JScrollPane(textArea);
+		        panel.add(scrollPane);
+		        // Set the background color of the pop-up box
+		        Object[] options = { "Refer Back", "Cancel" };
+
+		        // Show the confirm dialog with custom button labels
+		        int result = JOptionPane.showOptionDialog(null, panel, "Enter Comments", JOptionPane.OK_CANCEL_OPTION,
+		                JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+		        // Check if the user clicked the OK button
+		        if (result == JOptionPane.OK_OPTION) {
+		            String comment = textArea.getText();
+		            JOptionPane.showMessageDialog(null, "<html>You Comment:<br>" + comment + "<br>send to User</html>");
+		            newMainMenu obj = new newMainMenu(1);
+			    	obj.setSize(600, 500);
+			    	obj.setVisible(true);
+			    	dispose();
+		        } else if (result == JOptionPane.CANCEL_OPTION) {
+		            // Close the JOptionPane
+		            System.exit(0);
+		        }
+		}
+	    });
+	    referBackButton.setBounds(120, 410, 100, 30);
+	    getContentPane().add(referBackButton);
+
+	}
 	
 	JLabel lblLockerStatus = new JLabel("Locker Status");
 	lblLockerStatus.setForeground(new Color(0, 0, 0));
@@ -395,7 +457,7 @@ public void customerPanel()
 					modeOfPaymentComboBox.setBounds(200, 20, 300, 20);
 					DepositDetailsPanel.add(modeOfPaymentComboBox);
 				}
-				else if(chk==1)
+				else if(chk==1 | chk==3)
 				{
 					modeOfPaymentText = new JTextField();
 					modeOfPaymentText.setBounds(200, 20, 300, 20);
@@ -417,6 +479,21 @@ public void customerPanel()
 					recoverDateText.setEditable(false);
 					rentStatusText.setEditable(false);
 				}
+				else if(chk==2)
+				{
+					modeOfPaymentText = new JTextField();
+					modeOfPaymentText.setBounds(200, 20, 300, 20);
+					DepositDetailsPanel.add(modeOfPaymentText);
+					modeOfPaymentText.setColumns(10);
+					lockerSizeText.setEditable(true);
+					operatingInstructionText.setEditable(true);
+					modeOfOperationText.setEditable(true);
+					depositText.setEditable(true);
+					overdueDateText.setEditable(true);
+					recoverDateText.setEditable(true);
+					rentStatusText.setEditable(true);
+					
+				}
 	JLabel lblNewLabel_5 = new JLabel("Rent/Security Deposit");
 	lblNewLabel_5.setForeground(new Color(0, 0, 0));
 	lblNewLabel_5.setBounds(10, 45, 150, 20);
@@ -432,27 +509,77 @@ public void customerPanel()
 				obj.setSize(600, 500);
 				dispose();
 			}else if(chk==1){
-				newLockerMaintenance obj=new newLockerMaintenance(1);
+				newGrid obj=new newGrid(1);
 				obj.setVisible(true);
 				obj.setSize(600, 500);
 				dispose();
 			}
+			else if(chk==2){
+				newLockerMaintenance obj=new newLockerMaintenance(2);
+				obj.setVisible(true);
+				obj.setSize(600, 500);
+				dispose();
+			}
+			else if(chk==3){
+				newLockerMaintenance obj=new newLockerMaintenance(3);
+				obj.setVisible(true);
+				obj.setSize(600, 500);
+				dispose();
+			}
+			
+			
 		}
 	});
 	backButton.setBounds(370, 410, 90, 30);
 	getContentPane().add(backButton);
 	
 	JButton signOffButton = new JButton("Sign Off");
+	signOffButton.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent arg0) {
+			newLogIn obj=new newLogIn();
+			obj.setVisible(true);
+			obj.setSize(600, 500);
+			dispose();
+		}
+	});
 	signOffButton.setBounds(470, 410, 90, 30);
 	getContentPane().add(signOffButton);
-
+//date
 	newMainMenu date = new newMainMenu(1);
     JLabel dateLabel = new JLabel(date.getCurrentDate());
+    dateLabel.setForeground(Color.WHITE);
     dateLabel.setHorizontalAlignment(SwingConstants.LEFT);
     dateLabel.setVerticalAlignment(SwingConstants.BOTTOM);
     dateLabel.setBounds(10, 440, 570, 20);
     getContentPane().add(dateLabel);
-}
+    
+    JButton saveButton = new JButton(chk==1 ? "Authorize" : chk==2 ? "Update": chk==3 ? "Surrender": "Save");
+    saveButton.addActionListener(new ActionListener() {
+    	public void actionPerformed(ActionEvent arg0) {
+    		if(chk==0)
+    		{
+    			//user query 
+    			
+	            JOptionPane.showMessageDialog(null, "Save");
+    		}else if(chk==1){
+				//authorizer
+    			
+	            JOptionPane.showMessageDialog(null, "Authorize");
+			}else if(chk==2){
+				//authorizer
+    			
+	            JOptionPane.showMessageDialog(null, "Maintenance");
+			}else if(chk==3){
+				//authorizer
+    			
+	            JOptionPane.showMessageDialog(null, "Surrender");
+			}
+    	}
+    });
+    saveButton.setBounds(260, 410, 100, 30);
+    getContentPane().add(saveButton);
+    
+    }
 	
 	// functions declarations
 	public boolean formatDate(String inp){
@@ -476,33 +603,6 @@ public void customerPanel()
             return false;
         }
 	}
-//public static boolean formatDate(String inp) {
-//    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-//
-//    try {
-//        java.util.Date date = sdf.parse(inp);
-//
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.setTime(date);
-//
-//        int year = calendar.get(Calendar.YEAR);
-//        System.out.println("Month:" );
-//        int month = calendar.get(Calendar.MONTH) + 1; // Month index starts from 0, so adding 1
-//
-//        if (month > 12) {
-//        	JOptionPane.showMessageDialog(null,"Invalid Month");
-//            return false;
-//        }
-//
-//        System.out.println("The date you entered is: " + sdf.format(date)); // Display parsed date using SimpleDateFormat
-//        Date currentDate = new Date();
-//        return !date.before(currentDate);
-//    } catch (ParseException e) {
-//        System.out.println("Invalid date format. Please try again.");
-//        return false;
-//    }
-//}
-	
 	
 	
 	public static boolean validateDate(String dateString) {
@@ -565,7 +665,7 @@ public void customerPanel()
 			
 			ResultSet result = statement.executeQuery();
 			
-//			if (result.next()) {
+			if (result.next()) {
 //			    String secDeposit = result.getString("SECDEPOSIT");
 //			    Integer charges= result.getInt("CHARGES");
 //			    
@@ -580,7 +680,7 @@ public void customerPanel()
 //			   yearlyRentLabel.setEnabled(true);
 //			    
 //			   
-//			}
+			}
 			
 		}
 		catch(Exception e){
@@ -589,13 +689,82 @@ public void customerPanel()
 		}
 	
 	}
+
+	// customer Details fetching function
+	public void getCustDetails(String lockerNumber){
+			
+			try{
+				
+				Class.forName("COM.ibm.db2.jdbc.app.DB2Driver");
+				java.sql.Connection connection = null;
+				java.sql.Statement  lcl_stmt =null;
+				connection = java.sql.DriverManager.getConnection("jdbc:db2:WA27389", "db2admin", "admin123/?");
+							
+				String query="select c.customerid,c.customername,c.email, c.contactno  from Accountnew a, customerAccountRelationship r, customer c where a.accountNum=r.accountNum and r.customerId=c.customerid and a.accountNum=?;";
+				PreparedStatement statement = connection.prepareStatement(query);
+				
+				statement.setString(1, lockerNumber);
+				
+				ResultSet result = statement.executeQuery();
+				
+				String queryAccount="select  a.accountNum,a.accounttitle, a.branchCode, o.operatinginstruction from accountnew a,operatinginstruction o where a.operatinginstructionid=o.operatinginstructionid  and accountnum=?;";
+				PreparedStatement statementAccount = connection.prepareStatement(queryAccount);
+				
+				statementAccount.setString(1, lockerNumber);
+				
+				ResultSet resultAccount = statementAccount.executeQuery();
+				
+				HashMap<String, String> customerAccountRelationship = new HashMap<String, String>();
+				if(resultAccount.next()){
+					customerAccountRelationship.put("accounttitle",resultAccount.getString("ACCOUNTTITLE")) ;
+					Global.accountNum(resultAccount.getString("ACCOUNTNUM"));
+					int branchCode=resultAccount.getInt("BRANCHCODE");
+					if(branchCode==1001){
+						customerAccountRelationship.put("branchcode","No - Digital Account") ;
+					}
+					else{
+						customerAccountRelationship.put("branchcode","Yes - "+ Integer.toString(resultAccount.getInt("BRANCHCODE"))) ;
+					}
+					customerAccountRelationship.put("branchcodeid",Integer.toString(resultAccount.getInt("BRANCHCODE"))) ;
+					customerAccountRelationship.put("operatinginstruction", resultAccount.getString("OPERATINGINSTRUCTION")) ;
+					customerAccountRelationship.put("accountnum", resultAccount.getString("ACCOUNTNUM")) ;
+	
+				}
+				
+				
+				
+				if (result.next()) {
+					customerAccountRelationship.put("customername",result.getString("CUSTOMERNAME")) ;
+					customerAccountRelationship.put("contactno",result.getString("CONTACTNO")) ;
+					customerAccountRelationship.put("email", result.getString("EMAIL")) ;
+					Global.customerId= result.getInt("customerid");
+				    customerDetails obj= new customerDetails(0);
+				    	obj.insertData(customerAccountRelationship);
+				    	obj.insertArray(availableLockers);
+						obj.setVisible(true);
+						obj.setSize(600,500);
+						dispose();
+				  
+				   
+				}
+				else{
+					 JOptionPane.showMessageDialog(null,"Customer Details Not Found");
+				}
+			}
+			catch(Exception e){
+				JOptionPane.showMessageDialog(null,"Could not connect to DB");
+				System.out.println(e);
+			}
+			
+			
+			
+	}
 	
 	 public static void main(String[] args) {
-		 newDetails frame = new newDetails(0);
+		 newDetails frame = new newDetails(3);
 	    	frame.setSize(600, 500);
 	    	frame.setVisible(true);
 	    	
 	    }
-
 }
 

@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 2023-12-26 10:08:19.496 [Worker-2] INFO    com.objectaid.uml.model.manage.DiagramManager getFactories: com.objectaid.uml.diagramFactories[ucls]: com.objectaid.uml.cls.model.ClassDiagramFactory@281b7f06
 2023-12-26 10:08:19.511 [Worker-2] INFO    com.objectaid.uml.model.manage.DiagramManager getFactories: com.objectaid.uml.diagramFactories[useq]: com.objectaid.uml.seq.model.SequenceDiagramFactory@e52b9db7
+=======
+2023-12-26 09:34:27.670 [Worker-7] INFO    com.objectaid.uml.model.manage.DiagramManager getFactories: com.objectaid.uml.diagramFactories[ucls]: com.objectaid.uml.cls.model.ClassDiagramFactory@d061288b
+2023-12-26 09:34:27.670 [Worker-7] INFO    com.objectaid.uml.model.manage.DiagramManager getFactories: com.objectaid.uml.diagramFactories[useq]: com.objectaid.uml.seq.model.SequenceDiagramFactory@bbdd2862
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a

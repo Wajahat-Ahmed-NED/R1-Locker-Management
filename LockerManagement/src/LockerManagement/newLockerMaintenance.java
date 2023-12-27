@@ -20,10 +20,17 @@ public class newLockerMaintenance extends JFrame{
 		this.chk=chk;
 		setLocation(new Point(500, 200));
 		
+<<<<<<< HEAD
 		if(chk==1){
 			setTitle("Locker Maintenance");
 		}
 		else if (chk==2){
+=======
+		if(chk==2){
+			setTitle("Locker Maintenance");
+		}
+		else if (chk==3){
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 			setTitle("Locker Surrender");
 		}
 		getContentPane().setBackground(new Color(0, 102, 102));
@@ -42,16 +49,28 @@ public class newLockerMaintenance extends JFrame{
 		JButton searchButton = new JButton("Search");
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+<<<<<<< HEAD
 				if(chk==1){
 					
 				newDetails obj=new newDetails(1);
+=======
+				if(chk==2){
+					
+				newDetails obj=new newDetails(2);
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 				obj.setVisible(true);
 				obj.setSize(600, 500);
 				dispose();
 				}
+<<<<<<< HEAD
 				else if (chk==2){
 					
 					newDetails obj=new newDetails(1);
+=======
+				else if (chk==3){
+					
+					newDetails obj=new newDetails(3);
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 					obj.setVisible(true);
 					obj.setSize(600, 500);
 					dispose();
@@ -64,10 +83,23 @@ public class newLockerMaintenance extends JFrame{
 		JButton backButton = new JButton("Back");
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+<<<<<<< HEAD
 				
 				if (chk==0){	
 
 				lockerModule obj=new lockerModule(0);
+=======
+				if(chk==0)
+				{
+					newGrid obj=new newGrid(0);
+					obj.setVisible(true);
+					obj.setSize(600, 500);
+					dispose();
+				}
+				else if (chk==2){	
+
+				newLockerModule obj=new newLockerModule(2);
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 
 //				newLockerModule obj=new newLockerModule(0);
 
@@ -75,9 +107,15 @@ public class newLockerMaintenance extends JFrame{
 				obj.setSize(600, 500);
 				dispose();
 				}
+<<<<<<< HEAD
 				else if (chk==1) {
 
 					grid obj=new grid(1);
+=======
+				else if (chk==3) {
+
+					newLockerModule obj=new newLockerModule(3);
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 
 //					newGrid obj=new newGrid(1);
 
@@ -105,6 +143,10 @@ public class newLockerMaintenance extends JFrame{
 		//date
 				newMainMenu date = new newMainMenu(1);
 		        JLabel dateLabel = new JLabel(date.getCurrentDate());
+<<<<<<< HEAD
+=======
+		        dateLabel.setForeground(Color.WHITE);
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 		        dateLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		        dateLabel.setVerticalAlignment(SwingConstants.BOTTOM);
 		        dateLabel.setBounds(10, 440, 570, 20);
@@ -116,7 +158,11 @@ public class newLockerMaintenance extends JFrame{
 	 * @param args
 	 */
     public static void main(String[] args) {
+<<<<<<< HEAD
     	newLockerMaintenance frame = new newLockerMaintenance(1);
+=======
+    	newLockerMaintenance frame = new newLockerMaintenance(2);
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
     	frame.setSize(600, 500);
     	frame.setVisible(true);
     }

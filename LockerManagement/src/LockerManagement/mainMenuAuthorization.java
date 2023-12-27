@@ -1,6 +1,9 @@
 package LockerManagement;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -76,6 +79,14 @@ public class mainMenuAuthorization extends JFrame {
 			setTitle("User Menu");
 		}
 		// TODO Auto-generated constructor stub
+	//date
+		newMainMenu date = new newMainMenu(1);
+	    JLabel dateLabel = new JLabel(date.getCurrentDate());
+	    dateLabel.setForeground(Color.WHITE);
+	    dateLabel.setHorizontalAlignment(SwingConstants.LEFT);
+	    dateLabel.setVerticalAlignment(SwingConstants.BOTTOM);
+	    dateLabel.setBounds(10, 440, 570, 20);
+	    getContentPane().add(dateLabel);
 	}
 
 //    public static void main(String[] args) {

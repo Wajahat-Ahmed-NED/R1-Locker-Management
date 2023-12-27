@@ -59,6 +59,10 @@ public class newLogIn extends JFrame {
 		
 		newMainMenu date = new newMainMenu(1);
         JLabel dateLabel = new JLabel(date.getCurrentDate());
+<<<<<<< HEAD
+=======
+        dateLabel.setForeground(Color.WHITE);
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
         dateLabel.setHorizontalAlignment(SwingConstants.LEFT);
         dateLabel.setVerticalAlignment(SwingConstants.BOTTOM);
         dateLabel.setBounds(10, 440, 570, 20);
@@ -95,10 +99,23 @@ public class newLogIn extends JFrame {
 //				String branchCode = branchCodeText.getText();
 //				String userName = userNameText.getText();
 //				String password = passwordText.getText();
+<<<<<<< HEAD
 				
 				String branchCode = "1000";
 				String userName = "wajahat";
 				String password = "123";
+=======
+				//User
+//				String branchCode = "1000";
+//				String userName = "wajahat";
+//				String password = "pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=";
+				//Authorizer
+				String branchCode = "1000";
+				String userName = "ariz";
+				String password = "pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=";
+				
+				
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 				
 				
 				if((!branchCode.isEmpty() || !userName.isEmpty() || !password.isEmpty()) && branchCode.length()==4){

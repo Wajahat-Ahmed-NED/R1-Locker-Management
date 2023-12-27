@@ -3,11 +3,20 @@ package LockerManagement;
 import javax.swing.JFrame;
 import java.awt.Color;
 
+<<<<<<< HEAD
+=======
+import javax.swing.JLabel;
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
+<<<<<<< HEAD
+=======
+import javax.swing.SwingConstants;
+
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Point;
@@ -17,9 +26,20 @@ import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import javax.swing.border.BevelBorder;
 import java.awt.Font;
+<<<<<<< HEAD
 
 public class newGrid extends JFrame {
 	private JTable table;
+=======
+import java.awt.Dimension;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.table.DefaultTableModel;
+
+public class newGrid extends JFrame {
+	private JTable table;
+    private String selectedRowData;
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 	String [] columnNames={"Locker Number", "Locker"};
 	Object[][] data= new Object[5][7];
 	Object[][] newdata = new Object [1][7] ;
@@ -29,10 +49,21 @@ public class newGrid extends JFrame {
 	/**
 	 * @wbp.parser.constructor
 	 */
+<<<<<<< HEAD
 	public newGrid(final int chk) {
 		getContentPane().setFont(new Font("Tahoma", Font.BOLD, 12));
 		setLocation(new Point(500, 200));
 		getContentPane().setBackground(new Color(0, 153, 102));
+=======
+
+	public newGrid(final int chk) {
+
+		setTitle("Pending Task");
+		setSize(new Dimension(600, 500));
+		getContentPane().setFont(new Font("Tahoma", Font.BOLD, 12));
+		setLocation(new Point(500, 200));
+		getContentPane().setBackground(new Color(0, 102, 102));
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 		getContentPane().setLayout(null);
 		this.chk=chk;
 		JPanel panel= new JPanel();
@@ -40,9 +71,23 @@ public class newGrid extends JFrame {
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
+<<<<<<< HEAD
 		
 		
 		table = new JTable(data,columnNames);
+=======
+		DefaultTableModel tableModel = new DefaultTableModel(data, columnNames) {
+		    @Override
+		    public boolean isCellEditable(int row, int column) {
+		        return false; // Make all cells non-editable
+		    }
+		};
+
+		tableModel.setColumnIdentifiers(columnNames); // Set column names
+		
+		table = new JTable(tableModel);
+		
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 //		table.setVisible(false);
 		table.setBounds(77, 166, 414, 156);
 		getContentPane().add(table);
@@ -50,6 +95,7 @@ public class newGrid extends JFrame {
 		scroll.setViewportBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		scroll.setBounds(0,0,563,119);
 		panel.add(scroll);
+<<<<<<< HEAD
 
 		try {
 			Class.forName("COM.ibm.db2.jdbc.app.DB2Driver");
@@ -133,10 +179,16 @@ public class newGrid extends JFrame {
 		}
 		
 		JButton proceedButton = new JButton("Save");
+=======
+		
+		final JButton proceedButton = new JButton(chk==0 ? "Save" : "Proceed");
+		proceedButton.setEnabled(false);
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 		proceedButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(chk==1)
 				{
+<<<<<<< HEAD
 						lockerModule obj = new lockerModule(0);
 						obj.setVisible(true);
 						obj.setSize(600, 500);
@@ -144,6 +196,30 @@ public class newGrid extends JFrame {
 				} else if(chk==0)
 				{
 					lockerMaintenance obj = new lockerMaintenance(1);
+=======
+								if (selectedRowData != null) {
+				                    // Compare the stored row data and show a new window accordingly
+				                    if (!selectedRowData.isEmpty()) {
+				                        // Show a new window for row 1
+				                    	newDetails obj = new newDetails(1,selectedRowData);
+				    					obj.setVisible(true);
+				    					obj.setSize(600, 500);
+				    					dispose();
+
+				                    } else {
+				                        // Show a new window for other rows
+				                        JOptionPane.showMessageDialog(null, "Selected row: " + selectedRowData);
+				                        
+				                    }
+				                } else {
+				                    JOptionPane.showMessageDialog(null, "Please select a row first.");
+				                }
+								
+					
+				} else if(chk==0)
+				{
+					newLockerMaintenance obj = new newLockerMaintenance(0);
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 
 					obj.setVisible(true);
 					obj.setSize(600, 500);
@@ -151,11 +227,112 @@ public class newGrid extends JFrame {
 				}
 			}
 		});
+<<<<<<< HEAD
 		proceedButton.setBounds(219, 419, 99, 23);
 		getContentPane().add(proceedButton);
 		// TODO Auto-generated constructor stub
 		JButton Signoffbutton = new JButton("Sign Off");
 		Signoffbutton.addActionListener(new ActionListener() {
+=======
+		proceedButton.setBounds(270, 410, 90, 30);
+		getContentPane().add(proceedButton);
+					try {
+						Class.forName("COM.ibm.db2.jdbc.app.DB2Driver");
+						java.sql.Connection connection = null;
+						java.sql.Statement  lcl_stmt =null;
+						connection = java.sql.DriverManager.getConnection("jdbc:db2:WA27389", "db2admin", "admin123/?");
+									
+						String query="select  lockernum,rentstatus from lockerAssigned_tr;";
+						PreparedStatement statement = connection.prepareStatement(query);
+						
+			//			statement.setString(1, branchCode);
+			//			statement.setString(2, userName);
+			//			statement.setString(3, password);
+							
+						ResultSet result = statement.executeQuery();
+						ResultSetMetaData metaData = result.getMetaData();
+					        // Get number of columns in the result set
+					    int columnCount = metaData.getColumnCount();
+					    System.out.print("test "+columnCount+"    ");
+						
+						
+						ArrayList<Object[]> rows= new ArrayList<Object[]>();
+						
+						while(result.next()) {
+							Object[] row= new Object[columnCount];
+							for ( int i=0;i<columnCount;i++){
+								
+								row[i]=result.getString(i+1);
+								System.out.println(i+" "+row[i]);
+							}
+							System.out.println(row);
+			
+							if(row[1].equals("0")){
+								row[1]="Issuance";
+							}
+							else if (row[1].equals("1")){
+								row[1]="Maintenance";
+							}
+							else if (row[1].equals("2"))
+							{ 
+								row[1]="Surrender";
+							}
+							rows.add(row);
+						}
+						
+						
+						for (int i=0; i<rows.size();i++){
+							data[i]=rows.get(i);
+							
+						}
+						tableModel.setDataVector(data, columnNames); // Set data
+						  // Add a ListSelectionListener to the table
+				        table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+				            @Override
+				            public void valueChanged(ListSelectionEvent e) {
+				                int selectedRow = table.getSelectedRow();
+				                if (selectedRow != -1 ) {
+				                    selectedRowData = (String) table.getValueAt(selectedRow, 0); // Store the first column data
+//				                    System.out.println(selectedRowData);
+			                     }
+									try {
+										 if(selectedRowData != null)
+					                        {
+						                    proceedButton.setEnabled(true);
+					                        }
+					                        else
+					                        {
+					    	                    proceedButton.setEnabled(false);
+					                        }
+									} catch (Exception e2) {
+										// TODO: handle exception
+									}
+				              
+				            }
+				        });
+				        	
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
+		
+		
+		JButton backButton = new JButton("Back");
+		backButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				newMainMenu obj = new newMainMenu(1);
+				obj.setVisible(true);
+				obj.setSize(600, 500);
+				dispose();
+			}
+		});
+		backButton.setBounds(370, 410, 90, 30);
+		getContentPane().add(backButton);
+		
+		
+		// TODO Auto-generated constructor stub
+		JButton signOffButton = new JButton("Sign Off");
+		signOffButton.addActionListener(new ActionListener() {
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 			public void actionPerformed(ActionEvent arg0) {
 				logIn obj=new logIn();
 				obj.setVisible(true);
@@ -163,8 +340,21 @@ public class newGrid extends JFrame {
 				dispose();
 			}
 		});
+<<<<<<< HEAD
 		Signoffbutton.setBounds(10, 419, 99, 23);
 		getContentPane().add(Signoffbutton);
+=======
+		signOffButton.setBounds(470, 410, 90, 30);
+		getContentPane().add(signOffButton);
+//date
+		newMainMenu date = new newMainMenu(0);
+        JLabel dateLabel = new JLabel(date.getCurrentDate());
+        dateLabel.setForeground(Color.WHITE);
+        dateLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        dateLabel.setVerticalAlignment(SwingConstants.BOTTOM);
+        dateLabel.setBounds(10, 440, 570, 20);
+        getContentPane().add(dateLabel);
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 	}
 	public Integer lockerNum;
 	
@@ -187,6 +377,10 @@ public class newGrid extends JFrame {
 //				,"BranchCode","LockerSize","PaymentMode","Expiry"};
 		
 		table = new JTable(newdata3,columnNames);
+<<<<<<< HEAD
+=======
+		
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 //		table.setVisible(false);
 		table.setBounds(77, 166, 414, 156);
 		getContentPane().add(table);
@@ -285,7 +479,11 @@ public class newGrid extends JFrame {
 //		JButton updateButton = new JButton("Update");
 //		updateButton.setBounds(120, 419, 89, 23);
 //		getContentPane().add(updateButton);
+<<<<<<< HEAD
 		setTitle("Locker Issuance Details");
+=======
+//		setTitle("Locker Issuance Details");
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 		}
 		
 		JButton proceedButton = new JButton("Issue");
@@ -300,7 +498,11 @@ public class newGrid extends JFrame {
 		JButton Signoffbutton = new JButton("Sign Off");
 		Signoffbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+<<<<<<< HEAD
 				logIn obj=new logIn();
+=======
+				newLogIn obj=new newLogIn();
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 				obj.setVisible(true);
 				obj.setSize(600, 500);
 				dispose();
@@ -314,6 +516,7 @@ public class newGrid extends JFrame {
 	/**
 	 * @param args
 	 */
+<<<<<<< HEAD
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
     	newGrid frame = new newGrid(0,true);
@@ -322,6 +525,8 @@ public class newGrid extends JFrame {
 
 	}
 
+=======
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 
 	public void setData(Object[][] data2,Integer lockerid) {
 		// TODO Auto-generated method stub
@@ -419,4 +624,14 @@ public class newGrid extends JFrame {
 		return -1;
 	}
 	}
+<<<<<<< HEAD
+=======
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+    	newGrid frame = new newGrid(1);
+    	frame.setSize(600, 500);
+    	frame.setVisible(true);
+
+	}
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 }
