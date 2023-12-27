@@ -96,13 +96,13 @@ public void customerPanel()
 	JPanel customerDetailsPanel = new JPanel();
 	customerDetailsPanel.setForeground(new Color(0, 0, 0));
 	customerDetailsPanel.setBackground(new Color(0, 102, 102));
-	customerDetailsPanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Customer Details", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+	customerDetailsPanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Customer Details", TitledBorder.LEADING, TitledBorder.TOP, null, Color.LIGHT_GRAY));
 	customerDetailsPanel.setBounds(20, 10, 540, 130);
 	getContentPane().add(customerDetailsPanel);
 	customerDetailsPanel.setLayout(null);
 	
 	JLabel lblCustomerName = new JLabel("Customer Name");
-	lblCustomerName.setForeground(new Color(0, 0, 0));
+	lblCustomerName.setForeground(Color.WHITE);
 	lblCustomerName.setBounds(10, 20, 120, 20);
 	customerDetailsPanel.add(lblCustomerName);
 	
@@ -112,7 +112,7 @@ public void customerPanel()
 	customerNameText.setColumns(10);
 	
 	JLabel lblCorrespondedAddress = new JLabel("Corresponded Address");
-	lblCorrespondedAddress.setForeground(new Color(0, 0, 0));
+	lblCorrespondedAddress.setForeground(Color.WHITE);
 	lblCorrespondedAddress.setBounds(10, 45, 150, 20);
 	customerDetailsPanel.add(lblCorrespondedAddress);
 	
@@ -122,7 +122,7 @@ public void customerPanel()
 	correspondedAddressText.setColumns(10);
 	
 	JLabel lblMobileNumber = new JLabel("Mobile Number");
-	lblMobileNumber.setForeground(new Color(0, 0, 0));
+	lblMobileNumber.setForeground(Color.WHITE);
 	lblMobileNumber.setBounds(10, 70, 120, 20);
 	customerDetailsPanel.add(lblMobileNumber);
 	
@@ -132,7 +132,7 @@ public void customerPanel()
 	mobileNumberText.setColumns(10);
 	
 	JLabel lblAccountNumber = new JLabel("Account Number");
-	lblAccountNumber.setForeground(new Color(0, 0, 0));
+	lblAccountNumber.setForeground(Color.WHITE);
 	lblAccountNumber.setBounds(10, 95, 120, 20);
 	customerDetailsPanel.add(lblAccountNumber);
 	
@@ -143,14 +143,14 @@ public void customerPanel()
 	
 	JPanel lockerDetailsPanel = new JPanel();
 	lockerDetailsPanel.setForeground(new Color(0, 0, 0));
-	lockerDetailsPanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Locker Details", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+	lockerDetailsPanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Locker Details", TitledBorder.LEADING, TitledBorder.TOP, null, Color.LIGHT_GRAY));
 	lockerDetailsPanel.setBackground(new Color(0, 102, 102));
 	lockerDetailsPanel.setBounds(20, 150, 540, 130);
 	getContentPane().add(lockerDetailsPanel);
 	lockerDetailsPanel.setLayout(null);
 	
 	JLabel lblNewLabel = new JLabel("Locker Number");
-	lblNewLabel.setForeground(new Color(0, 0, 0));
+	lblNewLabel.setForeground(Color.WHITE);
 	lblNewLabel.setBounds(10, 45, 150, 20);
 	lockerDetailsPanel.add(lblNewLabel);
 	
@@ -160,7 +160,7 @@ public void customerPanel()
 	lockerNumberText.setColumns(10);
 	
 	JLabel lblNewLabel_1 = new JLabel("Locker Key");
-	lblNewLabel_1.setForeground(new Color(0, 0, 0));
+	lblNewLabel_1.setForeground(Color.WHITE);
 	lblNewLabel_1.setBounds(300, 20, 80, 20);
 	lockerDetailsPanel.add(lblNewLabel_1);
 	
@@ -170,56 +170,57 @@ public void customerPanel()
 	lockerKeyText.setColumns(10);
 	//if user then textfield replace to combobox
 	JLabel lblNewLabel_2 = new JLabel("Locker Size");
-	lblNewLabel_2.setForeground(new Color(0, 0, 0));
+	lblNewLabel_2.setForeground(Color.WHITE);
 	lblNewLabel_2.setBounds(10, 20, 80, 20);
 	JComboBox lockerSizeComboBox = new JComboBox();
 	lockerSizeComboBox.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-
-            JComboBox<String> cb = (JComboBox<String>) e.getSource();
-            String selectedItem = (String) cb.getSelectedItem();
-            System.out.println("Selected item: " + selectedItem);
-            lockerSize=selectedItem;
-            int val=0;
-            if(selectedItem=="Small"){
-            	if(availableLockers.get(0)==3){
-            		 JOptionPane.showMessageDialog(null,"Small Locker Not Available");
-            	}
-            	else{
-            		val=1;
-            		
-            		fetchLockerDetails(val);
-            	}
-            }
-            else if (selectedItem=="Medium"){
-            
-            	if(availableLockers.get(1)==0){
-            		 JOptionPane.showMessageDialog(null,"Medium Locker Not Available");
-            	}
-            	else{
-            		val=2;
-            		fetchLockerDetails(val);
-            	}
-            }
-            else if(selectedItem=="Large"){
-            	
-            	if(availableLockers.get(2)==0){
-            		 JOptionPane.showMessageDialog(null,"Large Locker Not Available");
-            	}
-            	else{
-            		val=3;
-            		fetchLockerDetails(val);
-            	}
-            }
-           
-        
+			try {
+	            JComboBox<String> cb = (JComboBox<String>) e.getSource();
+	            String selectedItem = (String) cb.getSelectedItem();
+	            System.out.println("Selected item: " + selectedItem);
+	            lockerSize=selectedItem;
+	            int val=0;
+	            if(selectedItem=="Small"){
+	            	if(availableLockers.get(0)==3){
+	            		 JOptionPane.showMessageDialog(null,"Small Locker Not Available");
+	            	}
+	            	else{
+	            		val=1;
+	            		
+	            		fetchLockerDetails(val);
+	            	}
+	            }
+	            else if (selectedItem=="Medium"){
+	            
+	            	if(availableLockers.get(1)==0){
+	            		 JOptionPane.showMessageDialog(null,"Medium Locker Not Available");
+	            	}
+	            	else{
+	            		val=2;
+	            		fetchLockerDetails(val);
+	            	}
+	            }
+	            else if(selectedItem=="Large"){
+	            	
+	            	if(availableLockers.get(2)==0){
+	            		 JOptionPane.showMessageDialog(null,"Large Locker Not Available");
+	            	}
+	            	else{
+	            		val=3;
+	            		fetchLockerDetails(val);
+	            	}
+	            }
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
 		}
 	});
 	lockerSizeComboBox.setModel(new DefaultComboBoxModel(new String[] {"Small", "Medium", "Large"}));
 	lockerSizeComboBox.setSelectedIndex(-1);
 	lockerDetailsPanel.add(lblNewLabel_2);
 	JLabel lblNewLabel_3 = new JLabel("Operating Instruction");
-	lblNewLabel_3.setForeground(new Color(0, 0, 0));
+	lblNewLabel_3.setForeground(Color.WHITE);
 	lblNewLabel_3.setBounds(10, 70, 120, 20);
 	lockerDetailsPanel.add(lblNewLabel_3);
 	
@@ -227,6 +228,7 @@ public void customerPanel()
 	JComboBox OperatingInstructionComboBox = new JComboBox();
 	OperatingInstructionComboBox.setModel(new DefaultComboBoxModel(new String[] {"Singly", "Either or Surviver", "Jointly by all of Us","Jointly by two of Us", "Others"}));
 	OperatingInstructionComboBox.setSelectedIndex(-1);
+
 	modeOfOperationComboBox = new JComboBox();
 	modeOfOperationComboBox.setModel(new DefaultComboBoxModel(new String[] {"Singly", "Either or Surviver", "Jointly by all of Us", "Jointly by two of Us", "Others"}));
 	modeOfOperationComboBox.setSelectedIndex(-1);
@@ -255,7 +257,24 @@ public void customerPanel()
 		lockerDetailsPanel.add(lockerSizeComboBox);
 		modeOfOperationComboBox.setBounds(200, 95, 300, 20);
 		lockerDetailsPanel.add(modeOfOperationComboBox);
-
+		OperatingInstructionComboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
+			}
+			});
+		modeOfOperationComboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
+			}
+			});
 	}
 	if(chk==1)
 	{
@@ -321,7 +340,7 @@ public void customerPanel()
 	}
 	
 	JLabel lblLockerStatus = new JLabel("Locker Status");
-	lblLockerStatus.setForeground(new Color(0, 0, 0));
+	lblLockerStatus.setForeground(Color.WHITE);
 	lblLockerStatus.setBounds(300, 45, 80, 20);
 	lockerDetailsPanel.add(lblLockerStatus);
 	
@@ -331,13 +350,13 @@ public void customerPanel()
 	lockerStatusText.setColumns(10);
 	
 	JLabel lblNewLabel_9 = new JLabel("Mode Of Operation");
-	lblNewLabel_9.setForeground(new Color(0, 0, 0));
+	lblNewLabel_9.setForeground(Color.WHITE);
 	lblNewLabel_9.setBounds(10, 95, 120, 20);
 	lockerDetailsPanel.add(lblNewLabel_9);
 	
 	final JPanel DepositDetailsPanel = new JPanel();
 	DepositDetailsPanel.setForeground(new Color(0, 0, 0));
-	DepositDetailsPanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Rent & Security Deposit Details", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+	DepositDetailsPanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Rent & Security Deposit Details", TitledBorder.LEADING, TitledBorder.TOP, null, Color.LIGHT_GRAY));
 	DepositDetailsPanel.setBackground(new Color(0, 102, 102));
 	DepositDetailsPanel.setBounds(20, 290, 540, 100);
 	// DepositDetailsPanel.setBounds(20, 290, 540, 125);
@@ -345,17 +364,18 @@ public void customerPanel()
 	DepositDetailsPanel.setLayout(null);
 	final JLabel lbldateFormat = new JLabel("Date format: dd/mm/yyyy");
 	JLabel lblNewLabel_4 = new JLabel("Mode Of Payment");
-	lblNewLabel_4.setForeground(new Color(0, 0, 0));
+	lblNewLabel_4.setForeground(Color.WHITE);
 	lblNewLabel_4.setBounds(10, 20, 120, 20);
 	DepositDetailsPanel.add(lblNewLabel_4);
 	final JLabel lblExpiryDate = new JLabel("Expiry Date");
+	lblExpiryDate.setForeground(Color.WHITE);
 	depositText = new JTextField();
 	depositText.setBounds(200, 45, 90, 20);
 	DepositDetailsPanel.add(depositText);
 	depositText.setColumns(10);
 	
 	JLabel lblNewLabel_6 = new JLabel("Overdue Date");
-	lblNewLabel_6.setForeground(new Color(0, 0, 0));
+	lblNewLabel_6.setForeground(Color.WHITE);
 	lblNewLabel_6.setBounds(300, 45, 80, 20);
 	DepositDetailsPanel.add(lblNewLabel_6);
 	
@@ -365,7 +385,7 @@ public void customerPanel()
 	overdueDateText.setColumns(10);
 	
 	JLabel lblNewLabel_7 = new JLabel("Last Rent Recover Date");
-	lblNewLabel_7.setForeground(new Color(0, 0, 0));
+	lblNewLabel_7.setForeground(Color.WHITE);
 	lblNewLabel_7.setBounds(10, 70, 150, 20);
 	DepositDetailsPanel.add(lblNewLabel_7);
 	
@@ -375,7 +395,7 @@ public void customerPanel()
 	recoverDateText.setColumns(10);
 	
 	JLabel lblNewLabel_8 = new JLabel("Rent Status");
-	lblNewLabel_8.setForeground(new Color(0, 0, 0));
+	lblNewLabel_8.setForeground(Color.WHITE);
 	lblNewLabel_8.setBounds(300, 70, 80, 20);
 	DepositDetailsPanel.add(lblNewLabel_8);
 	
@@ -392,7 +412,8 @@ public void customerPanel()
 				JComboBox modeOfPaymentComboBox = new JComboBox();
 				modeOfPaymentComboBox.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
-								
+								try {
+									
 					            JComboBox<String> cb = (JComboBox<String>) e.getSource();
 					            String selectedItem = (String) cb.getSelectedItem();
 					            System.out.println("Selected item: " + selectedItem);
@@ -416,6 +437,7 @@ public void customerPanel()
 					            		lbldateFormat.setBounds(300, 95, 150, 20);
 					            		lbldateFormat.setForeground(new Color(0, 0, 0));					            		
 					            		DepositDetailsPanel.add(lbldateFormat);
+					            		lbldateFormat.setForeground(Color.WHITE);
 					            		lbldateFormat.setVisible(true);
 					            		lbldateFormat.setEnabled(false);
 					            		
@@ -448,7 +470,9 @@ public void customerPanel()
 					            	lbldateFormat.setVisible(false);
 					            	
 					            }
-						 
+								} catch (Exception e2) {
+									// TODO: handle exception
+								}
 							}
 							});
 
@@ -496,7 +520,7 @@ public void customerPanel()
 					
 				}
 	JLabel lblNewLabel_5 = new JLabel("Rent/Security Deposit");
-	lblNewLabel_5.setForeground(new Color(0, 0, 0));
+	lblNewLabel_5.setForeground(Color.WHITE);
 	lblNewLabel_5.setBounds(10, 45, 150, 20);
 	DepositDetailsPanel.add(lblNewLabel_5);
 	
@@ -586,7 +610,7 @@ public void customerPanel()
 	public boolean formatDate(String inp){
 		Scanner scanner = new Scanner(System.in);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
+        sdf.setLenient(false); // Set lenient property to false
         try {
             java.util.Date date = sdf.parse(inp);
             int month = date.getMonth() + 1; // Extract month value

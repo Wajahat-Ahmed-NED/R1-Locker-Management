@@ -29,7 +29,7 @@ public class newGrid extends JFrame {
 	private JTable table;
     private String selectedRowData;
 	String [] columnNames={"Locker Number", "Locker"};
-	Object[][] data= new Object[5][7];
+	Object[][] data= new Object[5][2];
 	Object[][] newdata = new Object [1][7] ;
 	Object[][] newdata3 = new Object [4][6] ;
 	public int chk;
