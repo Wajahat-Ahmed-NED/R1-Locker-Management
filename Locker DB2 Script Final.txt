@@ -122,10 +122,15 @@ CREATE TABLE Voucher_Master_TL (
 );
 
 CREATE TABLE VoucherDetail_TL (
-    voucherId INTEGER NOT NULL,
-    sNo INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY,
-    accountNum VARCHAR(17) NOT NULL,
-    amount BIGINT NOT NULL,
+   
+    id INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY,
+	refNo varchar (5) Not Null,
+ 	voucherId INTEGER NOT NULL,
+    	accountNum VARCHAR(17) NOT NULL,
+	accounttitle varchar(255) not null,
+   	amount BIGINT NOT NULL,
+	description varchar(500) not null,
+	
     FOREIGN KEY (voucherId) REFERENCES Voucher_Master_TL(voucherId)
 );
 

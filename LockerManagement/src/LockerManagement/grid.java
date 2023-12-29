@@ -184,7 +184,7 @@ public class grid extends JFrame {
 	public grid(final int chk,final Boolean issuance, String refNo){
 
 		if(issuance==true){
-			
+		System.out.println("hello");
 		getContentPane().setFont(new Font("Tahoma", Font.BOLD, 12));
 		setLocation(new Point(500, 200));
 		getContentPane().setBackground(new Color(0, 153, 102));
@@ -221,7 +221,7 @@ public class grid extends JFrame {
 			String query="select  lockernum,rentstatus from lockerAssigned_tr;";
 			PreparedStatement statement = connection.prepareStatement(query);
 			
-			String query2="select  refNo,description,accounttitle,accountNum,amount  from voucherdetail_tl where refno=?;";
+			String query2="select  refNo,description,accounttitle,accountNum,amount  from voucherdetail_tl where ref_no=? order by id;";
 			PreparedStatement statement2 = connection.prepareStatement(query2);
 			
 			statement2.setString(1, refNo);
@@ -357,8 +357,13 @@ public class grid extends JFrame {
 		proceedButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JOptionPane.showMessageDialog(null,"Your Reference Number is "+ refNo);
+				dispose();
 			}
 		});
+		
+		//create table for lockerassined_tl + select row from tl and add in tr 
+		// for surrender
+		
 		proceedButton.setBounds(219, 419, 99, 23);
 		getContentPane().add(proceedButton);
 		// TODO Auto-generated constructor stub

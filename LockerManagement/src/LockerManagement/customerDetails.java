@@ -74,7 +74,8 @@ public class customerDetails extends JFrame {
 	private JTextField textField_6;
 	private JTextField textField_7;
 	final JTextPane textPane = new JTextPane();
-
+	Integer paymentId;
+	Integer operationId;
 	private JTextField lockerNumberText;
 	private JTextField keyNumberText;
 	public String accountNum;
@@ -83,8 +84,12 @@ public class customerDetails extends JFrame {
 	public String operationMode;
 	public String paymentMode;
 	public Integer lockerSizeId;
-
-	
+	public String lockerNo;
+	public String refNo;
+	public String expiryDate;
+	JComboBox comboBox = new JComboBox();
+	double charges;
+	double actualCharges;
 	
 	public customerDetails(final int chk)
 	{
@@ -166,7 +171,7 @@ public class customerDetails extends JFrame {
 		
 
 
-		JComboBox comboBox = new JComboBox();
+		
 		comboBox.addActionListener(new ActionListener() {
 
 //			 @Override
@@ -180,12 +185,12 @@ public class customerDetails extends JFrame {
 	                
 	                
 	                if(selectedItem=="Small"){
-	                	if(availableLockers.get(0)==3){
+	                	if(availableLockers.get(0)==0){
 	                		 JOptionPane.showMessageDialog(null,"Small Locker Not Available");
 	                	}
 	                	else{
 	                		val=1;
-	                		
+ 	                		
 	                		fetchLockerDetails(val);
 	                	}
 	                }
@@ -269,8 +274,10 @@ public class customerDetails extends JFrame {
 	            public void actionPerformed(ActionEvent e) {
 	                JComboBox<String> cb = (JComboBox<String>) e.getSource();
 	                String selectedItem = (String) cb.getSelectedItem();
-	                System.out.println("Selected item: " + selectedItem);
-	          
+	                operationId = cb.getSelectedIndex()+1;
+	               
+	                System.out.println("Selected item: " + selectedItem + " "+operationId);
+	                
 	                operationMode=selectedItem;
 	               
 			 }
@@ -290,6 +297,7 @@ public class customerDetails extends JFrame {
 	            public void actionPerformed(ActionEvent e) {
 	                JComboBox<String> cb = (JComboBox<String>) e.getSource();
 	                String selectedItem = (String) cb.getSelectedItem();
+	                paymentId=cb.getSelectedIndex()+1;
 	                System.out.println("Selected item: " + selectedItem);
 	                paymentMode=selectedItem;
 	                
@@ -466,14 +474,56 @@ if(chk==1) {
 				   {accountNum,titleOfAccountText.getText(),branchcodeid,lockerSize,operationMode,paymentMode,expiryDateText.getText()}
 				};
 			
-			createVoucher();
+//			if(paymentId==2) {
+//				purpose="Locker Charges";
+//				charges=50000;
+//				fedAccount="M-230-01-01-0586-2";
+//			}
+//			else if (paymentId==3) {
+//				purpose="MO Account";
+//				fedAccount="1036-230-01-01-0586-2";
+//				charges=5000;
+//			}
+			System.out.println("Ind"+comboBox.getSelectedIndex());
 			
-			grid obj=new grid(0,true,"123456");
-			obj.setData(data,lockerSizeId);
-			obj.setSize(600,500);
-			obj.setVisible(true);
+			if(paymentId==1) {
+				actualCharges=0;
+				charges=0;
+				System.out.println("charges c"+charges);
+			}
+			else if(paymentId==2) {
+				actualCharges=Integer.parseInt(securityDepositText.getText());
+				charges=Integer.parseInt(securityDepositText.getText())*1.13;
+				charges=Math.round(charges* 100)/100;
+				System.out.println("charges s " +charges);
+			}
+			else if(paymentId==3) {
+				actualCharges=Integer.parseInt(yearlyRentText.getText());
+				charges=Integer.parseInt(yearlyRentText.getText())*1.13;
+				charges=Math.round(charges* 100)/100;
+				System.out.println("charges y "+charges);
+			}
 			
-			dispose();
+//			System.out.println(paymentMode);
+			
+			
+			if(updateBalance(accountNum,charges)==true) {
+				if(createVoucher()==true) {
+					grid obj=new grid(0,true,refNo);
+					obj.setData(data,lockerSizeId);
+					obj.setSize(600,500);
+					obj.setVisible(true);
+					dispose();
+				}
+
+			}
+			else {
+				JOptionPane.showMessageDialog(null,"Insufficient Balance");
+			}
+			
+			
+			
+			
 			
 			
 		}
@@ -733,6 +783,9 @@ if(chk==1) {
 	
 	public void insertArray(ArrayList<Integer> arr){
 		availableLockers=arr;
+		for(int i=0;i<arr.size();i++) {
+			System.out.println("insert "+arr.get(i));
+		}
 	}
 	
 	
@@ -740,6 +793,7 @@ if(chk==1) {
 	public void fetchLockerDetails(int val){
 		try{
 			lockerSizeId=val;
+			
 			lockerNum=val;
 			Class.forName("COM.ibm.db2.jdbc.app.DB2Driver");
 			java.sql.Connection connection = null;
@@ -761,6 +815,9 @@ if(chk==1) {
 			    System.out.println(secDeposit);
 			    System.out.println(charges);
 			}
+			else {
+				JOptionPane.showMessageDialog(null,"Locker Not Available");
+			}
 			
 		}
 		catch(Exception e){
@@ -770,7 +827,14 @@ if(chk==1) {
 	}
 	
 	public Integer lockerNum;
-	public void createVoucher(){
+	
+	
+	//Not saving data in db when dynamic
+	//and do validations every where
+	// then merge code
+	
+	
+	public boolean createVoucher(){
 		
 		try {
 			Class.forName("COM.ibm.db2.jdbc.app.DB2Driver");
@@ -785,7 +849,7 @@ if(chk==1) {
 			
 			if(locker==-1 || locker==0) {
 				JOptionPane.showMessageDialog(null,"Selected Locker Is Not Available");
-				return;
+				return false;
 			}
 			String lockernum=getLockerNum(lockerNum);
 			
@@ -794,22 +858,32 @@ if(chk==1) {
 			
 			
 			System.out.println("Voucher Test");
-			String query="insert into voucher_master_tl (lockernum,customerId,userId,accountnum,modeofoperationid,modeofpaymentid,vouchertypeid,voucherstatusid) values('"+lockernum+"',"+Global.customerId+","+2001+",'"+Global.accountNum+"',"+"1,1,1,1);";
+			
+			
+			String query = "INSERT INTO voucher_master_tl (lockernum, customerId, userId, accountnum, modeofoperationid, modeofpaymentid, vouchertypeid, voucherstatusid,expirydate) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
+					
+//			String query="insert into voucher_master_tl (lockernum,customerId,userId,accountnum,modeofoperationid,modeofpaymentid,vouchertypeid,voucherstatusid) values('"+lockernum+"',"+Global.customerId+","+2001+",'"+Global.accountNum+"',"+"1,1,1,1);";
 			PreparedStatement statement = connection.prepareStatement(query);
 //			'A120',3000,2001,'1234567891245689',1,1,1,1
 			System.out.println(query);
-//			statement.setString(1, lockernum);
-//			statement.setInt(2, Global.customerId);
-//			statement.setInt(3, 2001);
-//			statement.setString(4, Global.accountNum);
-//			statement.setInt(5, 1);
-//			statement.setInt(6, 1);
-//			statement.setInt(7, 1);
-//			statement.setInt(8, 1);
+			statement.setString(1, lockernum);
+			statement.setInt(2, Global.customerId);
+			statement.setInt(3, 2001);
+			statement.setString(4, Global.accountNum);
+			statement.setInt(5, operationId);
+			statement.setInt(6, paymentId);
+			statement.setInt(7, 1);
+			statement.setInt(8, 1);
+			if(expiryDateText.isEnabled()==true) {
+				statement.setString(9,expiryDateText.getText());
+			}
+			else {
+				statement.setString(9,"");
+			}
 			
 			
-			
-			
+			System.out.println(lockernum);
+			System.out.println(Global.accountNum);
 			
 			int result = statement.executeUpdate();
 			
@@ -832,53 +906,135 @@ if(chk==1) {
 					System.out.println(vId);
 //				String queryVDetail="insert into voucherdetail_tl (refno,description,accounttitle,accountNum,voucherid,amount) values("+123456+",'"+"Testing"+"','"+"Wajahat"+"','"+Global.accountNum+"',"+vId+",5650);";
 				
+					refNo="A"+Integer.toString(vId);
 				
-				
-				
+					String purpose="";
+					String accountNo="M230010105861";
+					String fedAccount="";
+					
 					// This statement is not saving into database--check it
 				
+				if(paymentId==2) {
+					purpose="Locker Charges";
 					
-				String queryVDetail="INSERT INTO voucherdetail_tl (refno, description, accounttitle, accountNum, voucherid, amount)VALUES(123456, 'Testing', "
-						+ "'Wajahat', '"+Global.accountNum+"', "+vId+", -5650),(123456, 'Testing 2', 'Locker Charges', '9876543219876543', "+vId+", 5000),"
-								+ "(123456, 'Testing 3', 'FED', '1234567890123456', "+vId+", 650);"
-										+ "Insert into lockerassigned_tr (voucherid,customerid,lockernum,depositamount,overdue,lastrecoverdate,rentstatus)"
-										+ " values("+vId+","+Global.customerId+",'"+lockernum+"',5650,'"+LocalDate.now().plus(Period.ofYears(1)).toString()+"','"+LocalDate.now().toString()+"',0);";
-				
-				
-				
-				PreparedStatement statementVDetail = connection.prepareStatement(queryVDetail);
-				System.out.print(queryVDetail);
-
-				int[] resultVDetail = statementVDetail.executeBatch();
-				int i=0;
-				while(i<resultVDetail.length) {
-					if(resultVDetail[i]>0) {
-						
-					i++;
-					}
+					fedAccount="M230010105862";
 				}
-				if(i==resultVDetail.length) {
-					JOptionPane.showMessageDialog(null,"Voucher Generated Success");
+				else if (paymentId==3) {
+					purpose="MO Account";
+					fedAccount="1036230010105862";
+					
 				}
+				String queryVDetail="";
+				if (paymentId==1) {
+					queryVDetail="INSERT INTO voucherdetail_tl (refno, description, accounttitle, accountNum, voucherid, amount,ref_no)VALUES("+vId+", 'Locker Assigning', "
+							+ "'Wajahat', '"+Global.accountNum+"', "+vId+", "+charges+",'"+refNo+"');";
+				}
+				
 				else {
-					JOptionPane.showMessageDialog(null,"Voucher Not Generated ");
+					String ans=paymentId==2?"Security Deposit":" Yearly Rent"; 
+					queryVDetail="INSERT INTO voucherdetail_tl (refno, description, accounttitle, accountNum, voucherid, amount,ref_no)VALUES("+vId+", 'Locker Assigning', "
+							+ "'Wajahat', '"+Global.accountNum+"', "+vId+", "+charges*-1+",'"+refNo+"'),("+vId+", 'Locker Assigning with "+ans+"', '"+purpose+"', '"+accountNo+"', "+vId+", "+actualCharges+",'"+refNo+"'),"
+							+ "("+vId+", 'Govt Charges', 'FED (13%)', '"+fedAccount+"', "+vId+", "+Math.round((actualCharges*0.13)* 100)/100+",'"+refNo+"');";
+					
 				}
+				
+//					=?:;
+				
+				String queryLockerAssigned="Insert into lockerassigned_tr (voucherid,customerid,lockernum,depositamount,overdue,lastrecoverdate,rentstatus)"
+															+" values("+vId+","+Global.customerId+",'"+lockernum+"',"+charges*1.13+",'"+LocalDate.now().plus(Period.ofYears(1)).toString()+"','"+LocalDate.now().toString()+"',0);";
+				PreparedStatement statementVDetail = connection.prepareStatement(queryVDetail);
+				PreparedStatement statementLockerAssigned = connection.prepareStatement(queryLockerAssigned);
+				
+				statementVDetail.addBatch();
+				
+				statementLockerAssigned.addBatch();
+
+				
+				System.out.print(queryVDetail);
+				
+				int[] resultVDetail = statementVDetail.executeBatch();
+				int[] resultLockerAssigned = statementLockerAssigned.executeBatch();
+				
+				
+				if (resultVDetail.length > 0 && resultLockerAssigned.length > 0) {
+				    JOptionPane.showMessageDialog(null, "Voucher Generated Success");
+				    return true;
+				   
+				} else {
+				    JOptionPane.showMessageDialog(null, "Voucher Not Generated");
+				   
+				    
+				}
+				
+				
 				}
 			}
 			else
 			{
 				JOptionPane.showMessageDialog(null,"Could Not Inserted");
+				
 			}
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			// TODO: handle exception
 			System.out.println("DB Connection fail");
+			
 		}
+		return false;
 		
 	}
 	
 	
+	public Boolean updateBalance(String accountNum,double charges) {
+		try{
+			
+			Class.forName("COM.ibm.db2.jdbc.app.DB2Driver");
+			java.sql.Connection connection = null;
+			java.sql.Statement  lcl_stmt =null;
+			connection = java.sql.DriverManager.getConnection("jdbc:db2:WA27389", "db2admin", "admin123/?");
+			
+//			PreparedStatement statement = connection.prepareStatement("SELECT * FROM UserTable WHERE BRN_CD=? AND USER_NAME=? AND PASSWORD=?");
+			String query="UPDATE accountnew"
+					+ " SET "
+					+ "    onHoldbalance = CASE"
+					+ "                WHEN balance > ? THEN onHoldbalance + ?"
+					+ "                ELSE onHoldbalance"
+					+ "              END"
+					+ " WHERE balance - onHoldbalance > ?  and accountnum=?;";
+			PreparedStatement statement = connection.prepareStatement(query);
+//			'A120',3000,2001,'1234567891245689',1,1,1,1
+			statement.setDouble(1, charges);
+			statement.setDouble(2, charges);
+			statement.setDouble(3, charges);
+			statement.setString(4, accountNum);
+			
+			int result = statement.executeUpdate();
+//			System.out.println(result);
+			System.out.println("Balance Updatesd"+result);
+			if (result>0) {
+				
+				System.out.println("Balance Update"+result);
+				
+				return true;
+				}
+			else {
+				return false;
+			}
+				
+				
+			
+			
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			// TODO: handle exception
+			System.out.println("DB Connection fail");
+			return false;
+		}
+		
+		
+	}
 	
 	public Integer getLockerAvailable(Integer num){
 		try{

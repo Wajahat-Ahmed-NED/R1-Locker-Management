@@ -34,6 +34,7 @@ public class lockerIssuance extends JFrame {
 	
 	private JTable smallLockerTable;
 	private JTextField accountNumberText;
+	JLabel lblAccountNumber = new JLabel("Account Number");
 	String [] columnNames={"Locker Available", "Lockers Size"};
 	Object[][] data= new Object[3][2];
 	boolean auth=true;
@@ -160,6 +161,17 @@ public class lockerIssuance extends JFrame {
 		
 		
 		JComboBox identificationComboBox = new JComboBox();
+		identificationComboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 JComboBox<String> cb = (JComboBox<String>) e.getSource();
+	                String selectedItem = (String) cb.getSelectedItem();
+	                
+				 if(selectedItem!=null && selectedItem.equals("Account Number")) {
+					 accountNumberText.setVisible(true);
+					 lblAccountNumber.setVisible(true);
+				 }
+			}
+		});
 		identificationComboBox.setModel(new DefaultComboBoxModel(new String[] {"Account Number"}));
 		identificationComboBox.setSelectedIndex(-1);
 		identificationComboBox.setMaximumRowCount(3);
@@ -175,14 +187,16 @@ public class lockerIssuance extends JFrame {
 		
 		
 		
-		JLabel lblAccountNumber = new JLabel("Account Number");
+		
 		lblAccountNumber.setBounds(313, 289, 139, 21);
 		getContentPane().add(lblAccountNumber);
+		lblAccountNumber.setVisible(false);
 		
 		accountNumberText = new JTextField();
 		accountNumberText.setBounds(313, 321, 153, 30);
 		getContentPane().add(accountNumberText);
 		accountNumberText.setColumns(10);
+		accountNumberText.setVisible(false);
 		
 		
 		
@@ -190,6 +204,8 @@ public class lockerIssuance extends JFrame {
 		proceedButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
+				if(!accountNumberText.getText().isEmpty() && (accountNumberText.getText().length()==16 || accountNumberText.getText().length()==17)  ) {
+					
 				try{
 					
 					String accNum=accountNumberText.getText();
@@ -201,7 +217,7 @@ public class lockerIssuance extends JFrame {
 					String query="select accountstatus.accountstatusid,accountstatus.accountstatus from accountnew,accountstatus where accountnew.accountstatusid=accountstatus.accountstatusid and accountnew.accountnum=?;";
 					PreparedStatement statement = connection.prepareStatement(query);
 					
-					statement.setString(1, "1234567891245689");
+					statement.setString(1, accountNumberText.getText());
 					
 					ResultSet result = statement.executeQuery();
 					
@@ -211,13 +227,13 @@ public class lockerIssuance extends JFrame {
 					    if (id==1){
 					    	
 					    	 
-					    	 getCustDetails("1234567891245689");
+					    	 getCustDetails(accountNumberText.getText());
 					    	 
 					    	
 					    }
 					    else{
 					    		
-					     	 JOptionPane.showMessageDialog(null,"Cannot Assign Locker TO This Account No");
+					     	 JOptionPane.showMessageDialog(null,"Cannot Assign Locker TO This Account Holder");
 					    }
 					   
 					}
@@ -230,7 +246,7 @@ public class lockerIssuance extends JFrame {
 				}
 
 			}
-		});
+		}});
 		proceedButton.setBounds(122, 421, 89, 23);
 		getContentPane().add(proceedButton);
 		

@@ -33,6 +33,10 @@ import java.awt.Frame;
 import java.awt.Window.Type;
 import java.awt.Point;
 import java.awt.Cursor;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 //Merged Code
 public class logIn extends JFrame {
 	private JTextField branchCodeText;
@@ -41,6 +45,7 @@ public class logIn extends JFrame {
 	public static String currentDate;
 //	String password = "myPassword123";
 	String hashPassword = "";
+	JButton signInButton = new JButton("Sign In");
 	
 	public logIn() {
 		setResizable(false);
@@ -55,6 +60,22 @@ public class logIn extends JFrame {
 		logInPanel.setLayout(null);
 		
 		branchCodeText = new JTextField();
+		branchCodeText.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				validateFields();
+			}
+			@Override
+			public void focusGained(FocusEvent e) {
+				validateFields();
+			}
+		});
+		branchCodeText.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				validateFields();
+			}
+		});
 		branchCodeText.setBounds(43, 45, 74, 20);
 		logInPanel.add(branchCodeText);
 		branchCodeText.setColumns(10);
@@ -63,28 +84,64 @@ public class logIn extends JFrame {
 		passwordText.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
 		passwordText.setBounds(43, 81, 175, 20);
 		logInPanel.add(passwordText);
+		passwordText.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				validateFields();
+			}
+		});
+		passwordText.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				validateFields();
+			}
+			@Override
+			public void focusGained(FocusEvent e) {
+				validateFields();
+			}
+		});
 		
 		userNameText = new JPasswordField();
 		userNameText.setEchoChar('X');
 		userNameText.setBounds(121, 45, 97, 20);
 		logInPanel.add(userNameText);
+		userNameText.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				validateFields();
+			}
+		});
+		userNameText.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				validateFields();
+			}
+			@Override
+			public void focusGained(FocusEvent e) {
+				validateFields();
+			}
+		});
 
 		
 		String branchCode = branchCodeText.getText();
 		String userName = userNameText.getText();
 		String password = passwordText.getText();
 		
-		JButton signInButton = new JButton("Sign In");
 		
-		signInButton.addMouseListener(new MouseAdapter() {
+		
+		signInButton.setEnabled(false);
+		
+//		signInButton.setVisible(false);
+		signInButton.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) {
 				
 //				hashString("123");
 				
 //				String branchCode = branchCodeText.getText();
 //				String userName = userNameText.getText();
 //				String password = passwordText.getText();
+				
 				
 				String branchCode = "1000";
 				String userName = "wajahat";
@@ -225,6 +282,13 @@ public class logIn extends JFrame {
             
             e.printStackTrace();
         }
+	}
+	
+	public void validateFields()
+	{
+		 boolean flag=!branchCodeText.getText().isEmpty() && !userNameText.getText().isEmpty() && !passwordText.getText().isEmpty() && branchCodeText.getText().length()==4 ;
+		 signInButton.setEnabled(flag);
+		 System.out.println(flag);
 	}
     public static void main(String[] args) {
     	logIn frame = new logIn();

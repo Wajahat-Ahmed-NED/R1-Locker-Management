@@ -3,9 +3,12 @@ package LockerManagement;
 import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
 import java.awt.Point;
 
@@ -51,24 +54,43 @@ public class lockerMaintenance extends JFrame{
 		JButton searchButton = new JButton("Search");
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(chk==1){
+				
+				if (chk==2 || chk==1){
 					
-				customerDetails obj=new customerDetails(1);
-				obj.setVisible(true);
-				obj.setSize(600, 500);
-				dispose();
-				}
-				else if (chk==2){
-					
-					customerDetails obj=new customerDetails(2);
-					obj.setVisible(true);
-					obj.setSize(600, 500);
-					dispose();
+					System.out.println(lockerNumberText.getText());
+					String parsedLockerNum=Global.removeSpecialCharacters(lockerNumberText.getText());
+					System.out.println(parsedLockerNum);
+					if(lockerNumberText.getText().equals("")) {
+					    JOptionPane.showMessageDialog(null, "Enter Locker Number");
+
+					}
+					else if (lockerNumberText.getText().length()!=4) {
+						JOptionPane.showMessageDialog(null, "Invalid Locker Number");
+					}
+					else if (parsedLockerNum.length()!=4) {
+						JOptionPane.showMessageDialog(null, "Invalid Locker Number");
+					}
+					else {
+						
+//						JOptionPane.showMessageDialog(null, "Enter Locker Number");
+
+							if(fetchDetails(parsedLockerNum)==true) {
+								newDetails obj=new newDetails(chk==1?2:3,parsedLockerNum);
+								obj.setVisible(true);
+								obj.setSize(600, 500);		
+								dispose();
+							}
+
+					}
 				}
 			}
+
+			
 		});
 		searchButton.setBounds(183, 265, 123, 24);
 		getContentPane().add(searchButton);
+		
+		
 		
 		
 		
@@ -112,9 +134,52 @@ public class lockerMaintenance extends JFrame{
 		
 	}
 
+	
+	public Boolean fetchDetails(String parsedLockerNum) {
+		
+		try {
+			Class.forName("COM.ibm.db2.jdbc.app.DB2Driver");
+			java.sql.Connection connection = null;
+			java.sql.Statement  lcl_stmt =null;
+			connection = java.sql.DriverManager.getConnection("jdbc:db2:WA27389", "db2admin", "admin123/?");
+			String query="select * from (select lockernum from lockerassigned_tr union select lockernum from lockerassigned_tl) where lockernum=?";
+
+			PreparedStatement statement = connection.prepareStatement(query);
+		
+			statement.setString(1,parsedLockerNum);
+			
+			
+			ResultSet result = statement.executeQuery();
+			
+			
+			if (result.next()) {
+				System.out.println("After Execution");
+				return true;
+			
+			}
+			else
+			{
+				
+				JOptionPane.showMessageDialog(null,"Locker Number Not Found");
+				return false;
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			
+			System.out.println("DB Connection fail");
+			
+			JOptionPane.showMessageDialog(null,"Something Went Wrong");
+			return false;
+		}
+		
+		
+	}
+	
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		lockerMaintenance frame = new lockerMaintenance(1);
+		lockerMaintenance frame = new lockerMaintenance(2);
     	frame.setSize(600, 500);
     	frame.setVisible(true);
 	}
