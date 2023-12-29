@@ -42,12 +42,22 @@ public class newLockerIssuance extends JFrame {
 	
 	public newLockerIssuance(final int chk)
 	{
+		setResizable(false);
 		setSize(new Dimension(600, 500));
 		JPanel panel= new JPanel();
 		panel.setBounds(30,147,513,70);
 		getContentPane().add(panel);
 		panel.setLayout(null);
-		smallLockerTable=new JTable(data,columnNames);
+		DefaultTableModel tableModel = new DefaultTableModel(data, columnNames) {
+		    @Override
+		    public boolean isCellEditable(int row, int column) {
+		        return false; // Make all cells non-editable
+		    }
+		};
+
+		tableModel.setColumnIdentifiers(columnNames); // Set column names
+		
+		smallLockerTable = new JTable(tableModel);
 		smallLockerTable.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		smallLockerTable.setBounds(65,83,674,174);
 		getContentPane().add(smallLockerTable);
@@ -93,6 +103,7 @@ public class newLockerIssuance extends JFrame {
 			for (int i=0; i<rows.size();i++){
 				data[i]=rows.get(i);
 			}
+			tableModel.setDataVector(data, columnNames);
 			}else if(chk==1)
 			{
 				newDetails obj=new newDetails(1);
@@ -112,8 +123,9 @@ public class newLockerIssuance extends JFrame {
 		getContentPane().setLayout(null);
 		
 		JLabel lblLockersInformation = new JLabel("Lockers Information");
-		lblLockersInformation.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblLockersInformation.setBounds(142, 29, 139, 30);
+		lblLockersInformation.setForeground(Color.WHITE);
+		lblLockersInformation.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblLockersInformation.setBounds(30, 59, 214, 48);
 		getContentPane().add(lblLockersInformation);
 		
 		JButton signOffButton = new JButton("Sign Off");
@@ -157,11 +169,13 @@ public class newLockerIssuance extends JFrame {
 		getContentPane().add(identificationComboBox);
 		
 		JLabel lblLockerSize = new JLabel("Identification Type");
-		lblLockerSize.setBounds(93, 289, 94, 20);
+		lblLockerSize.setForeground(Color.WHITE);
+		lblLockerSize.setBounds(90, 300, 150, 20);
 		getContentPane().add(lblLockerSize);
 		
 		JLabel lblAccountNumber = new JLabel("Account Number");
-		lblAccountNumber.setBounds(313, 289, 139, 21);
+		lblAccountNumber.setForeground(Color.WHITE);
+		lblAccountNumber.setBounds(315, 300, 139, 21);
 		getContentPane().add(lblAccountNumber);
 		
 		accountNumberText = new JTextField();

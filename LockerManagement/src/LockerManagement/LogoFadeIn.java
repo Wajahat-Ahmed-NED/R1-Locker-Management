@@ -19,10 +19,9 @@ public class LogoFadeIn extends JFrame {
         setLocationRelativeTo(null);
         setSize(600,500);
         getContentPane().setLayout(new FlowLayout());
-    	setResizable(false);
     	setLocation(new Point(500, 200));
     	
-        final ImageIcon logo = createImageIcon("C:\\Users\\Mariz.27385\\Documents\\GitHub\\R1-Locker-Management\\bahl4.png"); // Load image
+        final ImageIcon logo = createImageIcon("D:\\Ariz\\Locker Management\\R1-Locker-Management\\black.png"); // Load image
         if (logo != null) {
             logoLabel = new JLabel(logo);
             logoLabel.setOpaque(true);

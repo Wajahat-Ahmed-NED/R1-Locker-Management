@@ -14,6 +14,7 @@ public class newLockerModule extends JFrame {
 	public int chk;
 	public newLockerModule(final int chk)
 	{
+		setResizable(false);
 		setSize(new Dimension(600, 500));
 		this.chk=chk;
 		setLocation(new Point(500, 200));

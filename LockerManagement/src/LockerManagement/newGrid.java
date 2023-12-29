@@ -29,7 +29,7 @@ public class newGrid extends JFrame {
 	private JTable table;
     private String selectedRowData;
 	String [] columnNames={"Locker Number", "Locker"};
-	Object[][] data= new Object[5][7];
+	Object[][] data= new Object[5][2];
 	Object[][] newdata = new Object [1][7] ;
 	Object[][] newdata3 = new Object [4][6] ;
 	public int chk;
@@ -39,6 +39,7 @@ public class newGrid extends JFrame {
 	 */
 
 	public newGrid(final int chk) {
+		setResizable(false);
 
 		setTitle("Pending Task");
 		setSize(new Dimension(600, 500));
@@ -114,8 +115,9 @@ public class newGrid extends JFrame {
 						java.sql.Statement  lcl_stmt =null;
 						connection = java.sql.DriverManager.getConnection("jdbc:db2:WA27389", "db2admin", "admin123/?");
 									
-						String query="select  lockernum,rentstatus from lockerAssigned_tr;";
+						String query="select  lockernum,rentstatus from lockerAssigned_tr where NOTIFYUSER is Null;";
 						PreparedStatement statement = connection.prepareStatement(query);
+//						statement.setInt(1, 0);//Notify user
 						
 			//			statement.setString(1, branchCode);
 			//			statement.setString(2, userName);

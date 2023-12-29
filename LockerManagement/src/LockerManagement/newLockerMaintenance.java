@@ -10,12 +10,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Point;
 import java.awt.Dimension;
+import java.awt.Font;
 
 public class newLockerMaintenance extends JFrame{
 	private JTextField lockerNumberText;
 	public int chk;
 	
 	public newLockerMaintenance(final int chk) {
+		setResizable(false);
 		setSize(new Dimension(600, 500));
 		this.chk=chk;
 		setLocation(new Point(500, 200));
@@ -31,7 +33,9 @@ public class newLockerMaintenance extends JFrame{
 		
 		
 		JLabel lblLockerNumber = new JLabel("Locker Number");
-		lblLockerNumber.setBounds(200, 180, 90, 30);
+		lblLockerNumber.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblLockerNumber.setForeground(Color.WHITE);
+		lblLockerNumber.setBounds(200, 180, 150, 30);
 		getContentPane().add(lblLockerNumber);
 		
 		lockerNumberText = new JTextField();

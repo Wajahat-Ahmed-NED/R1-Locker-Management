@@ -37,6 +37,7 @@ import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import javax.swing.UIManager;
 
 public class newLogIn extends JFrame {
 	private JTextField branchCodeText;
@@ -45,8 +46,8 @@ public class newLogIn extends JFrame {
 	public static String currentDate;
 	
 	public newLogIn() {
-		setSize(new Dimension(600, 500));
 		setResizable(false);
+		setSize(new Dimension(600, 500));
 		setLocation(new Point(500, 200));
 		getContentPane().setBackground(new Color(0, 102, 102));
 		setTitle("Login");
@@ -54,7 +55,7 @@ public class newLogIn extends JFrame {
 		JPanel logInPanel = new JPanel();
 		logInPanel.setBounds(293, 151, 241, 123);
 		logInPanel.setBackground(new Color(0, 102, 102));
-		logInPanel.setBorder(new TitledBorder(null, "Log In", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		logInPanel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Log In", TitledBorder.LEADING, TitledBorder.TOP, null, Color.WHITE));
 		logInPanel.setLayout(null);
 		
 		newMainMenu date = new newMainMenu(1);
@@ -189,34 +190,38 @@ public class newLogIn extends JFrame {
 		exitButton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
-				System.exit(404);
+				System.exit(0);
 			}
 			
 		});
 		
 		JLabel lblUserVerification = new JLabel("User Verification");
-		lblUserVerification.setBounds(294, 101, 187, 39);
-		lblUserVerification.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblUserVerification.setForeground(Color.WHITE);
+		lblUserVerification.setBounds(293, 101, 188, 39);
+		lblUserVerification.setFont(new Font("Tahoma", Font.BOLD, 18));
 		getContentPane().setLayout(null);
 		getContentPane().add(logInPanel);
 		
 		
 		
 		JLabel lblBranchCode = new JLabel("Branch Code");
+		lblBranchCode.setForeground(Color.WHITE);
 		lblBranchCode.setBounds(43, 29, 74, 14);
 		logInPanel.add(lblBranchCode);
 		
 		JLabel lblUserName = new JLabel("User Name");
+		lblUserName.setForeground(Color.WHITE);
 		lblUserName.setBounds(130, 29, 88, 14);
 		logInPanel.add(lblUserName);
 		
 		JLabel lblPassword = new JLabel("Password");
+		lblPassword.setForeground(Color.WHITE);
 		lblPassword.setBounds(43, 65, 74, 14);
 		logInPanel.add(lblPassword);
 		getContentPane().add(signInButton);
 		getContentPane().add(exitButton);
 		getContentPane().add(lblUserVerification);
-		ImageIcon originalIcon = new ImageIcon("C:\\Users\\Mariz.27385\\Documents\\GitHub\\R1-Locker-Management\\bahl4.png");
+		ImageIcon originalIcon = new ImageIcon("D:\\Ariz\\Locker Management\\R1-Locker-Management\\black.png");
 		Image originalImage = originalIcon.getImage();
         Image scaledImage = getScaledImage(originalImage, 250, 250);
 		JLabel lblLogo = new JLabel();
