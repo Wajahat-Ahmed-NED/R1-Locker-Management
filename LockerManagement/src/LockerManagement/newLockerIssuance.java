@@ -2,22 +2,23 @@ package LockerManagement;
 
 import javax.swing.JFrame;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-
+import javax.swing.text.AbstractDocument;
 import javax.swing.JTable;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
-import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
-import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
+import javax.swing.text.DocumentFilter.FilterBypass;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -34,6 +35,7 @@ import java.awt.event.FocusEvent;
 public class newLockerIssuance extends JFrame {
 	private JTable smallLockerTable;
 	private JTextField accountNumberText;
+
 	String [] columnNames={"Locker Available", "Lockers Size"};
 	Object[][] data= new Object[3][2];
 	boolean auth=true;
@@ -179,6 +181,7 @@ public class newLockerIssuance extends JFrame {
 		getContentPane().add(lblAccountNumber);
 		
 		accountNumberText = new JTextField();
+		((AbstractDocument) accountNumberText.getDocument()).setDocumentFilter(new NumberDocumentFilter());
 		accountNumberText.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
@@ -343,6 +346,34 @@ public class newLockerIssuance extends JFrame {
 		
 		
 	}
+	private static class NumberDocumentFilter extends DocumentFilter {
+	    private static final int[] hyphenPositions = {3, 8, 15,18};
+
+	    @Override
+	    public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+	        StringBuilder builder = new StringBuilder(string);
+	        for (int i = hyphenPositions.length - 1; i >= 0; i--) {
+	            if (offset == hyphenPositions[i]) {
+	                builder.append('-');
+	                break;
+	            }
+	        }
+	        super.insertString(fb, offset, builder.toString(), attr);
+	    }
+
+	    @Override
+	    public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+	        StringBuilder builder = new StringBuilder(text);
+	        for (int i = hyphenPositions.length - 1; i >= 0; i--) {
+	            if (offset == hyphenPositions[i]) {
+	                builder.append('-');
+	                break;
+	            }
+	        }
+	        super.replace(fb, offset, length, builder.toString(), attrs);
+	    }
+	}
+
 	 public static void main(String[] args) {
 		 newLockerIssuance frame = new newLockerIssuance(0);
 	    	frame.setSize(600, 500);
