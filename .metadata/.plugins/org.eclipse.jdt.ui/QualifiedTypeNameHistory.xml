@@ -2,8 +2,11 @@
 <fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
 <fullyQualifiedTypeName name="javax.swing.JTextArea"/>
 <fullyQualifiedTypeName name="javax.swing.JScrollPane"/>
+<<<<<<< HEAD
 <fullyQualifiedTypeName name="javax.sound.midi.SysexMessage"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="javax.swing.UIManager"/>
 <fullyQualifiedTypeName name="javax.swing.plaf.ColorUIResource"/>
+=======
+>>>>>>> d698dbb6d668408cde43cd85655e508aa86402b8
 </qualifiedTypeNameHistroy>

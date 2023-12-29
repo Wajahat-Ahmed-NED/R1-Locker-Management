@@ -98,13 +98,13 @@ public class newLogIn extends JFrame {
 //				String userName = userNameText.getText();
 //				String password = passwordText.getText();
 				//User
-//				String branchCode = "1000";
-//				String userName = "wajahat";
-//				String password = "pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=";
-				//Authorizer
 				String branchCode = "1000";
-				String userName = "ariz";
+				String userName = "wajahat";
 				String password = "pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=";
+				//Authorizer
+//				String branchCode = "1000";
+//				String userName = "ariz";
+//				String password = "pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=";
 				
 				
 				

@@ -23,6 +23,7 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product com.ibm.ratio
 
 !ENTRY org.eclipse.core.jobs 2 2 2023-12-26 09:25:10.424
 !MESSAGE Job found still running after platform shutdown.  Jobs should be canceled by the plugin that scheduled them during shutdown: com.ibm.ut.ic.server.jobs.PrefPageReplacerJob
+<<<<<<< HEAD
 !SESSION 2023-12-27 09:09:43.954 -----------------------------------------------
 eclipse.buildId=unknown
 java.fullversion=JRE 1.7.0 IBM J9 2.6 Windows 8 amd64-64 Compressed References 20130306_140761 (JIT enabled, AOT enabled)
@@ -67,3 +68,5 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product com.ibm.ratio
 
 !ENTRY org.eclipse.core.net 1 0 2023-12-28 09:04:07.917
 !MESSAGE System property http.proxyPort is set to 8080 but should not be set.
+=======
+>>>>>>> d698dbb6d668408cde43cd85655e508aa86402b8

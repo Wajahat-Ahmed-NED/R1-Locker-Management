@@ -2,9 +2,15 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="257" key="DIALOG_WIDTH"/>
+<<<<<<< HEAD
 		<item value="312" key="DIALOG_Y_ORIGIN"/>
 		<item value="351" key="DIALOG_HEIGHT"/>
 		<item value="1084" key="DIALOG_X_ORIGIN"/>
+=======
+		<item value="388" key="DIALOG_Y_ORIGIN"/>
+		<item value="351" key="DIALOG_HEIGHT"/>
+		<item value="1273" key="DIALOG_X_ORIGIN"/>
+>>>>>>> d698dbb6d668408cde43cd85655e508aa86402b8
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
@@ -13,6 +19,7 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
+<<<<<<< HEAD
 		<item value="expiryDateText" key="selection"/>
 		<list key="findhistory">
 			<item value="expiryDateText"/>
@@ -26,6 +33,20 @@
 		</list>
 		<list key="replacehistory">
 			<item value="result2"/>
+=======
+		<item value="JLabel" key="selection"/>
+		<list key="findhistory">
+			<item value="JLabel"/>
+			<item value="dateformat"/>
+			<item value="small"/>
+			<item value="singly"/>
+			<item value="yearly"/>
+			<item value="chk==0"/>
+			<item value="signOff"/>
+			<item value="joption"/>
+		</list>
+		<list key="replacehistory">
+>>>>>>> d698dbb6d668408cde43cd85655e508aa86402b8
 			<item value="chk=="/>
 			<item value="chk"/>
 		</list>
