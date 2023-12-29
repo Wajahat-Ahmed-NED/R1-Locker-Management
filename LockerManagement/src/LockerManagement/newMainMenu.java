@@ -19,26 +19,43 @@ public class newMainMenu extends JFrame {
 	
 
 	
+<<<<<<< HEAD
 	public newMainMenu(final int a) {
+=======
+	public newMainMenu(final int chk) {
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 		setSize(new Dimension(600, 500));
 		setLocation(new Point(500, 200));
 		setTitle("Main Menu");
 		getContentPane().setBackground(new Color(0, 102, 102));
 		getContentPane().setLayout(null);
 		
+<<<<<<< HEAD
 		JButton btnNewButton = new JButton(a == 1 ? "Main Menu" : "Pending Task");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				System.out.print(a);
 				if(a==0){
+=======
+		JButton btnNewButton = new JButton(chk == 0 ? "Main Menu" : "Pending Task");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				System.out.print(chk);
+				if(chk==0){
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 					newLockerModule obj= new newLockerModule(0);
 					obj.setVisible(true);
 					obj.setSize(600, 500);
 					dispose();
 //					System.out.println("Auth Success");
 				}
+<<<<<<< HEAD
 				else if (a==1){
+=======
+				else if (chk==1){
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 
 					newGrid obj=new newGrid(1);
 					obj.setVisible(true);
@@ -62,7 +79,11 @@ public class newMainMenu extends JFrame {
 		});
 		btnSignOff.setBounds(470, 410, 90, 30);
 		getContentPane().add(btnSignOff);
+<<<<<<< HEAD
 		if(a==0){
+=======
+		if(chk==1){
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 			
 			setTitle("Authorizor Menu");
 		}
@@ -71,6 +92,10 @@ public class newMainMenu extends JFrame {
 		}
 		// Date Label
         JLabel dateLabel = new JLabel(getCurrentDate());
+<<<<<<< HEAD
+=======
+        dateLabel.setForeground(Color.WHITE);
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
         dateLabel.setHorizontalAlignment(SwingConstants.LEFT);
         dateLabel.setVerticalAlignment(SwingConstants.BOTTOM);
         dateLabel.setBounds(10, 440, 570, 20);
@@ -78,6 +103,10 @@ public class newMainMenu extends JFrame {
         
         }
 	
+<<<<<<< HEAD
+=======
+	
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 	////////////////
 	 String getCurrentDate() {
 	        SimpleDateFormat formatter = new SimpleDateFormat("EEE, MMM dd, yyyy");
@@ -86,7 +115,11 @@ public class newMainMenu extends JFrame {
 	    }
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
 		newMainMenu frame = new newMainMenu(0);
+=======
+		newMainMenu frame = new newMainMenu(1);
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
     	frame.setSize(600, 500);
     	frame.setVisible(true);
 	}

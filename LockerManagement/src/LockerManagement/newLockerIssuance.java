@@ -55,7 +55,11 @@ public class newLockerIssuance extends JFrame {
 		scroll.setBounds(0, 0, 513, 70);
 		panel.add(scroll);
 		try {
+<<<<<<< HEAD
 			if(chk==1)
+=======
+			if(chk==0)
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 			{
 			Class.forName("COM.ibm.db2.jdbc.app.DB2Driver");
 			java.sql.Connection connection = null;
@@ -121,7 +125,11 @@ public class newLockerIssuance extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				newLogIn obj=new newLogIn();
 				obj.setVisible(true);
+<<<<<<< HEAD
 				obj.setSize(600, 400);
+=======
+				obj.setSize(600, 500);
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 				dispose();
 			}
 		});
@@ -254,6 +262,10 @@ public class newLockerIssuance extends JFrame {
 		
 		newMainMenu date = new newMainMenu(0);
         JLabel dateLabel = new JLabel(date.getCurrentDate());
+<<<<<<< HEAD
+=======
+        dateLabel.setForeground(Color.WHITE);
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
         dateLabel.setHorizontalAlignment(SwingConstants.LEFT);
         dateLabel.setVerticalAlignment(SwingConstants.BOTTOM);
         dateLabel.setBounds(10, 440, 570, 20);

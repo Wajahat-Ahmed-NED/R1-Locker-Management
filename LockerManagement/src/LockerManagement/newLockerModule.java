@@ -24,15 +24,26 @@ public class newLockerModule extends JFrame {
 		JButton lockerIssuanceButton = new JButton("Locker Issuance");
 		lockerIssuanceButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+<<<<<<< HEAD
 				if (chk==0) {
 					newDetails obj = new newDetails(0); 
+=======
+				
+				if (chk==0) {
+
+					newLockerIssuance obj=new newLockerIssuance(0);
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 					obj.setVisible(true);
 					obj.setSize(600,500);
 					dispose();
 				} else if(chk==1){
 //					lockerIssuance obj=new lockerIssuance(1);
+<<<<<<< HEAD
 
 					newLockerIssuance obj=new newLockerIssuance(1);
+=======
+					newDetails obj = new newDetails(1); 
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 					obj.setVisible(true);
 					obj.setSize(600,500);
 					dispose();
@@ -45,7 +56,11 @@ public class newLockerModule extends JFrame {
 		JButton lockerSurrenderButton = new JButton("Locker Surrender");
 		lockerSurrenderButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+<<<<<<< HEAD
 				newLockerMaintenance obj =new newLockerMaintenance(1);
+=======
+				newLockerMaintenance obj =new newLockerMaintenance(3);
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 				obj.setVisible(true);
 				obj.setSize(600,500);
 				dispose();
@@ -57,7 +72,11 @@ public class newLockerModule extends JFrame {
 		JButton btnNewButton_2 = new JButton("Locker Maintenance");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+<<<<<<< HEAD
 				newLockerMaintenance obj =new newLockerMaintenance(1);
+=======
+				newLockerMaintenance obj =new newLockerMaintenance(2);
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
 				obj.setVisible(true);
 				obj.setSize(600,500);
 				dispose();
@@ -92,6 +111,10 @@ public class newLockerModule extends JFrame {
 		//date
 		newMainMenu date = new newMainMenu(0);
         JLabel dateLabel = new JLabel(date.getCurrentDate());
+<<<<<<< HEAD
+=======
+        dateLabel.setForeground(Color.WHITE);
+>>>>>>> 707817bb5624bdf29f88d2cc9d16d96dae41499a
         dateLabel.setHorizontalAlignment(SwingConstants.LEFT);
         dateLabel.setVerticalAlignment(SwingConstants.BOTTOM);
         dateLabel.setBounds(10, 440, 570, 20);

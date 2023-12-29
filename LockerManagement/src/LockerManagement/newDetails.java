@@ -5,6 +5,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
@@ -47,6 +49,7 @@ public class newDetails extends JFrame {
 
 	public int chk;
 	public String lockerNumber;
+	public String lockerNumber;
 	public Integer lockerSizeId;
 	private JTextField customerNameText;
 	private JTextField correspondedAddressText;
@@ -78,6 +81,9 @@ public class newDetails extends JFrame {
     // Add key-value pairs to the HashMap
     
 	//Constructor
+	/**
+	 * @wbp.parser.constructor
+	 */
 	/**
 	 * @wbp.parser.constructor
 	 */
@@ -264,6 +270,8 @@ public void customerPanel()
 	modeOfOperationText = new JTextField();
 	lockerSizeText = new JTextField();
 	if (chk==1 | chk==3) {
+
+	if (chk==1) {
 
 //		operatingInstructionText.setBounds(200, 70, 300, 20);
 //		lockerDetailsPanel.add(operatingInstructionText);
@@ -543,6 +551,21 @@ public void customerPanel()
 						}
 						});
 				}
+				else if(chk==2)
+				{
+					modeOfPaymentText = new JTextField();
+					modeOfPaymentText.setBounds(200, 20, 300, 20);
+					DepositDetailsPanel.add(modeOfPaymentText);
+					modeOfPaymentText.setColumns(10);
+					lockerSizeText.setEditable(true);
+					// operatingInstructionText.setEditable(true);
+					modeOfOperationText.setEditable(true);
+					depositText.setEditable(true);
+					overdueDateText.setEditable(true);
+					recoverDateText.setEditable(true);
+					rentStatusText.setEditable(true);
+					
+				}
 	JLabel lblNewLabel_5 = new JLabel("Rent/Security Deposit");
 	lblNewLabel_5.setForeground(Color.WHITE);
 	lblNewLabel_5.setBounds(10, 45, 150, 20);
@@ -560,6 +583,19 @@ public void customerPanel()
 				obj.setSize(600, 500);
 				dispose();
 			}else if(chk==1){
+				newGrid obj=new newGrid(1);
+				obj.setVisible(true);
+				obj.setSize(600, 500);
+				dispose();
+			}
+			else if(chk==2){
+				newLockerMaintenance obj=new newLockerMaintenance(2);
+				obj.setVisible(true);
+				obj.setSize(600, 500);
+				dispose();
+			}
+			else if(chk==3){
+				newLockerMaintenance obj=new newLockerMaintenance(3);
 				newGrid obj=new newGrid(1);
 				obj.setVisible(true);
 				obj.setSize(600, 500);
@@ -593,11 +629,21 @@ public void customerPanel()
 			dispose();
 		}
 	});
+	signOffButton.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent arg0) {
+			newLogIn obj=new newLogIn();
+			obj.setVisible(true);
+			obj.setSize(600, 500);
+			dispose();
+		}
+	});
 	signOffButton.setBounds(470, 410, 90, 30);
 	getContentPane().add(signOffButton);
 //date
+//date
 	newMainMenu date = new newMainMenu(1);
     JLabel dateLabel = new JLabel(date.getCurrentDate());
+    dateLabel.setForeground(Color.WHITE);
     dateLabel.setForeground(Color.WHITE);
     dateLabel.setHorizontalAlignment(SwingConstants.LEFT);
     dateLabel.setVerticalAlignment(SwingConstants.BOTTOM);
@@ -856,6 +902,7 @@ public void maintainLocker() {
 			ResultSet result = statement.executeQuery();
 			
 			if (result.next()) {
+			if (result.next()) {
 //			    String secDeposit = result.getString("SECDEPOSIT");
 //			    Integer charges= result.getInt("CHARGES");
 //			    
@@ -871,6 +918,7 @@ public void maintainLocker() {
 //			    
 //			   
 			}
+			}
 			
 		}
 		catch(Exception e){
@@ -880,6 +928,8 @@ public void maintainLocker() {
 	
 	}
 
+	// customer Details fetching function
+	
 	// customer Details fetching function
 	public void getCustDetails(String lockerNumber){
 			
