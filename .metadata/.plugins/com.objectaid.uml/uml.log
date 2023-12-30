@@ -1,0 +1,2 @@
+2023-12-29 09:36:30.394 [Worker-8] INFO    com.objectaid.uml.model.manage.DiagramManager getFactories: com.objectaid.uml.diagramFactories[ucls]: com.objectaid.uml.cls.model.ClassDiagramFactory@598bf654
+2023-12-29 09:36:30.394 [Worker-8] INFO    com.objectaid.uml.model.manage.DiagramManager getFactories: com.objectaid.uml.diagramFactories[useq]: com.objectaid.uml.seq.model.SequenceDiagramFactory@dee533de

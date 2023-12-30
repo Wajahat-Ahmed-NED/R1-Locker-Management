@@ -1,0 +1,82 @@
+package LockerManagement;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class LogoFadeIn extends JFrame {
+    private Timer timer;
+    private float alpha = 0f;
+    private JLabel logoLabel;
+
+    public LogoFadeIn() {
+    	setResizable(false);
+    	setPreferredSize(new Dimension(500, 200));
+        setTitle("Bank Al Habib");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        setLocationRelativeTo(null);
+        setSize(600,500);
+        getContentPane().setLayout(new FlowLayout());
+    	setResizable(false);
+    	setLocation(new Point(500, 200));
+    	
+        final ImageIcon logo = createImageIcon("D:\\Ariz\\Locker Management\\R1-Locker-Management\\black.png"); // Load image
+        if (logo != null) {
+            logoLabel = new JLabel(logo);
+            logoLabel.setOpaque(true);
+            getContentPane().add(logoLabel);
+
+            timer = new Timer(0, new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    alpha += 0.007f;
+                    if (alpha >= 1.0f) {
+                        alpha = 1.0f;
+                        timer.stop();
+                        closeAndOpenNewWindow();
+                    }
+                    logoLabel.setIcon(new ImageIcon(logo.getImage().getScaledInstance(600, 460, Image.SCALE_SMOOTH)));
+                    logoLabel.setBackground(new Color(0, 102, 102, (int) (alpha * 255)));
+                }
+            });
+
+            timer.start();
+            setVisible(true);
+        } else {
+            System.err.println("Image not found or could not be loaded.");
+        }
+    }
+
+    protected ImageIcon createImageIcon(String path) {
+        ImageIcon icon = new ImageIcon(path);
+        if (icon.getImageLoadStatus() == MediaTracker.COMPLETE) {
+            return icon;
+        } else {
+            System.err.println("Failed to load image: " + path);
+            return null;
+        }
+    }
+
+    private void closeAndOpenNewWindow() {
+        // Dispose the current window
+        dispose();
+
+        // Create and display a new window
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+            	newLogIn frame = new newLogIn();
+            	frame.setSize(600, 500);
+            	frame.setVisible(true);
+            }
+        });
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new LogoFadeIn();
+            }
+        });
+    }
+}

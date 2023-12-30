@@ -2,8 +2,13 @@ eclipse.preferences.version=1
 remoteHelpHost=pic.dhe.ibm.com,127.0.0.1
 remoteHelpICEnabled=true,false
 remoteHelpName=Rational Application Developer,Local
+<<<<<<< HEAD
 remoteHelpOn=true
 remoteHelpPath=/infocenter/radhelp/v9,/help
 remoteHelpPort=80,63650
 remoteHelpPreferred=true
+=======
+remoteHelpPath=/infocenter/radhelp/v9,/help
+remoteHelpPort=80,63650
+>>>>>>> d698dbb6d668408cde43cd85655e508aa86402b8
 remoteHelpProtocol=http,http
