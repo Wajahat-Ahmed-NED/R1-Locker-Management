@@ -1,0 +1,227 @@
+
+Table "Branch" {
+  "branchCode" INT [pk, not null, increment]
+  "branchName" VARCHAR(255) [not null]
+  "address" VARCHAR(255) [not null]
+  "city" VARCHAR(255) [not null]
+}
+
+Table "UserTable" {
+  "userId" INT [pk, not null, increment]
+  "name" VARCHAR(255) [not null]
+  "age" INT [not null]
+  "contactNo" VARCHAR(13) [not null]
+  "emailId" VARCHAR(50) [not null]
+  "address" VARCHAR(255) [not null]
+  "PASSWORD" VARCHAR(20) [not null]
+  "branchCode" INT [not null]
+}
+
+Table "UserLockerCode_TL" {
+  "id" INT [pk, not null, increment]
+  "userId" INT [not null]
+  "auth" SMALLINT [not null]
+  "lastSignIn" TIMESTAMP
+}
+
+Table "Locker" {
+  "lockerNum" VARCHAR(4) [pk, not null]
+  "lockerSizeId" INT [not null]
+  "branchCode" INT [not null]
+  "keyNum" INT [not null]
+}
+
+Table "LockerSize" {
+  "lockerSizeId" INT [pk, not null, increment]
+  "lockerSize" VARCHAR(10) [not null]
+  "lockerChargesId" INT [not null]
+  "secDepositId" INT [not null]
+}
+
+Table "LockerCharges" {
+  "lockerChargesId" INT [pk, not null, increment]
+  "charges" INT [not null]
+  "fed" INT [not null]
+}
+
+Table "ModeOfOperation" {
+  "modeOfOperationId" INT [pk, not null, increment]
+  "modeOfOperation" VARCHAR(50) [not null]
+}
+
+Table "ModeOfPayment" {
+  "modeOfPaymentId" INT [pk, not null, increment]
+  "modeOfPayment" VARCHAR(50) [not null]
+  "expiry_date" TIMESTAMP
+}
+
+Table "LockerSecurityDeposit" {
+  "secDepositId" INT [pk, not null, increment]
+  "secDeposit" VARCHAR(50) [not null]
+}
+
+Table "LockerAssigned_TL" {
+  "assignedId" BIGINT [pk, not null]
+  "voucherId" BIGINT [not null]
+  "customerId" INT [not null]
+  "depositAmount" BIGINT [not null]
+  "overDue" DATE [not null]
+  "lastRecoverDate" DATE [not null]
+  "rentStatus" INT [not null]
+  "assignedDate" TIMESTAMP
+  "comments" VARCHAR(255)
+  "notifyUser" INT
+}
+
+Table "LockerAssigned_TR" {
+  "assignedId" BIGINT [pk, not null, increment]
+  "voucherId" BIGINT [not null]
+  "customerId" INT [not null]
+  "depositAmount" BIGINT [not null]
+  "overDue" DATE [not null]
+  "lastRecoverDate" DATE [not null]
+  "rentStatus" INT [not null]
+  "assignedDate" TIMESTAMP
+  "comments" VARCHAR(255)
+  "notifyUser" INT
+}
+
+Table "LockerAssigned_HT" {
+  "assignedId" BIGINT [pk, not null]
+  "voucherId" BIGINT [not null]
+  "customerId" INT [not null]
+  "depositAmount" BIGINT [not null]
+  "overDue" DATE [not null]
+  "lastRecoverDate" DATE [not null]
+  "rentStatus" INT [not null]
+  "assignedDate" TIMESTAMP
+  "comments" VARCHAR(255)
+  "notifyUser" INT
+}
+
+Table "Voucher_Master_TL" {
+  "voucherId" INT [pk, not null, increment]
+  "lockerNum" VARCHAR(4) [unique, not null]
+  "customerId" INT [not null]
+  "userId" INT [not null]
+  "accountNum" VARCHAR(17) [not null]
+  "modeOfOperationId" INT [not null]
+  "modeOfPaymentId" INT [not null]
+  "voucherTypeId" INT [not null]
+  "voucherStatusId" INT [not null]
+}
+
+Table "VoucherDetail_TL" {
+  "voucherId" INT [not null]
+  "sNo" INT [pk, increment]
+  "accountNum" VARCHAR(17) [not null]
+  "amount" BIGINT [not null]
+}
+
+Table "VoucherType" {
+  "voucherTypeId" INT [pk, not null, increment]
+  "voucherType" VARCHAR(20)
+}
+
+Table "VoucherStatus" {
+  "voucherStatusId" INT [pk, not null, increment]
+  "voucherStatus" VARCHAR(20)
+}
+
+Table "Customer" {
+  "customerId" INT [pk, not null, increment]
+  "customerName" VARCHAR(255) [not null]
+  "cnic" VARCHAR(13) [not null]
+  "customerTypeId" INT [not null]
+  "email" VARCHAR(50) [not null]
+  "age" INT
+  "contactNo" VARCHAR(255)
+  "address" VARCHAR(500)
+}
+
+Table "Account" {
+  "accountNum" VARCHAR(17) [pk, not null]
+  "accountTitle" VARCHAR(255) [not null]
+  "accountTypeId" INT [not null]
+  "accountCategoryId" INT [not null]
+  "accountStatusId" INT [not null]
+  "operatingInstructionId" INT [not null]
+  "branchCode" INT [not null]
+  "balance" BIGINT [not null]
+  "currencyNum" INT [not null]
+  "onHoldBalance" BIGINT [default: 0]
+}
+
+Table "OperatingInstruction" {
+  "operatingInstructionId" INT [pk, not null, increment]
+  "operatingInstruction" VARCHAR(50) [not null]
+}
+
+Table "CustomerAccountRelationship" {
+  "id" INT [pk, increment]
+  "accountNum" VARCHAR(17) [not null]
+  "customerId" BIGINT [not null]
+}
+
+Table "AccountType" {
+  "accountTypeId" INT [pk, not null, increment]
+  "accountType" VARCHAR(50) [not null]
+}
+
+Table "AccountCategory" {
+  "accountCategoryId" INT [pk, not null, increment]
+  "accountCategory" VARCHAR(50) [not null]
+}
+
+Table "AccountStatus" {
+  "accountStatusId" INT [pk, not null, increment]
+  "accountStatus" VARCHAR(50) [not null]
+}
+
+Table "CurrencyCode" {
+  "currencyNum" INT [pk, not null]
+  "currencyCode" VARCHAR(3) [not null]
+}
+
+Table "CustomerType" {
+  "customerTypeId" INT [pk, not null, increment]
+  "customerType" VARCHAR(255) [not null]
+}
+
+Ref:"Branch"."branchCode" < "UserTable"."branchCode"
+
+Ref:"UserTable"."userId" < "UserLockerCode_TL"."userId"
+
+Ref:"Branch"."branchCode" < "Locker"."branchCode"
+
+Ref:"Voucher_Master_TL"."voucherId" < "LockerAssigned_TL"."voucherId"
+
+Ref:"Customer"."customerId" < "LockerAssigned_TL"."customerId"
+
+Ref:"Voucher_Master_TL"."voucherId" < "LockerAssigned_TR"."voucherId"
+
+Ref:"Customer"."customerId" < "LockerAssigned_TR"."customerId"
+
+Ref:"Voucher_Master_TL"."voucherId" < "LockerAssigned_HT"."voucherId"
+
+Ref:"Customer"."customerId" < "LockerAssigned_HT"."customerId"
+
+Ref:"Customer"."customerId" < "Voucher_Master_TL"."customerId"
+
+Ref:"UserTable"."userId" < "Voucher_Master_TL"."userId"
+
+Ref:"Voucher_Master_TL"."voucherId" < "VoucherDetail_TL"."voucherId"
+
+Ref:"CustomerType"."customerTypeId" < "Customer"."customerTypeId"
+
+Ref:"AccountType"."accountTypeId" < "Account"."accountTypeId"
+
+Ref:"AccountCategory"."accountCategoryId" < "Account"."accountCategoryId"
+
+Ref:"AccountStatus"."accountStatusId" < "Account"."accountStatusId"
+
+Ref:"OperatingInstruction"."operatingInstructionId" < "Account"."operatingInstructionId"
+
+Ref:"Account"."accountNum" < "CustomerAccountRelationship"."accountNum"
+
+Ref:"Customer"."customerId" < "CustomerAccountRelationship"."customerId"
